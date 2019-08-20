@@ -1,3 +1,14 @@
+---
+page_type: sample
+description: "Sample databricks workbook for adding custom analytics to IoT Central."
+languages:
+- python
+products:
+- azure
+- azure-iot-central
+urlFragment: azure-iot-central-custom-analytics
+---
+
 # Project Name
 
 Sample code for [Azure IoT Central Documentation](https://docs.microsoft.com/azure/iot-central/)
