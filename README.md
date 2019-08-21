@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: "Sample databricks workbook for adding custom analytics to IoT Central."
+description: "Sample databricks workbook and Python code for adding custom analytics to IoT Central."
 languages:
 - python
 products:
