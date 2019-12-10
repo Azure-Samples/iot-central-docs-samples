@@ -16,3 +16,4 @@ urlFragment: azure-iot-central-custom-analytics
 The following articles use the sample code in this repository. Each article describes how to use the sample:
 
 * [Extend Azure IoT Central with custom analytics](https://docs.microsoft.com/azure/iot-central/howto-create-custom-analytics)
+* [Create an in-store analytics application in Azure IoT Central](https://docs.microsoft.com/azure/iot-central/retail/tutorial-in-store-analytics-create-app-pnp)
