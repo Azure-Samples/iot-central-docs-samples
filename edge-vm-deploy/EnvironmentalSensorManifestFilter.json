@@ -10,9 +10,9 @@
             "loggingOptions": "",
             "registryCredentials": {
               "rvacr": {
-                  "address": "<Your Azure Container Registry>",
-                  "password": "<Your Azure Container Registry Password",
-                  "username": "<Your Azure Container Registry Username>"
+                  "address": "<YOUR CONTAINER REGISTRY NAME>.azurecr.io",
+                  "password": "<YOUR CONTAINER REGISTRY PASSWORD>",
+                  "username": "<YOUR CONTAINER REGISTRY NAME>"
               }
             }
           }
@@ -48,7 +48,7 @@
           },
           "filterfunction": {
               "settings": {
-                  "image": "<Your Azure Container Registry>/filterfunction:v1",
+                  "image": "<YOUR CONTAINER REGISTRY NAME>.azurecr.io/filterfunction:v1",
                   "createOptions": ""
               },
               "type": "docker",
