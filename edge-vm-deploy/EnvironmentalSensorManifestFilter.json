@@ -63,7 +63,6 @@
       "properties.desired": {
         "schemaVersion": "1.0",
         "routes": {
-            "telemetryToIoTCentral": "FROM /messages/modules/SimulatedTemperatureSensor/* INTO $upstream",
             "FilterFunctionToIoTCentral": "FROM /messages/modules/filterfunction/outputs/* INTO $upstream",
             "sensorToFilterFunction": "FROM /messages/modules/SimulatedTemperatureSensor/outputs/temperatureOutput INTO BrokeredEndpoint(\"/modules/filterfunction/inputs/input1\")"
           },
