@@ -1,27 +1,23 @@
 {
-  "@id": "urn:storeManager:telemetry:1",
+  "@id": "dtmi:storeManager:telemetry;1",
   "@type": "Interface",
-  "displayName": {
-    "en": "Telemetry "
-  },
   "contents": [
     {
-      "@id": "urn:storeManager:telemetry:machine:1",
+      "@id": "dtmi:storeManager:telemetry:machine;1",
       "@type": "Telemetry",
       "displayName": {
         "en": "machine"
       },
       "name": "machine",
       "schema": {
-        "@id": "urn:storeManager:telemetry:machine:rv06iiglp:1",
+        "@id": "dtmi:storeManager:telemetry:machine:schema;1",
         "@type": "Object",
         "displayName": {
           "en": "Object"
         },
         "fields": [
           {
-            "@id": "urn:storeManager:telemetry:machine:rv06iiglp:temperature:1",
-            "@type": "SchemaField",
+            "@id": "dtmi:storeManager:telemetry:machine:schema:temperature;1",
             "displayName": {
               "en": "temperature"
             },
@@ -29,8 +25,7 @@
             "schema": "double"
           },
           {
-            "@id": "urn:storeManager:telemetry:machine:rv06iiglp:pressure:1",
-            "@type": "SchemaField",
+            "@id": "dtmi:storeManager:telemetry:machine:schema:pressure;1",
             "displayName": {
               "en": "pressure"
             },
@@ -41,22 +36,21 @@
       }
     },
     {
-      "@id": "urn:storeManager:telemetry:ambient:1",
+      "@id": "dtmi:storeManager:telemetry:ambient;1",
       "@type": "Telemetry",
       "displayName": {
         "en": "ambient"
       },
       "name": "ambient",
       "schema": {
-        "@id": "urn:storeManager:telemetry:ambient:h_cq33ee_y:1",
+        "@id": "dtmi:storeManager:telemetry:ambient:schema;1",
         "@type": "Object",
         "displayName": {
           "en": "Object"
         },
         "fields": [
           {
-            "@id": "urn:storeManager:telemetry:ambient:h_cq33ee_y:temperature:1",
-            "@type": "SchemaField",
+            "@id": "dtmi:storeManager:telemetry:ambient:schema:temperature;1",
             "displayName": {
               "en": "temperature"
             },
@@ -64,8 +58,7 @@
             "schema": "double"
           },
           {
-            "@id": "urn:storeManager:telemetry:ambient:h_cq33ee_y:humidity:1",
-            "@type": "SchemaField",
+            "@id": "dtmi:storeManager:telemetry:ambient:schema:humidity;1",
             "displayName": {
               "en": "humidity"
             },
@@ -76,7 +69,7 @@
       }
     },
     {
-      "@id": "urn:storeManager:telemetry:timeCreated:1",
+      "@id": "dtmi:storeManager:telemetry:timeCreated;1",
       "@type": "Telemetry",
       "displayName": {
         "en": "timeCreated"
@@ -85,7 +78,11 @@
       "schema": "dateTime"
     }
   ],
+  "displayName": {
+    "en": "Telemetry"
+  },
   "@context": [
-    "http://azureiot.com/v1/contexts/IoTModel.json"
+    "dtmi:iotcentral:context;2",
+    "dtmi:dtdl:context;2"
   ]
 }
