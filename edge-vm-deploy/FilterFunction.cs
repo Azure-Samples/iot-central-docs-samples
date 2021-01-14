@@ -20,7 +20,7 @@ namespace Functions.Samples
             [EdgeHub(OutputName = "output1")] IAsyncCollector<Message> output,
             ILogger logger)
         {
-            const int temperatureThreshold = 20;
+            const int temperatureThreshold = 70;
             byte[] messageBytes = messageReceived.GetBytes();
             var messageString = System.Text.Encoding.UTF8.GetString(messageBytes);
 
