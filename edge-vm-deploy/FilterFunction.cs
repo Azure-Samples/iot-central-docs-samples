@@ -20,7 +20,7 @@ namespace Functions.Samples
             [EdgeHub(OutputName = "output1")] IAsyncCollector<Message> output,
             ILogger logger)
         {
-            const int temperatureThreshold = 70;
+            const int temperatureThreshold = 21;
             byte[] messageBytes = messageReceived.GetBytes();
             var messageString = System.Text.Encoding.UTF8.GetString(messageBytes);
 
@@ -30,7 +30,7 @@ namespace Functions.Samples
                 // Get the body of the message and deserialize it.
                 var messageBody = JsonConvert.DeserializeObject<MessageBody>(messageString);
 
-                if (messageBody != null && messageBody.machine.temperature > temperatureThreshold)
+                if (messageBody != null && messageBody.ambient.temperature > temperatureThreshold)
                 {
                     // Send the message to the output as the temperature value is greater than the threshold.
                     var filteredMessage = new Message(messageBytes);
