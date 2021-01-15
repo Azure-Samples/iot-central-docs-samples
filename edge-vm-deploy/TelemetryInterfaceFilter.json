@@ -1,0 +1,88 @@
+{
+  "@id": "dtmi:storeManager:filteredtelemetry;1",
+  "@type": "Interface",
+  "contents": [
+    {
+      "@id": "dtmi:storeManager:filteredtelemetry:machine;1",
+      "@type": "Telemetry",
+      "displayName": {
+        "en": "machine"
+      },
+      "name": "machine",
+      "schema": {
+        "@id": "dtmi:storeManager:filteredtelemetry:machine:schema;1",
+        "@type": "Object",
+        "displayName": {
+          "en": "Object"
+        },
+        "fields": [
+          {
+            "@id": "dtmi:storeManager:filteredtelemetry:machine:schema:temperature;1",
+            "displayName": {
+              "en": "temperature"
+            },
+            "name": "temperature",
+            "schema": "double"
+          },
+          {
+            "@id": "dtmi:storeManager:filteredtelemetry:machine:schema:pressure;1",
+            "displayName": {
+              "en": "pressure"
+            },
+            "name": "pressure",
+            "schema": "double"
+          }
+        ]
+      }
+    },
+    {
+      "@id": "dtmi:storeManager:filteredtelemetry:ambient;1",
+      "@type": "Telemetry",
+      "displayName": {
+        "en": "ambient"
+      },
+      "name": "ambient",
+      "schema": {
+        "@id": "dtmi:storeManager:filteredtelemetry:ambient:schema;1",
+        "@type": "Object",
+        "displayName": {
+          "en": "Object"
+        },
+        "fields": [
+          {
+            "@id": "dtmi:storeManager:filteredtelemetry:ambient:schema:temperature;1",
+            "displayName": {
+              "en": "temperature"
+            },
+            "name": "temperature",
+            "schema": "double"
+          },
+          {
+            "@id": "dtmi:storeManager:filteredtelemetry:ambient:schema:humidity;1",
+            "displayName": {
+              "en": "humidity"
+            },
+            "name": "humidity",
+            "schema": "double"
+          }
+        ]
+      }
+    },
+    {
+      "@id": "dtmi:storeManager:filteredtelemetry:timeCreated;1",
+      "@type": "Telemetry",
+      "displayName": {
+        "en": "timeCreated"
+      },
+      "name": "timeCreated",
+      "schema": "dateTime"
+    }
+  ],
+  "displayName": {
+    "en": "Filtered Telemetry"
+  },
+  "@context": [
+    "dtmi:iotcentral:context;2",
+    "dtmi:dtdl:context;2"
+  ]
+}
