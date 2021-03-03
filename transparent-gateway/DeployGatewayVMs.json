@@ -2,22 +2,23 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-      "dnsLabelPrefix": {
+      "dnsLabelPrefixGateway": {
         "type": "String",
         "metadata": {
-          "description": "Unique DNS Name for the VM hosting the IoT Edge gateway."
+          "description": "Unique DNS Name for the VM hosting the IoT Edge gateway, for example 'mygatewaydevice'."
         }
       },
-      "dnsLabelPrefixLeaf": {
+      "dnsLabelPrefixDownstream": {
         "type": "String",
         "metadata": {
-          "description": "Unique DNS Name for the VM hosting the downstream device."
+          "description": "Unique DNS Name for the VM hosting the downstream device, for example 'mythermostatdevice'."
         }
       },
       "adminUsername": {
+        "defaultValue": "AzureUser",
         "type": "String",
         "metadata": {
-          "description": "User name for the Virtual Machine."
+          "description": "User name for the Virtual Machines."
         }
       },
       "scopeId": {
@@ -26,16 +27,16 @@
             "description": "IoT Central application Scope ID (from IoT Central)"
         }
       },
-      "deviceId": {
+      "deviceIdIotEdgeGateway": {
           "type": "string",
           "metadata": {
-              "description": "IoT Edge device ID (from IoT Central)"
+              "description": "IoT Edge gateway device ID (from IoT Central)"
           }
       },
-      "deviceKey": {
+      "deviceKeyIotEdgeGateway": {
           "type": "string",
           "metadata": {
-              "description": "IoT Edge device symmetric key (from IoT Central)"
+              "description": "IoT Edge gateway device symmetric key (from IoT Central)"
           }
       },
       "vmSize": {
@@ -107,8 +108,8 @@
         }
       },
       "sid": "[parameters('scopeId')]",
-      "did": "[parameters('deviceId')]",
-      "dky": "[parameters('deviceKey')]",
+      "did": "[parameters('deviceIdIotEdgeGateway')]",
+      "dky": "[parameters('deviceKeyIotEdgeGateway')]",
       "networkSecurityGroupName": "nsg-edgenetwork"
     },
     "resources": [
@@ -120,7 +121,7 @@
         "properties": {
           "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
           "dnsSettings": {
-            "domainNameLabel": "[parameters('dnsLabelPrefix')]"
+            "domainNameLabel": "[parameters('dnsLabelPrefixGateway')]"
           }
         }
       },
@@ -132,7 +133,7 @@
         "properties": {
           "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
           "dnsSettings": {
-            "domainNameLabel": "[parameters('dnsLabelPrefixLeaf')]"
+            "domainNameLabel": "[parameters('dnsLabelPrefixDownstream')]"
           }
         }
       },
