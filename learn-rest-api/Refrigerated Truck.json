@@ -1,0 +1,143 @@
+[
+  {
+    "@id": "dtmi:com:example:fleetmanagement:RefrigeratedTruck;1",
+    "@type": "Interface",
+    "contents": [
+      {
+        "@type": [
+          "Telemetry",
+          "Temperature"
+        ],
+        "displayName": {
+          "en": "Contents Temperature"
+        },
+        "name": "ContentsTemperature",
+        "schema": "double",
+        "unit": "degreeCelsius"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "State"
+        ],
+        "displayName": {
+          "en": "Cooling System State"
+        },
+        "name": "CoolingSystemState",
+        "schema": {
+          "@type": "Enum",
+          "enumValues": [
+            {
+              "displayName": {
+                "en": "On"
+              },
+              "enumValue": "on",
+              "name": "on"
+            },
+            {
+              "displayName": {
+                "en": "Off"
+              },
+              "enumValue": "off",
+              "name": "off"
+            },
+            {
+              "displayName": {
+                "en": "Failed"
+              },
+              "enumValue": "failed",
+              "name": "failed"
+            }
+          ],
+          "valueSchema": "string"
+        }
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "Location"
+        ],
+        "displayName": {
+          "en": "Location"
+        },
+        "name": "Location",
+        "schema": "geopoint"
+      },
+      {
+        "@type": "Property",
+        "displayName": {
+          "en": "Truck ID"
+        },
+        "name": "TruckID",
+        "schema": "string",
+        "writable": false
+      },
+      {
+       "@type": [
+          "Property",
+          "Temperature"
+        ],
+        "displayName": {
+          "en": "Target Temperature"
+        },
+        "name": "TargetTemperature",
+        "schema": "double",
+        "unit": "degreeCelsius",
+        "writable": true
+      },
+      {
+        "@type": "Command",
+        "name": "getMaxMinReport",
+        "displayName": "Get Max-Min report.",
+        "description": "This command returns the max, min and average temperature from the specified time to the current time.",
+        "request": {
+          "name": "since",
+          "displayName": "Since",
+          "description": "Period to return the max-min report.",
+          "schema": "dateTime"
+        },
+        "response": {
+          "name": "tempReport",
+          "displayName": "Temperature Report",
+          "schema": {
+            "@type": "Object",
+            "fields": [
+              {
+                "name": "maxTemp",
+                "displayName": "Max temperature",
+                "schema": "double"
+              },
+              {
+                "name": "minTemp",
+                "displayName": "Min temperature",
+                "schema": "double"
+              },
+              {
+                "name": "avgTemp",
+                "displayName": "Average Temperature",
+                "schema": "double"
+              },
+              {
+                "name": "startTime",
+                "displayName": "Start Time",
+                "schema": "dateTime"
+              },
+              {
+                "name": "endTime",
+                "displayName": "End Time",
+                "schema": "dateTime"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "displayName": {
+      "en": "Refrigerated Truck"
+    },
+    "@context": [
+      "dtmi:iotcentral:context;2",
+      "dtmi:dtdl:context;2"
+    ]
+  }
+]
