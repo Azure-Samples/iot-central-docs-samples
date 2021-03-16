@@ -1,7 +1,14 @@
-[
-  {
-    "@id": "dtmi:com:example:fleetmanagement:RefrigeratedTruck;1",
-    "@type": "Interface",
+{
+  "@id": "dtmi:contoso:refrigerated_truck;1",
+  "types": [
+    "ModelDefinition",
+    "DeviceModel"
+  ],
+  "displayName": "Refrigerated truck",
+  "capabilityModel": {
+    "@id": "dtmi:contoso:refrigerated_truck_dcm;1",
+    "@type": "CapabilityModel",
+    "displayName": "Refrigerated truck",
     "contents": [
       {
         "@type": [
@@ -131,13 +138,29 @@
           }
         }
       }
-    ],
-    "displayName": {
-      "en": "Refrigerated Truck"
-    },
-    "@context": [
-      "dtmi:iotcentral:context;2",
-      "dtmi:dtdl:context;2"
     ]
-  }
-]
+  },
+  "solutionModel": {
+    "@type": [
+      "SolutionModel"
+    ],
+    "@id": "dtmi:refrigerated_truck_sm;1",
+    "cloudProperties": [
+      {
+        "@type": "CloudProperty",
+        "displayName": "Last maintenance date",
+        "name": "maintenancedate",
+        "schema": "string",
+        "valueDetail": {
+          "@type": "StringValueDetail"
+        }
+      }
+    ],
+    "initialValues": [],
+    "overrides": []
+  },
+  "@context": [
+    "dtmi:iotcentral:context;2",
+    "dtmi:dtdl:context;2"
+  ]
+}
