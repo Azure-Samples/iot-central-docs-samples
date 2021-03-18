@@ -137,6 +137,25 @@
             ]
           }
         }
+      },
+      {
+        "@type": "Command",
+        "commandType": "synchronous",
+        "displayName": {
+          "en": "Reboot device"
+        },
+        "name": "reboot",
+        "request": {
+          "@type": "CommandPayload",
+          "description": {
+            "en": "Number of seconds to delay before rebooting"
+          },
+          "displayName": {
+            "en": "Delay - seconds"
+          },
+          "name": "delay",
+          "schema": "integer"
+        }        
       }
     ]
   },
