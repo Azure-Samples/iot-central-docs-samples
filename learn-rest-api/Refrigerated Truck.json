@@ -1,7 +1,6 @@
 {
-  "@id": "dtmi:contoso:refrigerated_truck;1",
+  "id": "dtmi:contoso:refrigerated_truck",
   "types": [
-    "ModelDefinition",
     "DeviceModel"
   ],
   "displayName": "Refrigerated truck",
