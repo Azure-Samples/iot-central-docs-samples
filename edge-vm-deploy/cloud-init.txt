@@ -41,7 +41,7 @@ runcmd:
         # Prevent iotedge from starting before the device connection string is set in config.yaml
         sudo ln -s /dev/null /etc/systemd/system/iotedge.service
         apt install iotedge
-        perl -0777 -i -pe "s#(\# Manual provisioning configuration)\n(.*)\n(.*)\n(.*)#\1\n\# \2\n\# \3\n\# \4#g; s#(\# DPS symmetric key provisioning configuration)\n\# (.*)\n\# (.*)\n\# (.*)\n\# (  scope_id: ).*\n\# (.*)\n\# (.*)\n\# (    registration_id: ).*\n\# (    symmetric_key: ).*#\1\n\2\n\3\n\4\n\5\"', variables('sid'), '\"\n\6\n\7\n\8\"', variables('did'), '\"\n\9\"', variables('dky'), '\"#g" /etc/iotedge/config.yaml 
+        perl -0777 -i -pe "s#(\# Manual provisioning with an IoT Hub connection string \(SharedAccessKey authentication only\))\n(.*)\n(.*)\n(.*)\n(.*)#\1\n\# \2\n\# \3\n\# \4\n\# \5#g; s#(\# DPS provisioning with symmetric key attestation)\n\# (.*)\n\# (.*)\n\# (.*)\n\# (  scope_id: ).*\n\# (.*)\n\# (.*)\n\# (    registration_id: ).*\n\# (    symmetric_key: ).*#\1\n\2\n\3\n\4\n\5\"', variables('sid'), '\"\n\6\n\7\n\8\"', variables('did'), '\"\n\9\"', variables('dky'), '\"#g" /etc/iotedge/config.yaml 
         systemctl unmask iotedge
         systemctl start iotedge
       ) &
