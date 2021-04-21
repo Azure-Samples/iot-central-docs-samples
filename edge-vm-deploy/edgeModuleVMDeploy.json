@@ -79,8 +79,7 @@
         "sid": "[parameters('scopeId')]",
         "did": "[parameters('deviceId')]",
         "dky": "[parameters('deviceKey')]",
-        "model":  "[parameters('vmSize')]",
-        "networkSecurityGroupName": "[concat('nsg-', uniquestring(parameters('dnsLabelPrefix')))]"
+        "model":  "[parameters('vmSize')]"
     },
     "resources": [
         {
@@ -93,30 +92,6 @@
                 "dnsSettings": {
                     "domainNameLabel": "[parameters('dnsLabelPrefix')]"
                 }
-            }
-        },
-        {
-            "comments": "Default Network Security Group for template",
-            "type": "Microsoft.Network/networkSecurityGroups",
-            "apiVersion": "2019-08-01",
-            "name": "[variables('networkSecurityGroupName')]",
-            "location": "[parameters('location')]",
-            "properties": {
-                "securityRules": [
-                    {
-                        "name": "SSH-Port",
-                        "properties": {
-                            "priority": 1000,
-                            "access": "Deny",
-                            "direction": "Inbound",
-                            "destinationPortRange": "22",
-                            "protocol": "Tcp",
-                            "sourceAddressPrefix": "*",
-                            "sourcePortRange": "*",
-                            "destinationAddressPrefix": "*"
-                        }
-                    }
-                ]
             }
         },
         {
