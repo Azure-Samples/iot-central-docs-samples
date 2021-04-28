@@ -156,27 +156,18 @@
           "name": "delay",
           "schema": "integer"
         }        
-      }
-    ]
-  },
-  "solutionModel": {
-    "@type": [
-      "SolutionModel"
-    ],
-    "@id": "dtmi:refrigerated_truck_sm;1",
-    "cloudProperties": [
+      },
       {
-        "@type": "CloudProperty",
+        "@type": [
+          "Property",
+          "Cloud",
+          "StringValue"
+        ],
         "displayName": "Last maintenance date",
         "name": "maintenancedate",
-        "schema": "string",
-        "valueDetail": {
-          "@type": "StringValueDetail"
-        }
+        "schema": "string"
       }
-    ],
-    "initialValues": [],
-    "overrides": []
+    ]
   },
   "@context": [
     "dtmi:iotcentral:context;2",
