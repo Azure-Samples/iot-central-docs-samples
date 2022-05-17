@@ -28,52 +28,6 @@ telementryEventHubConfig = {
 
 # COMMAND ----------
 
-# MAGIC %md ##Helper functions
-# MAGIC These helper functions manipulate the Spark [DataFrames](https://docs.azuredatabricks.net/spark/latest/dataframes-datasets/index.html).
-# MAGIC 
-# MAGIC #### Removing quotations
-# MAGIC Some data comes through from the event hub with quotation marks, you want to clean this.
-
-# COMMAND ----------
-
-@udf
-def removeQuotations(value):
-  return value.replace('"', '')
-
-# COMMAND ----------
-
-# MAGIC %md #### Getting nested items from a dictionary
-# MAGIC You need to get items from deep in a dictionary that may not exist, this function checks if items exist, and if they do, retrieves them.
-
-# COMMAND ----------
-
-#Gets from a multi-level dictionary 
-def nestedGet(dictionary, nestedKeys):
-    for key in nestedKeys:
-        dictionary = dictionary.get(key, None)
-        if dictionary is None:
-            return None
-    return dictionary
-
-# COMMAND ----------
-
-# MAGIC %md #### Body property extractor
-# MAGIC This function creates a [User-defined function (UDF)](https://docs.azuredatabricks.net/spark/latest/spark-sql/udf-python.html) that extracts an item nested in the JSON body of an event hub message.
-# MAGIC 
-# MAGIC For example, `bodyPropertyExtractorBuilder(['properties', 'location'])` returns a UDF that extracts `body.properties.location` if it exists.
-
-# COMMAND ----------
-
-import json
-
-def bodyPropertyExtractorBuilder(nestedKeys):
-  def bodyPropertyExtractor(body):
-    decodedBody =  json.loads(body.decode("utf-8"));
-    return nestedGet(decodedBody, nestedKeys)
-  return bodyPropertyExtractor
-
-# COMMAND ----------
-
 # MAGIC %md ## Telemetry query
 # MAGIC #### Initial query
 # MAGIC 
@@ -88,24 +42,46 @@ telemetryDF = spark \
   .load()
 
 
+
 # COMMAND ----------
 
 # MAGIC %md #### Extract the required data
 # MAGIC This creates a new streaming DataFrame that contains the:
-# MAGIC - Device Id from the event hub message's system properties
-# MAGIC - Enqueued time from the event hub message's system properties
-# MAGIC - humidity from the event hub message's body
+# MAGIC - `deviceId` from the event hub message body
+# MAGIC - `enqueuedTime` from the event hub message body
+# MAGIC - `humidity` from the event hub message body
 # MAGIC 
-# MAGIC The code uses the `removeQuotations` and `bodyPropertyExtractorBuilder` functions defined previously.
+# MAGIC The code converts the binary body field to JSON and then extracts the required fields from the JSON.
+# MAGIC 
+# MAGIC The `sourceSchema` structure is a partial schema for the `body` field that defines just the fields you need.
 
 # COMMAND ----------
 
-humidityUdf = udf(bodyPropertyExtractorBuilder(['humidity']), FloatType())
-telemetryDF = telemetryDF.select(
-    removeQuotations(telemetryDF.systemProperties['iothub-connection-device-id']).alias('deviceId'),
-    removeQuotations(telemetryDF.systemProperties['iothub-enqueuedtime']).cast("timestamp").alias('enqueuedtime'),
-    humidityUdf('body').alias('humidity')
-  )
+
+
+# COMMAND ----------
+
+# Create a schema that describes the Body field
+sourceSchema = StructType([
+  StructField("deviceId", StringType(), True),
+  StructField("enqueuedTime", TimestampType(), True),
+  StructField("telemetry", StructType([
+    StructField('humidity', FloatType(), True),
+    StructField('temperature', FloatType(), True),
+    StructField('pressure', FloatType(), True)
+  ])),
+])
+
+# Convert the binary Body column to a string
+telemetryDF = telemetryDF.withColumn("body", col("Body").cast("string")).select(col('body'))
+
+# Convert the string to JSON and select the fields you need.
+jsonOptions = {"dateFormat" : "yyyy-MM-dd HH:mm:ss.SSS"}
+telemetryDF = telemetryDF.withColumn("Body", from_json(telemetryDF.body, sourceSchema, jsonOptions)) \
+  .select(col('body.deviceId'),col('body.enqueuedTime'),col('body.telemetry.humidity'), \
+  col('body.telemetry.temperature'),col('body.telemetry.pressure'))
+
+# display(telemetryDF)
 
 # COMMAND ----------
 
