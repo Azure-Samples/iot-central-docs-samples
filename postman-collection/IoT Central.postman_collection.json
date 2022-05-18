@@ -2520,6 +2520,202 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "File Upload Storage Configuration",
+			"item": [
+				{
+					"name": "Add a storage configuration",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"account\": \"contoso-account\",\r\n  \"connectionString\": \"DefaultEndpointsProtocol=https;AccountName={{yourAccountName}};AccountKey{{yourAccountKey}}BlobEndpoint=core.windows.net\",\r\n  \"container\": \"container\",\r\n  \"sasTtl\": \"PT1H\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/fileUploads?api-version=1.2-preview",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"fileUploads"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "1.2-preview"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get storage configuration",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/fileUploads?api-version=1.2-preview",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"fileUploads"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "1.2-preview"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a storage configuration",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"account\": \"contoso-account\",\r\n  \"connectionString\": \"DefaultEndpointsProtocol=https;AccountName={{yourAccountName}};AccountKey{{yourAccountKey}}BlobEndpoint=core.windows.net\",\r\n  \"container\": \"container2\",\r\n  \"sasTtl\": \"PT1H\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/fileUploads?api-version=1.2-preview",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"fileUploads"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "1.2-preview"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete storage configuration",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/fileUploads?api-version=1.2-preview",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"fileUploads"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "1.2-preview"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"auth": {
