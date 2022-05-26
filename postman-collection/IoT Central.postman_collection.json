@@ -2998,11 +2998,6 @@
 			"type": "default"
 		},
 		{
-			"key": "resourceGroupName",
-			"value": "IOTC",
-			"type": "default"
-		},
-		{
 			"key": "applicationName",
 			"value": "Your new application name",
 			"type": "default"
