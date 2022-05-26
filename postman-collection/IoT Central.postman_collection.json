@@ -2241,7 +2241,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{BearerTokenIoTCentralApplication}}",
+									"value": "{{BearerToken}}",
 									"type": "string"
 								}
 							]
@@ -2281,7 +2281,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{BearerTokenIoTCentralApplication}}",
+									"value": "{{BearerToken}}",
 									"type": "string"
 								}
 							]
