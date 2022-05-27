@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f9a08e3c-bd81-4794-862a-f68fd093ebea",
+		"_postman_id": "21f2eda4-0013-4031-a3c6-e45ce2fb2e0e",
 		"name": "IoT Central",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "20434527"
@@ -2695,7 +2695,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"account\": \"{{accountName}}\",\r\n  \"connectionString\": \"DefaultEndpointsProtocol=https;AccountName={{accountName}};AccountKey{{accountKey}}BlobEndpoint=https://{{accountName}}.blob.core.windows.net/\",\r\n  \"container\": \"{{storageAccountcontainerName}}\",\r\n  \"sasTtl\": \"PT1H\"\r\n}",
+							"raw": "{\r\n  \"account\": \"{{accountName}}\",\r\n  \"connectionString\": \"DefaultEndpointsProtocol=https;AccountName={{accountName}};AccountKey={{accountKey}};BlobEndpoint=https://{{accountName}}.blob.core.windows.net/\",\r\n  \"container\": \"{{storageAccountcontainerName}}\",\r\n  \"sasTtl\": \"PT1H\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3018,12 +3018,12 @@
 		},
 		{
 			"key": "resourceGroupName",
-			"value": "Your resource group name",
+			"value": "fileuploadsrg",
 			"type": "string"
 		},
 		{
 			"key": "storageAccountcontainerName",
-			"value": "Your storage account container name"
+			"value": "centralfileuploads"
 		}
 	]
 }
