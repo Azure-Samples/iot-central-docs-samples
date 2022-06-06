@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "21f2eda4-0013-4031-a3c6-e45ce2fb2e0e",
+		"_postman_id": "5bd2cae8-18f5-4d5b-b18e-cc6743df30b9",
 		"name": "IoT Central",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "20434527"
@@ -580,7 +580,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations/{{organizationId}}?api-version=1.2-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations/{{organizationId}}?api-version=1.0",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -595,7 +595,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "1.0"
 								}
 							]
 						}
@@ -608,7 +608,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations/{{organizationId}}?api-version=1.2-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations/{{organizationId}}?api-version=1.0",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -623,7 +623,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "1.0"
 								}
 							]
 						}
@@ -645,7 +645,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations/{{organizationId}}?api-version=1.2-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations/{{organizationId}}?api-version=1.0",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -660,7 +660,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "1.0"
 								}
 							]
 						}
@@ -673,7 +673,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations?api-version=1.2-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations?api-version=1.0",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -687,7 +687,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "1.0"
 								}
 							]
 						}
@@ -700,7 +700,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations/{{organizationId}}?api-version=1.2-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations/{{organizationId}}?api-version=1.0",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -715,7 +715,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "1.0"
 								}
 							]
 						}
