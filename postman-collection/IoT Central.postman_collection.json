@@ -15,7 +15,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/roles?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/roles?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -51,7 +51,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/apiTokens/operator-token?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/apiTokens/operator-token?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -377,7 +377,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/roles?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/roles?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -404,7 +404,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/users?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/users?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -431,7 +431,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/users/{{newUserId}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/users/{{newUserId}}?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -473,7 +473,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/users/{{newUserId}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/users/{{newUserId}}?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -510,7 +510,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/users/{{newUserId}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/users/{{newUserId}}?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -538,7 +538,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/users/{{newUserId}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/users/{{newUserId}}?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -580,7 +580,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations/{{organizationId}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations/{{organizationId}}?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -608,7 +608,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations/{{organizationId}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations/{{organizationId}}?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -645,7 +645,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations/{{organizationId}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations/{{organizationId}}?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -673,7 +673,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -700,7 +700,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations/{{organizationId}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations/{{organizationId}}?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1071,7 +1071,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates/{{deviceTemplateId}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates/{{deviceTemplateId}}?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1099,7 +1099,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates/{{deviceTemplateId}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates/{{deviceTemplateId}}?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1136,7 +1136,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates/{{deviceTemplateId}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates/{{deviceTemplateId}}?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1164,7 +1164,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates/{{deviceTemplateId}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates/{{deviceTemplateId}}?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1192,7 +1192,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1361,7 +1361,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1389,7 +1389,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1417,7 +1417,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/credentials?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/credentials?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1455,7 +1455,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1483,7 +1483,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1511,7 +1511,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1834,7 +1834,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/components?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/components?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1863,7 +1863,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/modules?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/modules?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1892,7 +1892,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/telemetry/{{telemetryName}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/telemetry/{{telemetryName}}?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1922,7 +1922,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/components/{{componentName}}/telemetry/{{telemetryName}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/components/{{componentName}}/telemetry/{{telemetryName}}?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1954,7 +1954,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/properties?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/properties?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
