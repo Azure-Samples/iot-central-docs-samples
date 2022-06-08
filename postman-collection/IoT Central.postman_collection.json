@@ -1675,7 +1675,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceGroups/{{deviceGroupId}}?api-version=1.2-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceGroups/{{deviceGroupId}}?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1690,7 +1690,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -1703,7 +1703,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceGroups/{{deviceGroupId}}?api-version=1.2-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceGroups/{{deviceGroupId}}?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1718,7 +1718,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -1731,7 +1731,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceGroups/{{deviceGroupId}}?api-version=1.2-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceGroups/{{deviceGroupId}}?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1746,7 +1746,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -1759,7 +1759,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceGroups?api-version=1.2-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceGroups?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1773,7 +1773,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -1801,7 +1801,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceGroups/{{deviceGroupId}}?api-version=1.2-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceGroups/{{deviceGroupId}}?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1816,7 +1816,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -2703,7 +2703,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/fileUploads?api-version=1.2-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/fileUploads?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2717,7 +2717,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -2753,7 +2753,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/fileUploads?api-version=1.2-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/fileUploads?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2767,7 +2767,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -2800,7 +2800,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/fileUploads?api-version=1.2-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/fileUploads?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2814,7 +2814,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -2847,7 +2847,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/fileUploads?api-version=1.2-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/fileUploads?api-version=2022-05-31",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2861,7 +2861,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "2022-05-31"
 								}
 							]
 						}
