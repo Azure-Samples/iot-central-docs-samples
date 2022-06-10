@@ -29,7 +29,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -66,7 +66,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -391,7 +391,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -418,7 +418,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -446,7 +446,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "2022-05-31"
 								},
 								{
 									"key": "",
@@ -488,7 +488,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -525,7 +525,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -553,7 +553,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -595,7 +595,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -623,7 +623,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -660,7 +660,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -687,7 +687,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -715,7 +715,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -1086,7 +1086,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -1114,7 +1114,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -1151,7 +1151,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -1179,7 +1179,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -1206,7 +1206,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -1376,7 +1376,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -1404,7 +1404,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -1433,7 +1433,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -1470,7 +1470,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -1498,7 +1498,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -1525,7 +1525,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -1850,7 +1850,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -1879,7 +1879,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -1909,7 +1909,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -1941,7 +1941,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "2022-05-31"
 								}
 							]
 						}
@@ -1970,7 +1970,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "2022-05-31"
 								}
 							]
 						}
