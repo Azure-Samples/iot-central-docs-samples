@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "5bd2cae8-18f5-4d5b-b18e-cc6743df30b9",
+		"_postman_id": "c70bc0a0-f7fd-4522-8819-f5d1d3377795",
 		"name": "IoT Central",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "20434527"
+		"_exporter_id": "2530234"
 	},
 	"item": [
 		{
@@ -85,7 +85,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"query\": \"SELECT $id, $ts, temperature, humidity FROM dtmi:azurertos:devkit:hlby5jgib2o WHERE WITHIN_WINDOW(P1D)\"\r\n}",
+							"raw": "{\r\n  \"query\": \"SELECT $id, $ts, temperature, humidity FROM dtmi:azurertos:devkit:xh2pbku7tyi WHERE WITHIN_WINDOW(P1D)\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -121,7 +121,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"query\": \"SELECT deviceInformation.model, deviceInformation.swVersion FROM dtmi:azurertos:devkit:hlby5jgib2o\"\r\n}",
+							"raw": "{\r\n  \"query\": \"SELECT deviceInformation.model, deviceInformation.swVersion FROM dtmi:azurertos:devkit:xh2pbku7tyi\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -157,7 +157,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"query\": \"SELECT $id as ID, $ts as timestamp, temperature as t, pressure as p FROM dtmi:azurertos:devkit:hlby5jgib2o WHERE WITHIN_WINDOW(P1D) AND t > 0 AND p > 50\"\r\n}",
+							"raw": "{\r\n  \"query\": \"SELECT $id as ID, $ts as timestamp, temperature as t, pressure as p FROM dtmi:azurertos:devkit:xh2pbku7tyi WHERE WITHIN_WINDOW(P1D) AND t > 0 AND p > 50\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -193,7 +193,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"query\": \"SELECT TOP 10 $id as ID, $ts as timestamp, temperature, humidity FROM dtmi:azurertos:devkit:hlby5jgib2o\"\r\n}",
+							"raw": "{\r\n    \"query\": \"SELECT TOP 10 $id as ID, $ts as timestamp, temperature, humidity FROM dtmi:azurertos:devkit:xh2pbku7tyi\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -229,7 +229,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"query\": \"SELECT $id, $ts, temperature, humidity FROM dtmi:azurertos:devkit:hlby5jgib2o\"\r\n}",
+							"raw": "{\r\n  \"query\": \"SELECT $id, $ts, temperature, humidity FROM dtmi:azurertos:devkit:xh2pbku7tyi\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -265,7 +265,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"query\": \"SELECT $id, $ts, temperature, humidity FROM dtmi:azurertos:devkit:hlby5jgib2o WHERE WITHIN_WINDOW(P1D)\"\r\n}",
+							"raw": "{\r\n  \"query\": \"SELECT $id, $ts, temperature, humidity FROM dtmi:azurertos:devkit:xh2pbku7tyi WHERE WITHIN_WINDOW(P1D)\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -301,7 +301,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"query\": \"SELECT AVG(temperature), AVG(pressure) FROM dtmi:azurertos:devkit:hlby5jgib2o WHERE WITHIN_WINDOW(P1D) AND $id='{{deviceId}}' GROUP BY WINDOW(PT10M)\"\r\n}",
+							"raw": "{\r\n  \"query\": \"SELECT AVG(temperature), AVG(pressure) FROM dtmi:azurertos:devkit:xh2pbku7tyi WHERE WITHIN_WINDOW(P1D) AND $id='{{deviceId}}' GROUP BY WINDOW(PT10M)\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -337,7 +337,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"query\": \"SELECT $id as ID, $ts as timestamp, temperature, humidity FROM dtmi:azurertos:devkit:hlby5jgib2o ORDER BY timestamp DESC\"\r\n}",
+							"raw": "{\r\n  \"query\": \"SELECT $id as ID, $ts as timestamp, temperature, humidity FROM dtmi:azurertos:devkit:xh2pbku7tyi ORDER BY timestamp DESC\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2073,7 +2073,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"displayName\": \"Device group 1\",\r\n  \"description\": \"Custom device group.\",\r\n  \"filter\": \"SELECT * FROM devices WHERE $template = \\\"dtmi:azurertos:devkit:hlby5jgib2o\\\" AND $provisioned = true\"\r\n}",
+							"raw": "{\r\n  \"displayName\": \"Device group 1\",\r\n  \"description\": \"Custom device group.\",\r\n  \"filter\": \"SELECT * FROM devices WHERE $template = \\\"dtmi:azurertos:devkit:xh2pbku7tyi\\\" AND $provisioned = true\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2110,7 +2110,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n            \"displayName\": \"test\",\r\n            \"group\": {{deviceGroupId}},\r\n            \"data\": [\r\n                {\r\n                    \"type\": \"cloudProperty\",\r\n                    \"target\": \"dtmi:azurertos:devkit:hlby5jgib2o\",\r\n                    \"path\": \"Company\",\r\n                    \"value\": \"Contoso\"\r\n                }\r\n            ]\r\n}",
+							"raw": "{\r\n            \"displayName\": \"test2\",\r\n            \"group\": \"{{deviceGroupId}}\",\r\n            \"data\": [\r\n                {\r\n                    \"type\": \"cloudProperty\",\r\n                    \"target\": \"dtmi:azurertos:devkit:xh2pbku7tyi\",\r\n                    \"path\": \"Company\",\r\n                    \"value\": \"Contoso\"\r\n                }\r\n            ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2792,7 +2792,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"account\": \"{{accountName}}\",\r\n  \"connectionString\": \"DefaultEndpointsProtocol=https;AccountName={{accountName}};AccountKey{{accountKey}}BlobEndpoint=https://{{accountName}}.blob.core.windows.net/\",\r\n  \"container\": \"{{storageAccountcontainerName}}\",\r\n  \"sasTtl\": \"PT1H\"\r\n}",
+							"raw": "{\r\n  \"account\": \"{{accountName}}\",\r\n  \"connectionString\": \"DefaultEndpointsProtocol=https;AccountName={{accountName}};AccountKey={{accountKey}};BlobEndpoint=https://{{accountName}}.blob.core.windows.net/\",\r\n  \"container\": \"{{storageAccountcontainerName}}\",\r\n  \"sasTtl\": \"PT1H\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
