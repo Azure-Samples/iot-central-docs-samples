@@ -2627,6 +2627,20 @@
 				},
 				{
 					"name": "Storage accounts - list keys",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.log(\"Setting accountKey collection variable...\");\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"accountKey\", jsonData.keys[0].value);\r",
+									"console.log(\"Done!\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -3062,7 +3076,7 @@
 		},
 		{
 			"key": "accountKey",
-			"value": "Add your file upload storage account key",
+			"value": "Run \"Storage accounts - list keys\" to set this variable",
 			"type": "string"
 		},
 		{
