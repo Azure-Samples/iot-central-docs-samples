@@ -109,7 +109,7 @@
       },
       "sid": "[parameters('scopeId')]",
       "did": "[parameters('deviceIdIotEdgeGateway')]",
-      "dky": "[parameters('deviceKeyIotEdgeGateway')]",
+      "sky": "[parameters('deviceKeyIotEdgeGateway')]",
       "networkSecurityGroupName": "nsg-edgenetwork"
     },
     "resources": [
