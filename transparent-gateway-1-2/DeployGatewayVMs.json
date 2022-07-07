@@ -1,0 +1,317 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "dnsLabelPrefixGateway": {
+        "type": "String",
+        "metadata": {
+          "description": "Unique DNS Name for the VM hosting the IoT Edge gateway, for example 'mygatewaydevice'."
+        }
+      },
+      "dnsLabelPrefixDownstream": {
+        "type": "String",
+        "metadata": {
+          "description": "Unique DNS Name for the VM hosting the downstream device, for example 'mythermostatdevice'."
+        }
+      },
+      "adminUsername": {
+        "defaultValue": "AzureUser",
+        "type": "String",
+        "metadata": {
+          "description": "User name for the Virtual Machines."
+        }
+      },
+      "scopeId": {
+        "type": "string",
+        "metadata": {
+            "description": "IoT Central application Scope ID (from IoT Central)"
+        }
+      },
+      "deviceIdIotEdgeGateway": {
+          "type": "string",
+          "metadata": {
+              "description": "IoT Edge gateway device ID (from IoT Central)"
+          }
+      },
+      "deviceKeyIotEdgeGateway": {
+          "type": "string",
+          "metadata": {
+              "description": "IoT Edge gateway device symmetric key (from IoT Central)"
+          }
+      },
+      "vmSize": {
+        "defaultValue": "Standard_DS1_v2",
+        "type": "String",
+        "metadata": {
+          "description": "VM size"
+        }
+      },
+      "ubuntuOSVersion": {
+        "defaultValue": "20_04-lts",
+        "type": "String",
+        "metadata": {
+          "description": "The Ubuntu version for the VM. This will pick a fully patched image of this given Ubuntu version."
+        }
+      },
+      "location": {
+        "defaultValue": "[resourceGroup().location]",
+        "type": "String",
+        "metadata": {
+          "description": "Location for all resources."
+        }
+      },
+      "authenticationType": {
+        "defaultValue": "password",
+        "allowedValues": [
+          "sshPublicKey",
+          "password"
+        ],
+        "type": "String",
+        "metadata": {
+          "description": "Type of authentication to use on the Virtual Machine. SSH key is recommended."
+        }
+      },
+      "adminPasswordOrKey": {
+        "type": "SecureString",
+        "metadata": {
+          "description": "SSH Key or password for the Virtual Machine. SSH key is recommended."
+        }
+      }
+    },
+    "variables": {
+      "imagePublisher": "canonical",
+      "imageOffer": "0001-com-ubuntu-server-focal",
+      "nicName": "nic-edgegateway",
+      "nicNameLeaf": "nic-leafdevice",
+      "vmName": "edgegateway",
+      "vmNameLeaf": "leafdevice",
+      "virtualNetworkName": "edge-network",
+      "publicIPAddressName": "ip-edgegateway",
+      "publicIPAddressNameLeaf": "ip-leafdevice",
+      "addressPrefix": "10.0.0.0/16",
+      "subnet1Name": "subnet-edge-network",
+      "subnet1Prefix": "10.0.0.0/24",
+      "publicIPAddressType": "Dynamic",
+      "storageAccountType": "Standard_LRS",
+      "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
+      "subnet1Ref": "[concat(variables('vnetID'),'/subnets/',variables('subnet1Name'))]",
+      "apiVersion": "2015-06-15",
+      "linuxConfiguration": {
+        "disablePasswordAuthentication": true,
+        "ssh": {
+          "publicKeys": [
+            {
+              "path": "[concat('/home/', parameters('adminUsername'), '/.ssh/authorized_keys')]",
+              "keyData": "[parameters('adminPasswordOrKey')]"
+            }
+          ]
+        }
+      },
+      "sid": "[parameters('scopeId')]",
+      "did": "[parameters('deviceIdIotEdgeGateway')]",
+      "dky": "[parameters('deviceKeyIotEdgeGateway')]",
+      "networkSecurityGroupName": "nsg-edgenetwork"
+    },
+    "resources": [
+      {
+        "type": "Microsoft.Network/publicIPAddresses",
+        "apiVersion": "2019-02-01",
+        "name": "[variables('publicIPAddressName')]",
+        "location": "[parameters('location')]",
+        "properties": {
+          "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
+          "dnsSettings": {
+            "domainNameLabel": "[parameters('dnsLabelPrefixGateway')]"
+          }
+        }
+      },
+      {
+        "type": "Microsoft.Network/publicIPAddresses",
+        "apiVersion": "2019-02-01",
+        "name": "[variables('publicIPAddressNameLeaf')]",
+        "location": "[parameters('location')]",
+        "properties": {
+          "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
+          "dnsSettings": {
+            "domainNameLabel": "[parameters('dnsLabelPrefixDownstream')]"
+          }
+        }
+      },
+      {
+        "type": "Microsoft.Network/networkSecurityGroups",
+        "apiVersion": "2019-02-01",
+        "name": "[variables('networkSecurityGroupName')]",
+        "location": "[parameters('location')]",
+        "properties": {
+          "securityRules": []
+        }
+      },
+      {
+        "type": "Microsoft.Network/virtualNetworks",
+        "apiVersion": "2019-09-01",
+        "name": "[variables('virtualNetworkName')]",
+        "location": "[parameters('location')]",
+        "dependsOn": [
+          "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
+        ],
+        "properties": {
+          "addressSpace": {
+            "addressPrefixes": [
+              "[variables('addressPrefix')]"
+            ]
+          },
+          "subnets": [
+            {
+              "name": "[variables('subnet1Name')]",
+              "properties": {
+                "addressPrefix": "[variables('subnet1Prefix')]",
+                "networkSecurityGroup": {
+                  "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "Microsoft.Network/networkInterfaces",
+        "apiVersion": "2018-10-01",
+        "name": "[variables('nicName')]",
+        "location": "[parameters('location')]",
+        "dependsOn": [
+          "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
+          "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]"
+        ],
+        "properties": {
+          "ipConfigurations": [
+            {
+              "name": "ipconfig1",
+              "properties": {
+                "privateIPAllocationMethod": "Dynamic",
+                "publicIPAddress": {
+                  "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]"
+                },
+                "subnet": {
+                  "id": "[variables('subnet1Ref')]"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "Microsoft.Network/networkInterfaces",
+        "apiVersion": "2018-10-01",
+        "name": "[variables('nicNameLeaf')]",
+        "location": "[parameters('location')]",
+        "dependsOn": [
+          "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressNameLeaf'))]",
+          "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]"
+        ],
+        "properties": {
+          "ipConfigurations": [
+            {
+              "name": "ipconfig1",
+              "properties": {
+                "privateIPAllocationMethod": "Dynamic",
+                "publicIPAddress": {
+                  "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressNameLeaf'))]"
+                },
+                "subnet": {
+                  "id": "[variables('subnet1Ref')]"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "Microsoft.Compute/virtualMachines",
+        "apiVersion": "2020-12-01",
+        "name": "[variables('vmName')]",
+        "location": "[parameters('location')]",
+        "dependsOn": [
+          "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
+        ],
+        "properties": {
+          "hardwareProfile": {
+            "vmSize": "[parameters('vmSize')]"
+          },
+          "osProfile": {
+            "computerName": "[variables('vmName')]",
+            "adminUsername": "[parameters('adminUsername')]",
+            "adminPassword": "[parameters('adminPasswordOrKey')]",
+            "customData": "[base64(concat('#cloud-config\n\napt:\n  preserve_sources_list: true\n  sources:\n    msft.list:\n      source: \"deb https://packages.microsoft.com/ubuntu/20.04/prod focal main\"\n      key: |\n        -----BEGIN PGP PUBLIC KEY BLOCK-----\n        Version: GnuPG v1.4.7 (GNU/Linux)\n\n        mQENBFYxWIwBCADAKoZhZlJxGNGWzqV+1OG1xiQeoowKhssGAKvd+buXCGISZJwT\n        LXZqIcIiLP7pqdcZWtE9bSc7yBY2MalDp9Liu0KekywQ6VVX1T72NPf5Ev6x6DLV\n        7aVWsCzUAF+eb7DC9fPuFLEdxmOEYoPjzrQ7cCnSV4JQxAqhU4T6OjbvRazGl3ag\n        OeizPXmRljMtUUttHQZnRhtlzkmwIrUivbfFPD+fEoHJ1+uIdfOzZX8/oKHKLe2j\n        H632kvsNzJFlROVvGLYAk2WRcLu+RjjggixhwiB+Mu/A8Tf4V6b+YppS44q8EvVr\n        M+QvY7LNSOffSO6Slsy9oisGTdfE39nC7pVRABEBAAG0N01pY3Jvc29mdCAoUmVs\n        ZWFzZSBzaWduaW5nKSA8Z3Bnc2VjdXJpdHlAbWljcm9zb2Z0LmNvbT6JATUEEwEC\n        AB8FAlYxWIwCGwMGCwkIBwMCBBUCCAMDFgIBAh4BAheAAAoJEOs+lK2+EinPGpsH\n        /32vKy29Hg51H9dfFJMx0/a/F+5vKeCeVqimvyTM04C+XENNuSbYZ3eRPHGHFLqe\n        MNGxsfb7C7ZxEeW7J/vSzRgHxm7ZvESisUYRFq2sgkJ+HFERNrqfci45bdhmrUsy\n        7SWw9ybxdFOkuQoyKD3tBmiGfONQMlBaOMWdAsic965rvJsd5zYaZZFI1UwTkFXV\n        KJt3bp3Ngn1vEYXwijGTa+FXz6GLHueJwF0I7ug34DgUkAFvAs8Hacr2DRYxL5RJ\n        XdNgj4Jd2/g6T9InmWT0hASljur+dJnzNiNCkbn9KbX7J/qK1IbR8y560yRmFsU+\n        NdCFTW7wY0Fb1fWJ+/KTsC4=\n        =J6gs\n        -----END PGP PUBLIC KEY BLOCK----- \npackages:\n  - moby-cli\n  - moby-engine\nruncmd:\n  - sid=\"', variables('sid'),'\"\n  - did=\"', variables('did'),'\"\n  - sky=\"', variables('sky'),'\"\n  - |\n      set -x\n      (\n\n        # Wait for docker daemon to start\n        while [ $(ps -ef | grep -v grep | grep docker | wc -l) -le 0 ]; do \n          sleep 3\n        done\n\n        apt install -y aziot-edge\n\n        if [ ! -z \"$sid\" ] && [ ! -z \"$did\" ] && [ ! -z \"$sky\" ]; then\n          mkdir /etc/aziot\n          wget https://raw.githubusercontent.com/Azure-Samples/iot-central-docs-samples/master/transparent-gateway-1-2/config.toml -O /etc/aziot/config.toml\n          sed -i \"s#\\(id_scope = \\).*#\\1\\\"$sid\\\"#g;s#\\(registration_id = \\).*#\\1\\\"$did\\\"#g;s#\\(value = \\).*#\\1\\\"$sky\\\" }#g\" /etc/aziot/config.toml\n          iotedge config apply -c /etc/aziot/config.toml\n        fi\n\n      ) &\n'))]",
+            "linuxConfiguration": "[if(equals(parameters('authenticationType'), 'password'), json('null'), variables('linuxConfiguration'))]"
+          },
+          "storageProfile": {
+            "imageReference": {
+              "publisher": "[variables('imagePublisher')]",
+              "offer": "[variables('imageOffer')]",
+              "sku": "[parameters('ubuntuOSVersion')]",
+              "version": "latest"
+            },
+            "osDisk": {
+              "createOption": "FromImage"
+            }
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicName'))]"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "type": "Microsoft.Compute/virtualMachines",
+        "apiVersion": "2020-12-01",
+        "name": "[variables('vmNameLeaf')]",
+        "location": "[parameters('location')]",
+        "dependsOn": [
+          "[concat('Microsoft.Network/networkInterfaces/', variables('nicNameLeaf'))]"
+        ],
+        "properties": {
+          "hardwareProfile": {
+            "vmSize": "[parameters('vmSize')]"
+          },
+          "osProfile": {
+            "computerName": "[variables('vmNameLeaf')]",
+            "adminUsername": "[parameters('adminUsername')]",
+            "adminPassword": "[parameters('adminPasswordOrKey')]",
+            "linuxConfiguration": "[if(equals(parameters('authenticationType'), 'password'), json('null'), variables('linuxConfiguration'))]"
+          },
+          "storageProfile": {
+            "imageReference": {
+              "publisher": "[variables('imagePublisher')]",
+              "offer": "[variables('imageOffer')]",
+              "sku": "[parameters('ubuntuOSVersion')]",
+              "version": "latest"
+            },
+            "osDisk": {
+              "createOption": "FromImage"
+            }
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicNameLeaf'))]"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "outputs": {
+      "Public SSH edgegateway": {
+        "type": "String",
+        "value": "[concat('ssh ', reference(resourceId('Microsoft.Compute/virtualMachines', variables('vmName'))).osProfile.adminUsername, '@', reference(resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPAddressName'))).dnsSettings.fqdn)]"
+      },
+      "Public SSH leafdevice": {
+        "type": "String",
+        "value": "[concat('ssh ', reference(resourceId('Microsoft.Compute/virtualMachines', variables('vmNameLeaf'))).osProfile.adminUsername, '@', reference(resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPAddressNameLeaf'))).dnsSettings.fqdn)]"
+      }
+
+    }
+  }
