@@ -727,13 +727,13 @@
 					"response": []
 				},
 				{
-					"name": "Create API token to a node in an organization hierarchy Copy",
+					"name": "Create API token to a node in an organization hierarchy ",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"roles\": [\r\n        {\r\n            \"role\": \"84cc62c1-dabe-49d3-b16e-8b291232b285\",\r\n            \"organization\": \"{{organizationId}}\"\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n  \"roles\": [\r\n    {\r\n      \"role\": \"ca310b8d-2f4a-44e0-a36e-957c202cd8d4\"\r\n    },\r\n    {\r\n      \"role\": \"{{organizationId}}\"\r\n    }\r\n  ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -741,7 +741,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/apiTokens/{{tokenId}}?api-version={{dataPlaneGA}}",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations/api/apiTokens/{{tokenId}}?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -749,6 +749,9 @@
 								"com"
 							],
 							"path": [
+								"",
+								"api",
+								"organizations",
 								"api",
 								"apiTokens",
 								"{{tokenId}}"
@@ -764,13 +767,13 @@
 					"response": []
 				},
 				{
-					"name": "Associate a user with a node in an organization hierarchy Copy",
+					"name": "Associate a user with a node in an organization hierarchy ",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"{{newUserId}}\",\r\n    \"type\": \"email\",\r\n    \"roles\": [\r\n        {\r\n            \"role\": \"84cc62c1-dabe-49d3-b16e-8b291232b285\",\r\n            \"organization\": \"{{organizationId}}\"\r\n        }\r\n    ],\r\n    \"email\": \"user1@contoso.com\"\r\n}",
+							"raw": "{\r\n    \"id\": \"{{newUserId}}\",\r\n    \"type\": \"email\",\r\n    \"roles\": [\r\n        {\r\n            \"role\": \"ca310b8d-2f4a-44e0-a36e-957c202cd8d4\"\r\n        },\r\n        {\r\n            \"role\": \"{{organizationId}}\"\r\n        }\r\n    ],\r\n    \"email\": \"user1@contoso.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -801,7 +804,7 @@
 					"response": []
 				},
 				{
-					"name": "Add and associate a device to an organization Copy",
+					"name": "Add and associate a device to an organization ",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -838,7 +841,7 @@
 					"response": []
 				},
 				{
-					"name": "Add and associate a device group to an organization Copy",
+					"name": "Add and associate a device group to an organization ",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -2171,7 +2174,7 @@
 					"response": []
 				},
 				{
-					"name": "Write properties - no component Copy",
+					"name": "Write properties - no component ",
 					"request": {
 						"method": "PATCH",
 						"header": [],
@@ -2209,7 +2212,7 @@
 					"response": []
 				},
 				{
-					"name": "Write properties - Module Copy",
+					"name": "Write properties - Module ",
 					"request": {
 						"method": "PATCH",
 						"header": [],
@@ -2249,7 +2252,7 @@
 					"response": []
 				},
 				{
-					"name": "Write properties - Component Copy",
+					"name": "Write properties - Component ",
 					"request": {
 						"method": "PATCH",
 						"header": [],
@@ -2289,7 +2292,7 @@
 					"response": []
 				},
 				{
-					"name": "Get properties from a module Copy",
+					"name": "Get properties from a module ",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -2320,7 +2323,7 @@
 					"response": []
 				},
 				{
-					"name": "Get properties from a component in a module Copy",
+					"name": "Get properties from a component in a module ",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -2353,7 +2356,7 @@
 					"response": []
 				},
 				{
-					"name": "Call command - no component Copy",
+					"name": "Call command - no component ",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -2392,7 +2395,7 @@
 					"response": []
 				},
 				{
-					"name": "Get Call command - no component Copy",
+					"name": "Get Call command - no component ",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -2422,7 +2425,7 @@
 					"response": []
 				},
 				{
-					"name": "Call command - with component Copy",
+					"name": "Call command - with component ",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -2463,7 +2466,7 @@
 					"response": []
 				},
 				{
-					"name": "Get Call command - with component Copy",
+					"name": "Get Call command - with component ",
 					"request": {
 						"method": "GET",
 						"header": [],
