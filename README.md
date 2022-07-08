@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: "Sample databricks workbook and Python code for adding custom analytics to IoT Central."
+description: "Samples used by the IoT Central documentation."
 languages:
 - python
 products:
@@ -19,3 +19,4 @@ The following articles use the sample code in this repository. Each article desc
 * [Extend Azure IoT Central with custom analytics](https://docs.microsoft.com/azure/iot-central/core/howto-create-custom-analytics)
 * [Create an in-store analytics application in Azure IoT Central](https://docs.microsoft.com/azure/iot-central/retail/tutorial-in-store-analytics-create-app-pnp)
 * [Manage devices in bulk in your Azure IoT Central application](https://docs.microsoft.com/azure/iot-central/core/howto-manage-devices-in-bulk)
+* [How to connect devices through an IoT Edge transparent gateway](https://docs.microsoft.com/en-us/azure/iot-central/core/how-to-connect-iot-edge-transparent-gateway)
