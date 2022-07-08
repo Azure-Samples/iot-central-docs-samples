@@ -607,6 +607,43 @@
 			"name": "Manage organizations",
 			"item": [
 				{
+					"name": "Create an organization",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"displayName\": \"Seattle\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations/{{organizationId}}?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"organizations",
+								"{{organizationId}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get an organization",
 					"request": {
 						"method": "GET",
@@ -727,7 +764,7 @@
 					"response": []
 				},
 				{
-					"name": "Create API token to a node in an organization hierarchy",
+					"name": "Add an API token to a node in an organization hierarchy",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -863,43 +900,6 @@
 								"api",
 								"deviceGroups",
 								"{{deviceGroupId}}"
-							],
-							"query": [
-								{
-									"key": "api-version",
-									"value": "{{dataPlaneGA}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create an organization",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"displayName\": \"Seattle\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations/{{organizationId}}?api-version={{dataPlaneGA}}",
-							"protocol": "https",
-							"host": [
-								"{{yourAppSubdomain}}",
-								"azureiotcentral",
-								"com"
-							],
-							"path": [
-								"api",
-								"organizations",
-								"{{organizationId}}"
 							],
 							"query": [
 								{
@@ -3582,22 +3582,22 @@
 		},
 		{
 			"key": "tokenId",
-			"value": "Add your unique token Id",
+			"value": "token-001",
 			"type": "string"
 		},
 		{
 			"key": "propertyName",
-			"value": "Add your property Name",
+			"value": "maxTempSinceLastReboot",
 			"type": "string"
 		},
 		{
 			"key": "moduleName",
-			"value": "Add your module name",
+			"value": "SimulatedTemperatureSensor",
 			"type": "string"
 		},
 		{
 			"key": "commandName",
-			"value": "Add your command name",
+			"value": "getMaxMinReport",
 			"type": "string"
 		}
 	]
