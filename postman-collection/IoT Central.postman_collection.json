@@ -2506,7 +2506,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs?api-version={{dataPlanePreview}}",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2520,7 +2520,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -2533,7 +2533,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}?api-version={{dataPlanePreview}}",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2548,7 +2548,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -2561,7 +2561,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}/devices?api-version={{dataPlanePreview}}",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}/devices?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2577,7 +2577,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -2636,7 +2636,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}?api-version={{dataPlanePreview}}",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2651,7 +2651,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -2664,7 +2664,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}/stop?api-version={{dataPlanePreview}}",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}/stop?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2680,7 +2680,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -2693,7 +2693,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}/resume?api-version={{dataPlanePreview}}",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}/resume?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2709,7 +2709,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -2722,7 +2722,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}/rerun/rerun-01?api-version={{dataPlanePreview}}",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}/rerun/rerun-01?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2739,35 +2739,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete a scheduled job by Id Copy",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/scheduledJobs/{{scheduledJobId}}?api-version=2022-07-31",
-							"protocol": "https",
-							"host": [
-								"{{yourAppSubdomain}}",
-								"azureiotcentral",
-								"com"
-							],
-							"path": [
-								"api",
-								"scheduledJobs",
-								"{{scheduledJobId}}"
-							],
-							"query": [
-								{
-									"key": "api-version",
-									"value": "2022-07-31"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -2789,7 +2761,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{scheduledJobId}}?api-version={{dataPlanePreview}}",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{scheduledJobId}}?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2804,7 +2776,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -2817,7 +2789,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/scheduledJobs/{{scheduledJobId}}?api-version={{dataPlanePreview}}",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/scheduledJobs/{{scheduledJobId}}?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2832,7 +2804,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -2845,7 +2817,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/scheduledJobs?api-version={{dataPlanePreview}}",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/scheduledJobs?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2859,7 +2831,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -2909,7 +2881,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/scheduledJobs/{{scheduledJobId}}?api-version={{dataPlanePreview}}",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/scheduledJobs/{{scheduledJobId}}?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2924,7 +2896,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -3747,12 +3719,12 @@
 		},
 		{
 			"key": "dataPlaneGA",
-			"value": "2022-05-31",
+			"value": "2022-07-31",
 			"type": "string"
 		},
 		{
 			"key": "dataPlanePreview",
-			"value": "1.2-preview",
+			"value": "2022-06-30-preview",
 			"type": "string"
 		},
 		{
