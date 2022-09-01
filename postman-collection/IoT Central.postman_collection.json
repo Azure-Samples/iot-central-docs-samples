@@ -1,7 +1,8 @@
 {
 	"info": {
-		"_postman_id": "e439127d-4382-48ad-b96d-824a7231f9e4",
+		"_postman_id": "bab15e0d-d322-4162-888f-349f32389b41",
 		"name": "IoT Central",
+		"description": "This collection helps you try out the IoT Central REST API calls described in [How to use the Azure IoT Central REST API](https://docs.microsoft.com/azure/iot-central/core/howto-authorize-rest-api).\n\nMany of the variables used in this collection are set for you. Some, such as as your app ID and admin token, you need to set using your own values.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "20434527"
 	},
@@ -15,7 +16,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/roles?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/roles?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -29,7 +30,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -51,7 +52,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/apiTokens/operator-token?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/apiTokens/operator-token?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -66,48 +67,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Query devices",
-			"item": [
-				{
-					"name": "Run a query",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"query\": \"SELECT $id, $ts, temperature, humidity FROM dtmi:azurertos:devkit:hlby5jgib2o WHERE WITHIN_WINDOW(P1D)\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/query?api-version=2022-06-30-preview",
-							"protocol": "https",
-							"host": [
-								"{{yourAppSubdomain}}",
-								"azureiotcentral",
-								"com"
-							],
-							"path": [
-								"api",
-								"query"
-							],
-							"query": [
-								{
-									"key": "api-version",
-									"value": "2022-06-30-preview"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -115,269 +75,27 @@
 					"response": []
 				},
 				{
-					"name": "Select",
+					"name": "Get role list (Bearer token)",
 					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"query\": \"SELECT deviceInformation.model, deviceInformation.swVersion FROM dtmi:azurertos:devkit:hlby5jgib2o\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/query?api-version=2022-06-30-preview",
-							"protocol": "https",
-							"host": [
-								"{{yourAppSubdomain}}",
-								"azureiotcentral",
-								"com"
-							],
-							"path": [
-								"api",
-								"query"
-							],
-							"query": [
+						"auth": {
+							"type": "bearer",
+							"bearer": [
 								{
-									"key": "api-version",
-									"value": "2022-06-30-preview"
+									"key": "token",
+									"value": "{{BearerToken}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
 								}
 							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Aliases",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"query\": \"SELECT $id as ID, $ts as timestamp, temperature as t, pressure as p FROM dtmi:azurertos:devkit:hlby5jgib2o WHERE WITHIN_WINDOW(P1D) AND t > 0 AND p > 50\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
 						},
-						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/query?api-version=2022-06-30-preview",
-							"protocol": "https",
-							"host": [
-								"{{yourAppSubdomain}}",
-								"azureiotcentral",
-								"com"
-							],
-							"path": [
-								"api",
-								"query"
-							],
-							"query": [
-								{
-									"key": "api-version",
-									"value": "2022-06-30-preview"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Top",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"query\": \"SELECT TOP 10 $id as ID, $ts as timestamp, temperature, humidity FROM dtmi:azurertos:devkit:hlby5jgib2o\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/query?api-version=2022-06-30-preview",
-							"protocol": "https",
-							"host": [
-								"{{yourAppSubdomain}}",
-								"azureiotcentral",
-								"com"
-							],
-							"path": [
-								"api",
-								"query"
-							],
-							"query": [
-								{
-									"key": "api-version",
-									"value": "2022-06-30-preview"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "From",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"query\": \"SELECT $id, $ts, temperature, humidity FROM dtmi:azurertos:devkit:hlby5jgib2o\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/query?api-version=2022-06-30-preview",
-							"protocol": "https",
-							"host": [
-								"{{yourAppSubdomain}}",
-								"azureiotcentral",
-								"com"
-							],
-							"path": [
-								"api",
-								"query"
-							],
-							"query": [
-								{
-									"key": "api-version",
-									"value": "2022-06-30-preview"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Where",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"query\": \"SELECT $id, $ts, temperature, humidity FROM dtmi:azurertos:devkit:hlby5jgib2o WHERE WITHIN_WINDOW(P1D)\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/query?api-version=2022-06-30-preview",
-							"protocol": "https",
-							"host": [
-								"{{yourAppSubdomain}}",
-								"azureiotcentral",
-								"com"
-							],
-							"path": [
-								"api",
-								"query"
-							],
-							"query": [
-								{
-									"key": "api-version",
-									"value": "2022-06-30-preview"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Aggregations and Group By",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"query\": \"SELECT AVG(temperature), AVG(pressure) FROM dtmi:azurertos:devkit:hlby5jgib2o WHERE WITHIN_WINDOW(P1D) AND $id='{{deviceId}}' GROUP BY WINDOW(PT10M)\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/query?api-version=2022-06-30-preview",
-							"protocol": "https",
-							"host": [
-								"{{yourAppSubdomain}}",
-								"azureiotcentral",
-								"com"
-							],
-							"path": [
-								"api",
-								"query"
-							],
-							"query": [
-								{
-									"key": "api-version",
-									"value": "2022-06-30-preview"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Order By",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"query\": \"SELECT $id as ID, $ts as timestamp, temperature, humidity FROM dtmi:azurertos:devkit:hlby5jgib2o ORDER BY timestamp DESC\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/query?api-version=2022-06-30-preview",
-							"protocol": "https",
-							"host": [
-								"{{yourAppSubdomain}}",
-								"azureiotcentral",
-								"com"
-							],
-							"path": [
-								"api",
-								"query"
-							],
-							"query": [
-								{
-									"key": "api-version",
-									"value": "2022-06-30-preview"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Manage users and roles",
-			"item": [
-				{
-					"name": "Get role ids",
-					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/roles?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/roles?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -391,7 +109,334 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "To learn more, see [How to authenticate and authorize IoT Central REST API calls](https://docs.microsoft.com/azure/iot-central/core/howto-authorize-rest-api)"
+		},
+		{
+			"name": "Query devices",
+			"item": [
+				{
+					"name": "Run a query",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"SELECT $id, $ts, temperature, humidity FROM dtmi:azurertos:devkit:wqdyhzg5yax WHERE WITHIN_WINDOW(P1D)\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/query?api-version={{dataPlanePreview}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"query"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlanePreview}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"SELECT deviceInformation.model, deviceInformation.swVersion FROM dtmi:azurertos:devkit:wqdyhzg5yax\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/query?api-version={{dataPlanePreview}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"query"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlanePreview}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Aliases",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"SELECT $id as ID, $ts as timestamp, temperature as t, pressure as p FROM dtmi:azurertos:devkit:wqdyhzg5yax WHERE WITHIN_WINDOW(P1D) AND t > 0 AND p > 50\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/query?api-version={{dataPlanePreview}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"query"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlanePreview}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Top",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\": \"SELECT TOP 10 $id as ID, $ts as timestamp, temperature, humidity FROM dtmi:azurertos:devkit:wqdyhzg5yax\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/query?api-version={{dataPlanePreview}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"query"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlanePreview}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "From",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"SELECT $id, $ts, temperature, humidity FROM dtmi:azurertos:devkit:wqdyhzg5yax\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/query?api-version={{dataPlanePreview}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"query"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlanePreview}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Where",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"SELECT $id, $ts, temperature, humidity FROM dtmi:azurertos:devkit:wqdyhzg5yax WHERE WITHIN_WINDOW(P1D)\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/query?api-version={{dataPlanePreview}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"query"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlanePreview}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Aggregations and Group By",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"SELECT AVG(temperature), AVG(pressure) FROM dtmi:azurertos:devkit:wqdyhzg5yax WHERE WITHIN_WINDOW(P1D) AND $id='{{deviceId}}' GROUP BY WINDOW(PT10M)\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/query?api-version={{dataPlanePreview}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"query"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlanePreview}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order By",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"SELECT $id as ID, $ts as timestamp, temperature, humidity FROM dtmi:azurertos:devkit:wqdyhzg5yax ORDER BY timestamp DESC\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/query?api-version={{dataPlanePreview}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"query"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlanePreview}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "To learn more, see [How to use the IoT Central REST API to query devices](https://docs.microsoft.com/azure/iot-central/core/howto-query-with-rest-api)"
+		},
+		{
+			"name": "Manage users and roles",
+			"item": [
+				{
+					"name": "Get role ids",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/roles?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"roles"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -404,7 +449,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/users?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/users?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -418,40 +463,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get a user",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/users/{{newUserId}}?api-version=1.0",
-							"protocol": "https",
-							"host": [
-								"{{yourAppSubdomain}}",
-								"azureiotcentral",
-								"com"
-							],
-							"path": [
-								"api",
-								"users",
-								"{{newUserId}}"
-							],
-							"query": [
-								{
-									"key": "api-version",
-									"value": "1.0"
-								},
-								{
-									"key": "",
-									"value": "",
-									"disabled": true
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -473,7 +485,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/users/{{newUserId}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/users/{{newUserId}}?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -488,7 +500,35 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/users/{{newUserId}}?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{newUserId}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -510,7 +550,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/users/{{newUserId}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/users/{{newUserId}}?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -525,7 +565,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -538,7 +578,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/users/{{newUserId}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/users/{{newUserId}}?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -553,14 +593,15 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "To learn more, see [How to use the IoT Central REST API to manage users and roles](https://docs.microsoft.com/azure/iot-central/core/howto-manage-users-roles-with-rest-api)"
 		},
 		{
 			"name": "Manage organizations",
@@ -580,7 +621,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations/{{organizationId}}?api-version=1.2-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations/{{organizationId}}?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -595,7 +636,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -608,7 +649,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations/{{organizationId}}?api-version=1.2-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations/{{organizationId}}?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -623,7 +664,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -645,7 +686,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations/{{organizationId}}?api-version=1.2-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations/{{organizationId}}?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -660,7 +701,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -673,7 +714,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations?api-version=1.2-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -687,7 +728,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -700,7 +741,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations/{{organizationId}}?api-version=1.2-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/organizations/{{organizationId}}?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -715,14 +756,163 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add an API token to a node in an organization hierarchy",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"roles\": [\r\n        {\r\n            \"role\": \"84cc62c1-dabe-49d3-b16e-8b291232b285\",\r\n            \"organization\": \"{{organizationId}}\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/apiTokens/{{tokenId}}?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"apiTokens",
+								"{{tokenId}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Associate a user with a node in an organization hierarchy",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{newUserId}}\",\r\n    \"type\": \"email\",\r\n    \"roles\": [\r\n        {\r\n            \"role\": \"84cc62c1-dabe-49d3-b16e-8b291232b285\",\r\n            \"organization\": \"{{organizationId}}\"\r\n        }\r\n    ],\r\n    \"email\": \"user1@contoso.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/users/{{newUserId}}?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{newUserId}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add and associate a device to an organization ",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"displayName\": \"Thermostat device 001\",\r\n    \"template\": \"{{deviceTemplateId}}\",\r\n    \"simulated\": true,\r\n    \"enabled\": true,\r\n    \"organizations\": [\r\n        \"{{organizationId}}\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"devices",
+								"{{deviceId}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add and associate a device group to an organization ",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"displayName\": \"Device group 1\",\r\n    \"description\": \"Custom device group.\",\r\n    \"filter\": \"SELECT * FROM devices WHERE $template = \\\"{{deviceTemplateId}}}\\\" AND $provisioned = true\",\r\n    \"organizations\": [\r\n        \"{{organizationId}}\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceGroups/{{deviceGroupId}}?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"deviceGroups",
+								"{{deviceGroupId}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "To learn more, see [How to use the IoT Central REST API to manage organizations](https://docs.microsoft.com/azure/iot-central/core/howto-manage-organizations-with-rest-api)"
 		},
 		{
 			"name": "Data export",
@@ -734,7 +924,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"displayName\": \"DataExport2\",\r\n    \"type\": \"blobstorage@v1\",\r\n    \"authorization\": {\r\n        \"type\": \"connectionString\",\r\n        \"connectionString\": \"{{destBlobConnectionString}}\",\r\n        \"containerName\": \"{{containerName}}\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"displayName\": \"DataExport\",\r\n    \"type\": \"blobstorage@v1\",\r\n    \"authorization\": {\r\n        \"type\": \"connectionString\",\r\n        \"connectionString\": \"{{destBlobConnectionString}}\",\r\n        \"containerName\": \"{{containerName}}\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -742,7 +932,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/dataExport/destinations/{{destinationId}}?api-version=2022-06-30-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/dataExport/destinations/{{destinationId}}?api-version={{dataPlanePreview}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -758,7 +948,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "2022-06-30-preview"
+									"value": "{{dataPlanePreview}}"
 								}
 							]
 						}
@@ -771,7 +961,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/dataExport/destinations/{{destinationId}}?api-version=2022-06-30-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/dataExport/destinations/{{destinationId}}?api-version={{dataPlanePreview}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -787,7 +977,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "2022-06-30-preview"
+									"value": "{{dataPlanePreview}}"
 								}
 							]
 						}
@@ -800,7 +990,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/dataExport/destinations?api-version=2022-06-30-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/dataExport/destinations?api-version={{dataPlanePreview}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -815,7 +1005,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "2022-06-30-preview"
+									"value": "{{dataPlanePreview}}"
 								}
 							]
 						}
@@ -837,7 +1027,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/dataExport/destinations/{{destinationId}}?api-version=2022-06-30-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/dataExport/destinations/{{destinationId}}?api-version={{dataPlanePreview}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -853,7 +1043,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "2022-06-30-preview"
+									"value": "{{dataPlanePreview}}"
 								}
 							]
 						}
@@ -866,7 +1056,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/dataExport/destinations/{{destinationId}}?api-version=2022-06-30-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/dataExport/destinations/{{destinationId}}?api-version={{dataPlanePreview}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -882,7 +1072,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "2022-06-30-preview"
+									"value": "{{dataPlanePreview}}"
 								}
 							]
 						}
@@ -904,7 +1094,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/dataExport/exports/{{exportId}}?api-version=2022-06-30-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/dataExport/exports/{{exportId}}?api-version={{dataPlanePreview}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -920,7 +1110,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "2022-06-30-preview"
+									"value": "{{dataPlanePreview}}"
 								}
 							]
 						}
@@ -933,7 +1123,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/dataExport/exports/{{exportId}}?api-version=2022-06-30-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/dataExport/exports/{{exportId}}?api-version={{dataPlanePreview}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -949,7 +1139,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "2022-06-30-preview"
+									"value": "{{dataPlanePreview}}"
 								}
 							]
 						}
@@ -962,7 +1152,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/dataExport/exports?api-version=2022-06-30-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/dataExport/exports?api-version={{dataPlanePreview}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -977,7 +1167,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "2022-06-30-preview"
+									"value": "{{dataPlanePreview}}"
 								}
 							]
 						}
@@ -999,7 +1189,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/dataExport/exports/{{exportId}}?api-version=2022-06-30-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/dataExport/exports/{{exportId}}?api-version={{dataPlanePreview}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1015,7 +1205,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "2022-06-30-preview"
+									"value": "{{dataPlanePreview}}"
 								}
 							]
 						}
@@ -1028,7 +1218,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/dataExport/exports/{{exportId}}?api-version=2022-06-30-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/dataExport/exports/{{exportId}}?api-version={{dataPlanePreview}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1044,14 +1234,15 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "2022-06-30-preview"
+									"value": "{{dataPlanePreview}}"
 								}
 							]
 						}
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "To learn more, see [How to use the IoT Central REST API to manage data exports](https://docs.microsoft.com/azure/iot-central/core/howto-manage-data-export-with-rest-api)"
 		},
 		{
 			"name": "Manage device templates",
@@ -1071,7 +1262,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates/{{deviceTemplateId}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates/{{deviceTemplateId}}?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1086,7 +1277,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -1099,7 +1290,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates/{{deviceTemplateId}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates/{{deviceTemplateId}}?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1114,7 +1305,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -1136,7 +1327,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates/{{deviceTemplateId}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates/{{deviceTemplateId}}?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1151,7 +1342,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -1164,7 +1355,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates/{{deviceTemplateId}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates/{{deviceTemplateId}}?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1179,7 +1370,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -1192,7 +1383,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1206,7 +1397,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -1219,7 +1410,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version=1.2-preview&$top=10",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version={{dataPlanePreview}}&$top=10",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1233,7 +1424,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "{{dataPlanePreview}}"
 								},
 								{
 									"key": "$top",
@@ -1250,7 +1441,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version=1.2-preview&$filter=contains(displayName, 'thermostat')",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version={{dataPlanePreview}}&$filter=contains(displayName, 'thermostat')",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1264,7 +1455,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "{{dataPlanePreview}}"
 								},
 								{
 									"key": "$filter",
@@ -1281,7 +1472,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version=1.2-preview&$orderby=displayName",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version={{dataPlanePreview}}&$orderby=displayName",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1295,7 +1486,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "{{dataPlanePreview}}"
 								},
 								{
 									"key": "$orderby",
@@ -1312,7 +1503,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version=1.2-preview&$filter=contains(displayName, 'thermostat')&$top=2",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version={{dataPlanePreview}}&$filter=contains(displayName, 'thermostat')&$top=2",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1326,7 +1517,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "{{dataPlanePreview}}"
 								},
 								{
 									"key": "$filter",
@@ -1341,7 +1532,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "To learn more, see [How to use the IoT Central REST API to manage device templates](https://docs.microsoft.com/azure/iot-central/core/howto-manage-device-templates-with-rest-api)"
 		},
 		{
 			"name": "Manage devices",
@@ -1361,7 +1553,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1376,7 +1568,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -1389,7 +1581,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1404,7 +1596,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -1417,7 +1609,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/credentials?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/credentials?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1433,7 +1625,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -1455,7 +1647,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1470,7 +1662,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -1483,7 +1675,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1498,7 +1690,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -1511,7 +1703,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1525,7 +1717,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -1538,7 +1730,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version=1.2-preview&$top=10",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version={{dataPlanePreview}}&$top=10",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1552,7 +1744,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "{{dataPlanePreview}}"
 								},
 								{
 									"key": "$top",
@@ -1569,7 +1761,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version=1.2-preview&$filter=displayName eq 'Contoso thermostat 001'",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version={{dataPlanePreview}}&$filter=displayName eq 'Contoso thermostat 001'",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1583,7 +1775,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "{{dataPlanePreview}}"
 								},
 								{
 									"key": "$filter",
@@ -1600,7 +1792,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version=1.2-preview&$orderby=displayName",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version={{dataPlanePreview}}&$orderby=displayName",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1614,7 +1806,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "{{dataPlanePreview}}"
 								},
 								{
 									"key": "$orderby",
@@ -1631,7 +1823,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version=1.2-preview&$filter=indexof(displayName, 'thermostat') ge 0&$top=2",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version={{dataPlanePreview}}&$filter=indexof(displayName, 'thermostat') ge 0&$top=2",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1645,7 +1837,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "{{dataPlanePreview}}"
 								},
 								{
 									"key": "$filter",
@@ -1667,7 +1859,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"displayName\": \"Device group 1\",\r\n  \"description\": \"Custom device group.\",\r\n  \"filter\": \"SELECT * FROM devices WHERE $template = \\\"dtmi:modelDefinition:dtdlv2\\\" AND $provisioned = true\",\r\n  \"organizations\": [\r\n    \"seattle-org\"\r\n  ]\r\n}",
+							"raw": "{\r\n  \"displayName\": \"Device group 1\",\r\n  \"description\": \"Custom device group.\",\r\n  \"filter\": \"SELECT * FROM devices WHERE $template = \\\"{{deviceTemplateId}}}\\\" AND $provisioned = true\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1675,7 +1867,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceGroups/{{deviceGroupId}}?api-version=1.2-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceGroups/{{deviceGroupId}}?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1690,7 +1882,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -1703,7 +1895,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceGroups/{{deviceGroupId}}?api-version=1.2-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceGroups/{{deviceGroupId}}?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1718,7 +1910,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -1731,7 +1923,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceGroups/{{deviceGroupId}}?api-version=1.2-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceGroups/{{deviceGroupId}}?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1746,7 +1938,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -1759,7 +1951,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceGroups?api-version=1.2-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceGroups?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1773,7 +1965,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -1801,7 +1993,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceGroups/{{deviceGroupId}}?api-version=1.2-preview",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceGroups/{{deviceGroupId}}?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1816,14 +2008,15 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.2-preview"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "To learn more, see [How to use the IoT Central REST API to manage devices](https://docs.microsoft.com/azure/iot-central/core/howto-manage-devices-with-rest-api)"
 		},
 		{
 			"name": "Control devices",
@@ -1834,7 +2027,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/components?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/components?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1850,7 +2043,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -1863,7 +2056,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/modules?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/modules?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1879,7 +2072,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -1892,7 +2085,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/telemetry/{{telemetryName}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/telemetry/{{telemetryName}}?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1909,7 +2102,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -1922,7 +2115,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/components/{{componentName}}/telemetry/{{telemetryName}}?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/components/{{componentName}}/telemetry/{{telemetryName}}?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1941,7 +2134,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -1954,7 +2147,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/properties?api-version=1.0",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/properties?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1970,25 +2163,350 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "1.0"
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Write properties - no component ",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"{{propertyName}}\": 65.5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/properties?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"devices",
+								"{{deviceId}}",
+								"properties"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Write properties - Module ",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"{{propertyName}}\": 65.5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/modules/{{moduleName}}/properties?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"devices",
+								"{{deviceId}}",
+								"modules",
+								"{{moduleName}}",
+								"properties"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Write properties - Component ",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"{{propertyName}}\": 65.5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/components/{{componentId}}/properties?/properties?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"devices",
+								"{{deviceId}}",
+								"components",
+								"{{componentId}}",
+								"properties"
+							],
+							"query": [
+								{
+									"key": "/properties?api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get properties from a module ",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/modules/{{moduleName}}/properties?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"devices",
+								"{{deviceId}}",
+								"modules",
+								"{{moduleName}}",
+								"properties"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get properties from a component in a module ",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/modules/{{moduleName}}/components/{{componentName}}/properties?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"devices",
+								"{{deviceId}}",
+								"modules",
+								"{{moduleName}}",
+								"components",
+								"{{componentName}}",
+								"properties"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Call command - no component ",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"request\": \"2021-06-24T12:55:20.789Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/commands/{{commandName}}?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"devices",
+								"{{deviceId}}",
+								"commands",
+								"{{commandName}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Call command - no component ",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/commands/{{commandName}}?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"devices",
+								"{{deviceId}}",
+								"commands",
+								"{{commandName}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Call command - with component ",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"request\": \"2021-06-24T12:55:20.789Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/components/{{componentName}}/commands/{{commandName}}?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"devices",
+								"{{deviceId}}",
+								"components",
+								"{{componentName}}",
+								"commands",
+								"{{commandName}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Call command - with component ",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/components/{{componentName}}/commands/{{commandName}}?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"devices",
+								"{{deviceId}}",
+								"components",
+								"{{componentName}}",
+								"commands",
+								"{{commandName}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "To learn more see [How to use the IoT Central REST API to control devices](https://docs.microsoft.com/azure/iot-central/core/howto-control-devices-with-rest-api)"
 		},
 		{
 			"name": "Manage jobs",
 			"item": [
 				{
-					"name": "List jobs Copy",
+					"name": "List jobs",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs?api-version=2022-07-31",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs?api-version={{dataPlanePreview}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2002,7 +2520,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "2022-07-31"
+									"value": "{{dataPlanePreview}}"
 								}
 							]
 						}
@@ -2015,7 +2533,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}?api-version=2022-07-31",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}?api-version={{dataPlanePreview}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2030,7 +2548,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "2022-07-31"
+									"value": "{{dataPlanePreview}}"
 								}
 							]
 						}
@@ -2043,7 +2561,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}/devices?api-version=2022-07-31",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}/devices?api-version={{dataPlanePreview}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2059,7 +2577,44 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "2022-07-31"
+									"value": "{{dataPlanePreview}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add a device group",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"displayName\": \"Device group 1\",\r\n  \"description\": \"Custom device group.\",\r\n  \"filter\": \"SELECT * FROM devices WHERE $template = \\\"dtmi:azurertos:devkit:wqdyhzg5yax\\\" AND $provisioned = true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceGroups/{{deviceGroupId}}?api-version={{dataPlanePreview}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"deviceGroups",
+								"{{deviceGroupId}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlanePreview}}"
 								}
 							]
 						}
@@ -2073,7 +2628,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n            \"displayName\": \"test\",\r\n            \"group\": \"6fecf96f-a26c-49ed-8076-6960f8efba31\",\r\n            \"data\": [\r\n                {\r\n                    \"type\": \"cloudProperty\",\r\n                    \"target\": \"dtmi:azurertos:devkit:hlby5jgib2o\",\r\n                    \"path\": \"Company\",\r\n                    \"value\": \"Contoso\"\r\n                }\r\n            ]\r\n}",
+							"raw": "{\r\n            \"displayName\": \"test2\",\r\n            \"group\": \"{{deviceGroupId}}\",\r\n            \"data\": [\r\n                {\r\n                    \"type\": \"cloudProperty\",\r\n                    \"target\": \"dtmi:azurertos:devkit:wqdyhzg5yax\",\r\n                    \"path\": \"Company\",\r\n                    \"value\": \"Contoso\"\r\n                }\r\n            ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2081,7 +2636,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}?api-version=2022-07-31",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}?api-version={{dataPlanePreview}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2096,7 +2651,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "2022-07-31"
+									"value": "{{dataPlanePreview}}"
 								}
 							]
 						}
@@ -2109,7 +2664,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}/stop?api-version=2022-07-31",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}/stop?api-version={{dataPlanePreview}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2125,7 +2680,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "2022-07-31"
+									"value": "{{dataPlanePreview}}"
 								}
 							]
 						}
@@ -2138,7 +2693,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}/resume?api-version=2022-07-31",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}/resume?api-version={{dataPlanePreview}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2154,7 +2709,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "2022-07-31"
+									"value": "{{dataPlanePreview}}"
 								}
 							]
 						}
@@ -2167,7 +2722,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}/rerun/rerun-01?api-version=2022-07-31",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}/rerun/rerun-01?api-version={{dataPlanePreview}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2180,6 +2735,34 @@
 								"{{jobId}}",
 								"rerun",
 								"rerun-01"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlanePreview}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a scheduled job by Id Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/scheduledJobs/{{scheduledJobId}}?api-version=2022-07-31",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"scheduledJobs",
+								"{{scheduledJobId}}"
 							],
 							"query": [
 								{
@@ -2206,7 +2789,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{scheduledJobId}}?api-version=2022-07-31",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{scheduledJobId}}?api-version={{dataPlanePreview}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2221,7 +2804,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "2022-07-31"
+									"value": "{{dataPlanePreview}}"
 								}
 							]
 						}
@@ -2234,7 +2817,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/scheduledJobs/{{scheduledJobId}}?api-]version=2022-07-31",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/scheduledJobs/{{scheduledJobId}}?api-version={{dataPlanePreview}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2248,8 +2831,8 @@
 							],
 							"query": [
 								{
-									"key": "api-]version",
-									"value": "2022-07-31"
+									"key": "api-version",
+									"value": "{{dataPlanePreview}}"
 								}
 							]
 						}
@@ -2262,7 +2845,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/scheduledJobs?api-version=2022-07-31",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/scheduledJobs?api-version={{dataPlanePreview}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2276,7 +2859,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "2022-07-31"
+									"value": "{{dataPlanePreview}}"
 								}
 							]
 						}
@@ -2298,7 +2881,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{scheduledJobId}}?api-version=2022-07-31",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{scheduledJobId}}?api-version={{dataPlanePreview}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2313,7 +2896,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "2022-07-31"
+									"value": "{{dataPlanePreview}}"
 								}
 							]
 						}
@@ -2326,7 +2909,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/scheduledJobs/{{scheduledJobId}}?api-version=2022-07-31",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/scheduledJobs/{{scheduledJobId}}?api-version={{dataPlanePreview}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2341,14 +2924,15 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "2022-07-31"
+									"value": "{{dataPlanePreview}}"
 								}
 							]
 						}
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "To learn more, see [How to use the IoT Central REST API to create and manage jobs](https://docs.microsoft.com/azure/iot-central/core/howto-manage-jobs-with-rest-api)"
 		},
 		{
 			"name": "Manage applications",
@@ -2369,7 +2953,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.IoTCentral/iotApps?api-version=2021-06-01",
+							"raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/providers/Microsoft.IoTCentral/iotApps?api-version={{controlPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"management",
@@ -2386,7 +2970,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "2021-06-01"
+									"value": "{{controlPlaneGA}}"
 								}
 							]
 						}
@@ -2409,7 +2993,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroupName}}/providers/Microsoft.IoTCentral/iotApps?api-version=2021-06-01",
+							"raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroupName}}/providers/Microsoft.IoTCentral/iotApps?api-version={{controlPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"management",
@@ -2428,7 +3012,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "2021-06-01"
+									"value": "{{controlPlaneGA}}"
 								}
 							]
 						}
@@ -2451,7 +3035,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroupName}}/providers/Microsoft.IoTCentral/iotApps/{{applicationName}}?api-version=2021-06-01",
+							"raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroupName}}/providers/Microsoft.IoTCentral/iotApps/{{applicationName}}?api-version={{controlPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"management",
@@ -2471,7 +3055,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "2021-06-01"
+									"value": "{{controlPlaneGA}}"
 								}
 							]
 						}
@@ -2508,7 +3092,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroupName}}/providers/Microsoft.IoTCentral/iotApps/{{applicationName}}?api-version=2021-06-01",
+							"raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroupName}}/providers/Microsoft.IoTCentral/iotApps/{{applicationName}}?api-version={{controlPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"management",
@@ -2528,7 +3112,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "2021-06-01"
+									"value": "{{controlPlaneGA}}"
 								}
 							]
 						}
@@ -2536,7 +3120,7 @@
 					"response": []
 				},
 				{
-					"name": "Modify an IoT Central application Copy",
+					"name": "Modify an IoT Central application",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -2565,7 +3149,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroupName}}/providers/Microsoft.IoTCentral/iotApps/{{applicationName}}?api-version=2021-06-01",
+							"raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroupName}}/providers/Microsoft.IoTCentral/iotApps/{{applicationName}}?api-version={{controlPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"management",
@@ -2585,7 +3169,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "2021-06-01"
+									"value": "{{controlPlaneGA}}"
 								}
 							]
 						}
@@ -2613,7 +3197,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroupName}}/providers/Microsoft.IoTCentral/iotApps/{{applicationName}}?api-version=2021-06-01",
+							"raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroupName}}/providers/Microsoft.IoTCentral/iotApps/{{applicationName}}?api-version={{controlPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"management",
@@ -2633,14 +3217,378 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "2021-06-01"
+									"value": "{{controlPlaneGA}}"
 								}
 							]
 						}
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "To learn more, see [Use the REST API to create and manage IoT Central applications](https://docs.microsoft.com/azure/iot-central/core/howto-manage-iot-central-with-rest-api)"
+		},
+		{
+			"name": "File upload storage configuration",
+			"item": [
+				{
+					"name": "Create a storage account",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"kind\": \"BlockBlobStorage\",\r\n \"location\": \"West US\",\r\n \"sku\": {\r\n    \"name\": \"Premium_LRS\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroupName}}/providers/Microsoft.Storage/storageAccounts/{{accountName}}?api-version={{storageControlPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"management",
+								"azure",
+								"com"
+							],
+							"path": [
+								"subscriptions",
+								"{{subscriptionId}}",
+								"resourceGroups",
+								"{{resourceGroupName}}",
+								"providers",
+								"Microsoft.Storage",
+								"storageAccounts",
+								"{{accountName}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{storageControlPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Storage accounts - list keys",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.log(\"Setting accountKey collection variable...\");\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"accountKey\", jsonData.keys[0].value);\r",
+									"console.log(\"Done!\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroupName}}/providers/Microsoft.Storage/storageAccounts/{{accountName}}/listKeys?api-version={{storageControlPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"management",
+								"azure",
+								"com"
+							],
+							"path": [
+								"subscriptions",
+								"{{subscriptionId}}",
+								"resourceGroups",
+								"{{resourceGroupName}}",
+								"providers",
+								"Microsoft.Storage",
+								"storageAccounts",
+								"{{accountName}}",
+								"listKeys"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{storageControlPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a container",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroupName}}/providers/Microsoft.Storage/storageAccounts/{{accountName}}/blobServices/default/containers/{{storageAccountcontainerName}}?api-version={{storageControlPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"management",
+								"azure",
+								"com"
+							],
+							"path": [
+								"subscriptions",
+								"{{subscriptionId}}",
+								"resourceGroups",
+								"{{resourceGroupName}}",
+								"providers",
+								"Microsoft.Storage",
+								"storageAccounts",
+								"{{accountName}}",
+								"blobServices",
+								"default",
+								"containers",
+								"{{storageAccountcontainerName}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{storageControlPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add a storage configuration",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"account\": \"{{accountName}}\",\r\n  \"connectionString\": \"DefaultEndpointsProtocol=https;AccountName={{accountName}};AccountKey={{accountKey}};BlobEndpoint=https://{{accountName}}.blob.core.windows.net/\",\r\n  \"container\": \"{{storageAccountcontainerName}}\",\r\n  \"sasTtl\": \"PT1H\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/fileUploads?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"fileUploads"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get storage configuration",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/fileUploads?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"fileUploads"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a storage configuration",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"account\": \"{{accountName}}\",\r\n  \"connectionString\": \"DefaultEndpointsProtocol=https;AccountName={{accountName}};AccountKey={{accountKey}};BlobEndpoint=https://{{accountName}}.blob.core.windows.net/\",\r\n  \"container\": \"{{storageAccountcontainerName}}\",\r\n  \"sasTtl\": \"PT1H\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/fileUploads?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"fileUploads"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete storage configuration",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/fileUploads?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"fileUploads"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "To learn more, see [How to use the IoT Central REST API to upload a file](https://docs.microsoft.com/azure/iot-central/core/howto-upload-file-rest-api)"
 		}
 	],
 	"auth": {
@@ -2681,17 +3629,17 @@
 	"variable": [
 		{
 			"key": "yourAppSubdomain",
-			"value": "Add yourAppSubdomain",
+			"value": "Add your IoT Central app subdomain",
 			"type": "default"
 		},
 		{
 			"key": "adminToken",
-			"value": "Add your admin auth token",
+			"value": "Add your IoT Central admin auth token",
 			"type": "default"
 		},
 		{
 			"key": "subscriptionId",
-			"value": "Add your subscription ID",
+			"value": "Add your Azure subscription ID",
 			"type": "default"
 		},
 		{
@@ -2726,7 +3674,7 @@
 		},
 		{
 			"key": "destBlobConnectionString",
-			"value": "Add your blob connection string",
+			"value": "Add your blob connection string for data export",
 			"type": "string"
 		},
 		{
@@ -2766,22 +3714,76 @@
 		},
 		{
 			"key": "BearerToken",
-			"value": "Add your bearer token",
-			"type": "default"
-		},
-		{
-			"key": "resourceGroupName",
-			"value": "IOTC",
+			"value": "Add your bearer token ",
 			"type": "default"
 		},
 		{
 			"key": "applicationName",
-			"value": "Your new application name",
+			"value": "Add your new IoT Central app name",
 			"type": "default"
 		},
 		{
 			"key": "deviceGroupId",
 			"value": "device-group-01"
+		},
+		{
+			"key": "accountName",
+			"value": "Add the name of your storage account for file uploads",
+			"type": "string"
+		},
+		{
+			"key": "accountKey",
+			"value": "Run \"Storage accounts - list keys\" to set this variable",
+			"type": "string"
+		},
+		{
+			"key": "resourceGroupName",
+			"value": "fileuploadsrg",
+			"type": "string"
+		},
+		{
+			"key": "storageAccountcontainerName",
+			"value": "centralfileuploads"
+		},
+		{
+			"key": "dataPlaneGA",
+			"value": "2022-05-31",
+			"type": "string"
+		},
+		{
+			"key": "dataPlanePreview",
+			"value": "1.2-preview",
+			"type": "string"
+		},
+		{
+			"key": "controlPlaneGA",
+			"value": "2021-06-01",
+			"type": "string"
+		},
+		{
+			"key": "storageControlPlaneGA",
+			"value": "2021-09-01",
+			"type": "string"
+		},
+		{
+			"key": "tokenId",
+			"value": "token-001",
+			"type": "string"
+		},
+		{
+			"key": "propertyName",
+			"value": "maxTempSinceLastReboot",
+			"type": "string"
+		},
+		{
+			"key": "moduleName",
+			"value": "SimulatedTemperatureSensor",
+			"type": "string"
+		},
+		{
+			"key": "commandName",
+			"value": "getMaxMinReport",
+			"type": "string"
 		},
 		{
 			"key": "scheduledJobId",
