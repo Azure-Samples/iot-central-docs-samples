@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "bab15e0d-d322-4162-888f-349f32389b41",
+		"_postman_id": "d0c47859-9ef0-4587-96c6-a6aaec677a38",
 		"name": "IoT Central",
 		"description": "This collection helps you try out the IoT Central REST API calls described in [How to use the Azure IoT Central REST API](https://docs.microsoft.com/azure/iot-central/core/howto-authorize-rest-api).\n\nMany of the variables used in this collection are set for you. Some, such as as your app ID and admin token, you need to set using your own values.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -1410,7 +1410,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version={{dataPlanePreview}}&$top=10",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version={{dataPlaneGA}}&$top=10",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1424,7 +1424,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								},
 								{
 									"key": "$top",
@@ -1441,7 +1441,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version={{dataPlanePreview}}&$filter=contains(displayName, 'thermostat')",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version={{dataPlaneGA}}&$filter=contains(displayName, 'thermostat')",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1455,7 +1455,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								},
 								{
 									"key": "$filter",
@@ -1472,7 +1472,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version={{dataPlanePreview}}&$orderby=displayName",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version={{dataPlaneGA}}&$orderby=displayName",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1486,7 +1486,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								},
 								{
 									"key": "$orderby",
@@ -1503,7 +1503,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version={{dataPlanePreview}}&$filter=contains(displayName, 'thermostat')&$top=2",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version={{dataPlaneGA}}&$filter=contains(displayName, 'thermostat')&$top=2",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1517,7 +1517,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								},
 								{
 									"key": "$filter",
@@ -1730,7 +1730,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version={{dataPlanePreview}}&$top=10",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version={{dataPlaneGA}}&$top=10",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1744,7 +1744,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								},
 								{
 									"key": "$top",
@@ -1761,7 +1761,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version={{dataPlanePreview}}&$filter=displayName eq 'Contoso thermostat 001'",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version={{dataPlaneGA}}&$filter=displayName eq 'Contoso thermostat 001'",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1775,7 +1775,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								},
 								{
 									"key": "$filter",
@@ -1792,7 +1792,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version={{dataPlanePreview}}&$orderby=displayName",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version={{dataPlaneGA}}&$orderby=displayName",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1806,7 +1806,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								},
 								{
 									"key": "$orderby",
@@ -1823,7 +1823,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version={{dataPlanePreview}}&$filter=indexof(displayName, 'thermostat') ge 0&$top=2",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version={{dataPlaneGA}}&$filter=contains(displayName, 'thermostat') ge 0&$top=2",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1837,11 +1837,11 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								},
 								{
 									"key": "$filter",
-									"value": "indexof(displayName, 'thermostat') ge 0"
+									"value": "contains(displayName, 'thermostat') ge 0"
 								},
 								{
 									"key": "$top",
@@ -2263,7 +2263,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/components/{{componentId}}/properties?/properties?api-version={{dataPlaneGA}}",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/components/{{componentId}}/properties?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2280,7 +2280,7 @@
 							],
 							"query": [
 								{
-									"key": "/properties?api-version",
+									"key": "api-version",
 									"value": "{{dataPlaneGA}}"
 								}
 							]
@@ -2591,7 +2591,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"displayName\": \"Device group 1\",\r\n  \"description\": \"Custom device group.\",\r\n  \"filter\": \"SELECT * FROM devices WHERE $template = \\\"dtmi:azurertos:devkit:wqdyhzg5yax\\\" AND $provisioned = true\"\r\n}",
+							"raw": "{\r\n  \"displayName\": \"Device group 1\",\r\n  \"description\": \"Custom device group.\",\r\n  \"filter\": \"SELECT * FROM devices WHERE $template = \\\"{{deviceTemplateId}}\\\" AND $provisioned = true\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2628,7 +2628,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n            \"displayName\": \"test2\",\r\n            \"group\": \"{{deviceGroupId}}\",\r\n            \"data\": [\r\n                {\r\n                    \"type\": \"cloudProperty\",\r\n                    \"target\": \"dtmi:azurertos:devkit:wqdyhzg5yax\",\r\n                    \"path\": \"Company\",\r\n                    \"value\": \"Contoso\"\r\n                }\r\n            ]\r\n}",
+							"raw": "{\r\n            \"displayName\": \"test2\",\r\n            \"group\": \"{{deviceGroupId}}\",\r\n            \"data\": [\r\n                {\r\n                    \"type\": \"cloudProperty\",\r\n                    \"target\": {{deviceTemplateId}},\r\n                    \"path\": \"Company\",\r\n                    \"value\": \"Contoso\"\r\n                }\r\n            ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2753,7 +2753,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"displayName\": \"New Scheduled Job\",\r\n    \"group\": \"6fecf96f-a26c-49ed-8076-6960f8efba31\",\r\n    \"data\": [\r\n        {\r\n            \"type\": \"cloudProperty\",\r\n            \"target\": \"dtmi:azurertos:devkit:hlby5jgib2o\",\r\n            \"path\": \"Company\",\r\n            \"value\": \"Contoso\"\r\n        }\r\n    ],\r\n    \"schedule\": {\r\n        \"start\": \"2022-10-24T22:29:01Z\",\r\n        \"recurrence\": \"daily\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"displayName\": \"New Scheduled Job\",\r\n    \"group\": {{deviceGroupId}},\r\n    \"data\": [\r\n        {\r\n            \"type\": \"cloudProperty\",\r\n            \"target\": {{deviceTemplateId}},\r\n            \"path\": \"Company\",\r\n            \"value\": \"Contoso\"\r\n        }\r\n    ],\r\n    \"schedule\": {\r\n        \"start\": \"2022-10-24T22:29:01Z\",\r\n        \"recurrence\": \"daily\",\r\n        \"end\": {\r\n            \"type\": \"date\",\r\n            \"date\": \"2022-12-30\"\r\n        }\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
