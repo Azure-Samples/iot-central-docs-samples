@@ -3961,12 +3961,12 @@
 	"variable": [
 		{
 			"key": "yourAppSubdomain",
-			"value": "custom-app33",
+			"value": "Add your IoT Central app subdomain",
 			"type": "default"
 		},
 		{
 			"key": "adminToken",
-			"value": "SharedAccessSignature sr=5e647fd0-8702-4db0-857f-79f5952c906f&sig=qpkycDnef%2FOgn9g1WEPtzR3HET2TZDqnwYflVYJxaTI%3D&skn=cd&se=1694028284139",
+			"value": "Add your IoT Central admin auth token",
 			"type": "default"
 		},
 		{
