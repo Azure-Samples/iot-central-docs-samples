@@ -2014,6 +2014,366 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Add a enrollment group",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"displayName\": \"My group\",\r\n  \"enabled\": true,\r\n  \"type\": \"iot\",\r\n  \"attestation\": {\r\n    \"type\": \"x509\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/enrollmentGroups/{{enrollmentGroupId}}?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"enrollmentGroups",
+								"{{enrollmentGroupId}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add a X509 certificate to a enrollment group",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"verified\": false,\r\n  \"certificate\": \"{{base64-certificate}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/enrollmentGroups/{{enrollmentGroupId}}/certificates/{{entry}}?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"enrollmentGroups",
+								"{{enrollmentGroupId}}",
+								"certificates",
+								"{{entry}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate Verification Code for X509 certificate of an enrollment group",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/enrollmentGroups/{{enrollmentGroupId}}/certificates/{{entry}}/generateVerificationCode?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"enrollmentGroups",
+								"{{enrollmentGroupId}}",
+								"certificates",
+								"{{entry}}",
+								"generateVerificationCode"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify X509 certificate of an enrollment group",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"certificate\": \"{{base64-certificate}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/enrollmentGroups/{{enrollmentGroupId}}/certificates/{{entry}}/verify?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"enrollmentGroups",
+								"{{enrollmentGroupId}}",
+								"certificates",
+								"{{entry}}",
+								"verify"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a enrollment group",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"displayName\": \"My group\",\r\n  \"enabled\": true,\r\n  \"type\": \"iot\",\r\n  \"attestation\": {\r\n    \"type\": \"x509\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/enrollmentGroups/{{enrollmentGroupId}}?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"enrollmentGroups",
+								"{{enrollmentGroupId}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a X509 certificate of an enrollment group",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/enrollmentGroups/{{enrollmentGroupId}}/certificates/{{entry}}?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"enrollmentGroups",
+								"{{enrollmentGroupId}}",
+								"certificates",
+								"{{entry}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a enrollment group",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"displayName\": \"My updated group\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/enrollmentGroups/{{enrollmentGroupId}}?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"enrollmentGroups",
+								"{{enrollmentGroupId}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List enrollment groups",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"displayName\": \"My group\",\r\n  \"enabled\": true,\r\n  \"type\": \"iot\",\r\n  \"attestation\": {\r\n    \"type\": \"x509\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/enrollmentGroups?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"enrollmentGroups"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a enrollment group",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"displayName\": \"My group\",\r\n  \"enabled\": true,\r\n  \"type\": \"iot\",\r\n  \"attestation\": {\r\n    \"type\": \"x509\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/enrollmentGroups/{{enrollmentGroupId}}?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"enrollmentGroups",
+								"{{enrollmentGroupId}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a X509 certificate from an enrollment group",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/enrollmentGroups/{{enrollmentGroupId}}/certificates/{{entry}}?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"enrollmentGroups",
+								"{{enrollmentGroupId}}",
+								"certificates",
+								"{{entry}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"description": "To learn more, see [How to use the IoT Central REST API to manage devices](https://docs.microsoft.com/azure/iot-central/core/howto-manage-devices-with-rest-api)"
@@ -3601,12 +3961,12 @@
 	"variable": [
 		{
 			"key": "yourAppSubdomain",
-			"value": "Add your IoT Central app subdomain",
+			"value": "custom-app33",
 			"type": "default"
 		},
 		{
 			"key": "adminToken",
-			"value": "Add your IoT Central admin auth token",
+			"value": "SharedAccessSignature sr=5e647fd0-8702-4db0-857f-79f5952c906f&sig=qpkycDnef%2FOgn9g1WEPtzR3HET2TZDqnwYflVYJxaTI%3D&skn=cd&se=1694028284139",
 			"type": "default"
 		},
 		{
@@ -3760,6 +4120,21 @@
 		{
 			"key": "scheduledJobId",
 			"value": "scheduled-job-001",
+			"type": "string"
+		},
+		{
+			"key": "enrollmentGroupId",
+			"value": "enrollmentGroupId-001",
+			"type": "string"
+		},
+		{
+			"key": "entry",
+			"value": "primary",
+			"type": "string"
+		},
+		{
+			"key": "base64-certificate",
+			"value": "Add your base-64 encoded certificate",
 			"type": "string"
 		}
 	]
