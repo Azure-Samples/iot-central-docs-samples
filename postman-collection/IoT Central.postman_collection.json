@@ -2016,7 +2016,7 @@
 					"response": []
 				},
 				{
-					"name": "Add a enrollment group",
+					"name": "Add an X.509 enrollment group",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -2053,7 +2053,44 @@
 					"response": []
 				},
 				{
-					"name": "Add a X509 certificate to a enrollment group",
+					"name": "Add an symmetric key enrollment group",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"displayName\": \"My group\",\r\n  \"enabled\": true,\r\n  \"type\": \"iot\",\r\n  \"attestation\": {\r\n    \"type\": \"symmetricKey\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/enrollmentGroups/{{enrollmentGroupId}}?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"enrollmentGroups",
+								"{{enrollmentGroupId}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add an X509 certificate to a enrollment group",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -2129,7 +2166,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"certificate\": \"{{base64-certificate}}\"\r\n}",
+							"raw": "{\r\n  \"certificate\": \"{{base64-verification-certificate}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2163,7 +2200,7 @@
 					"response": []
 				},
 				{
-					"name": "Get a enrollment group",
+					"name": "Get an enrollment group",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -2233,7 +2270,7 @@
 					"response": []
 				},
 				{
-					"name": "Update a enrollment group",
+					"name": "Update an enrollment group",
 					"request": {
 						"method": "PATCH",
 						"header": [],
@@ -2309,7 +2346,7 @@
 					"response": []
 				},
 				{
-					"name": "Delete a enrollment group",
+					"name": "Delete an enrollment group",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -3961,12 +3998,12 @@
 	"variable": [
 		{
 			"key": "yourAppSubdomain",
-			"value": "Add your IoT Central app subdomain",
+			"value": "custom-app33",
 			"type": "default"
 		},
 		{
 			"key": "adminToken",
-			"value": "Add your IoT Central admin auth token",
+			"value": "SharedAccessSignature sr=5e647fd0-8702-4db0-857f-79f5952c906f&sig=qpkycDnef%2FOgn9g1WEPtzR3HET2TZDqnwYflVYJxaTI%3D&skn=cd&se=1694028284139",
 			"type": "default"
 		},
 		{
@@ -4135,6 +4172,11 @@
 		{
 			"key": "base64-certificate",
 			"value": "Add your base-64 encoded certificate",
+			"type": "string"
+		},
+		{
+			"key": "base64-verification-certificate",
+			"value": "Add your base64-verification-certificate",
 			"type": "string"
 		}
 	]
