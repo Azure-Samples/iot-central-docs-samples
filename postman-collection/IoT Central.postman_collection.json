@@ -2022,7 +2022,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"displayName\": \"My group\",\r\n  \"enabled\": true,\r\n  \"type\": \"iot\",\r\n  \"attestation\": {\r\n    \"type\": \"x509\"\r\n  }\r\n}\r\n",
+							"raw": "{\r\n  \"displayName\": \"My X.509 group\",\r\n  \"enabled\": true,\r\n  \"type\": \"iot\",\r\n  \"attestation\": {\r\n    \"type\": \"x509\"\r\n  }\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2059,7 +2059,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"displayName\": \"My group\",\r\n  \"enabled\": true,\r\n  \"type\": \"iot\",\r\n  \"attestation\": {\r\n    \"type\": \"symmetricKey\"\r\n  }\r\n}\r\n",
+							"raw": "{\r\n  \"displayName\": \"My symmetricKey group\",\r\n  \"enabled\": true,\r\n  \"type\": \"iot\",\r\n  \"attestation\": {\r\n    \"type\": \"symmetricKey\"\r\n  }\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
