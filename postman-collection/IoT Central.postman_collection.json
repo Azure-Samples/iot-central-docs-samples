@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4b9957ce-4ea8-4402-9990-945745548a2b",
+		"_postman_id": "11ab72a5-f39c-4096-a967-2dcf8d120ccf",
 		"name": "IoT Central",
 		"description": "This collection helps you try out the IoT Central REST API calls described in [How to use the Azure IoT Central REST API](https://docs.microsoft.com/azure/iot-central/core/howto-authorize-rest-api).\n\nMany of the variables used in this collection are set for you. Some, such as as your app ID and admin token, you need to set using your own values.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -129,7 +129,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"query\": \"SELECT $id, $ts, temperature, humidity FROM dtmi:azurertos:devkit:wqdyhzg5yax WHERE WITHIN_WINDOW(P1D)\"\r\n}",
+							"raw": "{\r\n  \"query\": \"SELECT $id, $ts, temperature, humidity FROM {{deviceTemplateId}} WHERE WITHIN_WINDOW(P1D)\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -165,7 +165,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"query\": \"SELECT deviceInformation.model, deviceInformation.swVersion FROM dtmi:azurertos:devkit:wqdyhzg5yax\"\r\n}",
+							"raw": "{\r\n  \"query\": \"SELECT deviceInformation.model, deviceInformation.swVersion FROM {{deviceTemplateId}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -201,7 +201,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"query\": \"SELECT $id as ID, $ts as timestamp, temperature as t, pressure as p FROM dtmi:azurertos:devkit:wqdyhzg5yax WHERE WITHIN_WINDOW(P1D) AND t > 0 AND p > 50\"\r\n}",
+							"raw": "{\r\n  \"query\": \"SELECT $id as ID, $ts as timestamp, temperature as t, pressure as p FROM {{deviceTemplateId}} WHERE WITHIN_WINDOW(P1D) AND t > 0 AND p > 50\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -237,7 +237,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"query\": \"SELECT TOP 10 $id as ID, $ts as timestamp, temperature, humidity FROM dtmi:azurertos:devkit:wqdyhzg5yax\"\r\n}",
+							"raw": "{\r\n    \"query\": \"SELECT TOP 10 $id as ID, $ts as timestamp, temperature, humidity FROM {{deviceTemplateId}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -273,7 +273,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"query\": \"SELECT $id, $ts, temperature, humidity FROM dtmi:azurertos:devkit:wqdyhzg5yax\"\r\n}",
+							"raw": "{\r\n  \"query\": \"SELECT $id, $ts, temperature, humidity FROM {{deviceTemplateId}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -309,7 +309,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"query\": \"SELECT $id, $ts, temperature, humidity FROM dtmi:azurertos:devkit:wqdyhzg5yax WHERE WITHIN_WINDOW(P1D)\"\r\n}",
+							"raw": "{\r\n  \"query\": \"SELECT $id, $ts, temperature, humidity FROM {{deviceTemplateId}} WHERE WITHIN_WINDOW(P1D)\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -345,7 +345,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"query\": \"SELECT AVG(temperature), AVG(pressure) FROM dtmi:azurertos:devkit:wqdyhzg5yax WHERE WITHIN_WINDOW(P1D) AND $id='{{deviceId}}' GROUP BY WINDOW(PT10M)\"\r\n}",
+							"raw": "{\r\n  \"query\": \"SELECT AVG(temperature), AVG(pressure) FROM {{deviceTemplateId}} WHERE WITHIN_WINDOW(P1D) AND $id='{{deviceId}}' GROUP BY WINDOW(PT10M)\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -381,7 +381,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"query\": \"SELECT $id as ID, $ts as timestamp, temperature, humidity FROM dtmi:azurertos:devkit:wqdyhzg5yax ORDER BY timestamp DESC\"\r\n}",
+							"raw": "{\r\n  \"query\": \"SELECT $id as ID, $ts as timestamp, temperature, humidity FROM {{deviceTemplateId}} ORDER BY timestamp DESC\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
