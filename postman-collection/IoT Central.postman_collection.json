@@ -3025,7 +3025,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n            \"displayName\": \"test2\",\r\n            \"group\": \"{{deviceGroupId}}\",\r\n            \"data\": [\r\n                {\r\n                    \"type\": \"cloudProperty\",\r\n                    \"target\": {{deviceTemplateId}},\r\n                    \"path\": \"Company\",\r\n                    \"value\": \"Contoso\"\r\n                }\r\n            ]\r\n}",
+							"raw": "{\r\n            \"displayName\": \"New Job\",\r\n            \"group\": \"{{deviceGroupId}}\",\r\n            \"data\": [\r\n                {\r\n                    \"type\": \"cloudProperty\",\r\n                    \"target\": {{deviceTemplateId}},\r\n                    \"path\": {{cloudPropertyName}},\r\n                    \"value\": \"1\"\r\n                }\r\n            ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -4177,6 +4177,16 @@
 		{
 			"key": "base64-verification-certificate",
 			"value": "Add your base64-verification-certificate",
+			"type": "string"
+		},
+		{
+			"key": "cloudPropertyName",
+			"value": "Add your cloud property name",
+			"type": "string"
+		},
+		{
+			"key": "componentId",
+			"value": "componentId-001",
 			"type": "string"
 		}
 	]
