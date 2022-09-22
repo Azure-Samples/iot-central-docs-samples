@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d0c47859-9ef0-4587-96c6-a6aaec677a38",
+		"_postman_id": "4b9957ce-4ea8-4402-9990-945745548a2b",
 		"name": "IoT Central",
 		"description": "This collection helps you try out the IoT Central REST API calls described in [How to use the Azure IoT Central REST API](https://docs.microsoft.com/azure/iot-central/core/howto-authorize-rest-api).\n\nMany of the variables used in this collection are set for you. Some, such as as your app ID and admin token, you need to set using your own values.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -3998,12 +3998,12 @@
 	"variable": [
 		{
 			"key": "yourAppSubdomain",
-			"value": "custom-app33",
+			"value": "Add your IoT Central app subdomain",
 			"type": "default"
 		},
 		{
 			"key": "adminToken",
-			"value": "SharedAccessSignature sr=5e647fd0-8702-4db0-857f-79f5952c906f&sig=qpkycDnef%2FOgn9g1WEPtzR3HET2TZDqnwYflVYJxaTI%3D&skn=cd&se=1694028284139",
+			"value": "Add your IoT Central admin auth token",
 			"type": "default"
 		},
 		{
