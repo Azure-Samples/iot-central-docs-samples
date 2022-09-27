@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e11812a4-5ded-4862-b538-3d07ed56f8b1",
+		"_postman_id": "11ab72a5-f39c-4096-a967-2dcf8d120ccf",
 		"name": "IoT Central",
 		"description": "This collection helps you try out the IoT Central REST API calls described in [How to use the Azure IoT Central REST API](https://docs.microsoft.com/azure/iot-central/core/howto-authorize-rest-api).\n\nMany of the variables used in this collection are set for you. Some, such as as your app ID and admin token, you need to set using your own values.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -129,7 +129,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"query\": \"SELECT $id, $ts, temperature, humidity FROM dtmi:azurertos:devkit:wqdyhzg5yax WHERE WITHIN_WINDOW(P1D)\"\r\n}",
+							"raw": "{\r\n  \"query\": \"SELECT $id, $ts, temperature, humidity FROM {{deviceTemplateId}} WHERE WITHIN_WINDOW(P1D)\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -165,7 +165,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"query\": \"SELECT deviceInformation.model, deviceInformation.swVersion FROM dtmi:azurertos:devkit:wqdyhzg5yax\"\r\n}",
+							"raw": "{\r\n  \"query\": \"SELECT deviceInformation.model, deviceInformation.swVersion FROM {{deviceTemplateId}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -201,7 +201,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"query\": \"SELECT $id as ID, $ts as timestamp, temperature as t, pressure as p FROM dtmi:azurertos:devkit:wqdyhzg5yax WHERE WITHIN_WINDOW(P1D) AND t > 0 AND p > 50\"\r\n}",
+							"raw": "{\r\n  \"query\": \"SELECT $id as ID, $ts as timestamp, temperature as t, pressure as p FROM {{deviceTemplateId}} WHERE WITHIN_WINDOW(P1D) AND t > 0 AND p > 50\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -237,7 +237,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"query\": \"SELECT TOP 10 $id as ID, $ts as timestamp, temperature, humidity FROM dtmi:azurertos:devkit:wqdyhzg5yax\"\r\n}",
+							"raw": "{\r\n    \"query\": \"SELECT TOP 10 $id as ID, $ts as timestamp, temperature, humidity FROM {{deviceTemplateId}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -273,7 +273,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"query\": \"SELECT $id, $ts, temperature, humidity FROM dtmi:azurertos:devkit:wqdyhzg5yax\"\r\n}",
+							"raw": "{\r\n  \"query\": \"SELECT $id, $ts, temperature, humidity FROM {{deviceTemplateId}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -309,7 +309,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"query\": \"SELECT $id, $ts, temperature, humidity FROM dtmi:azurertos:devkit:wqdyhzg5yax WHERE WITHIN_WINDOW(P1D)\"\r\n}",
+							"raw": "{\r\n  \"query\": \"SELECT $id, $ts, temperature, humidity FROM {{deviceTemplateId}} WHERE WITHIN_WINDOW(P1D)\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -345,7 +345,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"query\": \"SELECT AVG(temperature), AVG(pressure) FROM dtmi:azurertos:devkit:wqdyhzg5yax WHERE WITHIN_WINDOW(P1D) AND $id='{{deviceId}}' GROUP BY WINDOW(PT10M)\"\r\n}",
+							"raw": "{\r\n  \"query\": \"SELECT AVG(temperature), AVG(pressure) FROM {{deviceTemplateId}} WHERE WITHIN_WINDOW(P1D) AND $id='{{deviceId}}' GROUP BY WINDOW(PT10M)\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -381,7 +381,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"query\": \"SELECT $id as ID, $ts as timestamp, temperature, humidity FROM dtmi:azurertos:devkit:wqdyhzg5yax ORDER BY timestamp DESC\"\r\n}",
+							"raw": "{\r\n  \"query\": \"SELECT $id as ID, $ts as timestamp, temperature, humidity FROM {{deviceTemplateId}} ORDER BY timestamp DESC\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1410,7 +1410,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version={{dataPlanePreview}}&$top=10",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version={{dataPlaneGA}}&$top=10",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1424,7 +1424,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								},
 								{
 									"key": "$top",
@@ -1441,7 +1441,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version={{dataPlanePreview}}&$filter=contains(displayName, 'thermostat')",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version={{dataPlaneGA}}&$filter=contains(displayName, 'thermostat')",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1455,7 +1455,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								},
 								{
 									"key": "$filter",
@@ -1472,7 +1472,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version={{dataPlanePreview}}&$orderby=displayName",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version={{dataPlaneGA}}&$orderby=displayName",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1486,7 +1486,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								},
 								{
 									"key": "$orderby",
@@ -1503,7 +1503,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version={{dataPlanePreview}}&$filter=contains(displayName, 'thermostat')&$top=2",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version={{dataPlaneGA}}&$filter=contains(displayName, 'thermostat')&$top=2",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1517,7 +1517,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								},
 								{
 									"key": "$filter",
@@ -1730,7 +1730,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version={{dataPlanePreview}}&$top=10",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version={{dataPlaneGA}}&$top=10",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1744,7 +1744,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								},
 								{
 									"key": "$top",
@@ -1761,7 +1761,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version={{dataPlanePreview}}&$filter=displayName eq 'Contoso thermostat 001'",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version={{dataPlaneGA}}&$filter=displayName eq 'Contoso thermostat 001'",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1775,7 +1775,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								},
 								{
 									"key": "$filter",
@@ -1792,7 +1792,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version={{dataPlanePreview}}&$orderby=displayName",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version={{dataPlaneGA}}&$orderby=displayName",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1806,7 +1806,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								},
 								{
 									"key": "$orderby",
@@ -1823,7 +1823,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version={{dataPlanePreview}}&$filter=indexof(displayName, 'thermostat') ge 0&$top=2",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version={{dataPlaneGA}}&$filter=contains(displayName, 'thermostat') ge 0&$top=2",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1837,11 +1837,11 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								},
 								{
 									"key": "$filter",
-									"value": "indexof(displayName, 'thermostat') ge 0"
+									"value": "contains(displayName, 'thermostat') ge 0"
 								},
 								{
 									"key": "$top",
@@ -2004,6 +2004,403 @@
 								"api",
 								"deviceGroups",
 								"{{deviceGroupId}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add an X.509 enrollment group",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"displayName\": \"My X.509 group\",\r\n  \"enabled\": true,\r\n  \"type\": \"iot\",\r\n  \"attestation\": {\r\n    \"type\": \"x509\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/enrollmentGroups/{{enrollmentGroupId}}?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"enrollmentGroups",
+								"{{enrollmentGroupId}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add an symmetric key enrollment group",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"displayName\": \"My symmetricKey group\",\r\n  \"enabled\": true,\r\n  \"type\": \"iot\",\r\n  \"attestation\": {\r\n    \"type\": \"symmetricKey\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/enrollmentGroups/{{enrollmentGroupId}}?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"enrollmentGroups",
+								"{{enrollmentGroupId}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add an X509 certificate to a enrollment group",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"verified\": false,\r\n  \"certificate\": \"{{base64-certificate}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/enrollmentGroups/{{enrollmentGroupId}}/certificates/{{entry}}?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"enrollmentGroups",
+								"{{enrollmentGroupId}}",
+								"certificates",
+								"{{entry}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate Verification Code for X509 certificate of an enrollment group",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/enrollmentGroups/{{enrollmentGroupId}}/certificates/{{entry}}/generateVerificationCode?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"enrollmentGroups",
+								"{{enrollmentGroupId}}",
+								"certificates",
+								"{{entry}}",
+								"generateVerificationCode"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify X509 certificate of an enrollment group",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"certificate\": \"{{base64-verification-certificate}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/enrollmentGroups/{{enrollmentGroupId}}/certificates/{{entry}}/verify?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"enrollmentGroups",
+								"{{enrollmentGroupId}}",
+								"certificates",
+								"{{entry}}",
+								"verify"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get an enrollment group",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"displayName\": \"My group\",\r\n  \"enabled\": true,\r\n  \"type\": \"iot\",\r\n  \"attestation\": {\r\n    \"type\": \"x509\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/enrollmentGroups/{{enrollmentGroupId}}?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"enrollmentGroups",
+								"{{enrollmentGroupId}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a X509 certificate of an enrollment group",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/enrollmentGroups/{{enrollmentGroupId}}/certificates/{{entry}}?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"enrollmentGroups",
+								"{{enrollmentGroupId}}",
+								"certificates",
+								"{{entry}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an enrollment group",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"displayName\": \"My updated group\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/enrollmentGroups/{{enrollmentGroupId}}?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"enrollmentGroups",
+								"{{enrollmentGroupId}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List enrollment groups",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"displayName\": \"My group\",\r\n  \"enabled\": true,\r\n  \"type\": \"iot\",\r\n  \"attestation\": {\r\n    \"type\": \"x509\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/enrollmentGroups?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"enrollmentGroups"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an enrollment group",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"displayName\": \"My group\",\r\n  \"enabled\": true,\r\n  \"type\": \"iot\",\r\n  \"attestation\": {\r\n    \"type\": \"x509\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/enrollmentGroups/{{enrollmentGroupId}}?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"enrollmentGroups",
+								"{{enrollmentGroupId}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a X509 certificate from an enrollment group",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/enrollmentGroups/{{enrollmentGroupId}}/certificates/{{entry}}?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"enrollmentGroups",
+								"{{enrollmentGroupId}}",
+								"certificates",
+								"{{entry}}"
 							],
 							"query": [
 								{
@@ -2263,7 +2660,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/components/{{componentId}}/properties?/properties?api-version={{dataPlaneGA}}",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{deviceId}}/components/{{componentId}}/properties?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2280,7 +2677,7 @@
 							],
 							"query": [
 								{
-									"key": "/properties?api-version",
+									"key": "api-version",
 									"value": "{{dataPlaneGA}}"
 								}
 							]
@@ -2506,7 +2903,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs?api-version={{dataPlanePreview}}",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2520,7 +2917,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -2533,7 +2930,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}?api-version={{dataPlanePreview}}",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2548,7 +2945,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -2561,7 +2958,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}/devices?api-version={{dataPlanePreview}}",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}/devices?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2577,7 +2974,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -2591,7 +2988,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"displayName\": \"Device group 1\",\r\n  \"description\": \"Custom device group.\",\r\n  \"filter\": \"SELECT * FROM devices WHERE $template = \\\"dtmi:azurertos:devkit:wqdyhzg5yax\\\" AND $provisioned = true\"\r\n}",
+							"raw": "{\r\n  \"displayName\": \"Device group 1\",\r\n  \"description\": \"Custom device group.\",\r\n  \"filter\": \"SELECT * FROM devices WHERE $template = \\\"{{deviceTemplateId}}\\\" AND $provisioned = true\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2628,7 +3025,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n            \"displayName\": \"test2\",\r\n            \"group\": \"{{deviceGroupId}}\",\r\n            \"data\": [\r\n                {\r\n                    \"type\": \"cloudProperty\",\r\n                    \"target\": \"dtmi:azurertos:devkit:wqdyhzg5yax\",\r\n                    \"path\": \"Company\",\r\n                    \"value\": \"Contoso\"\r\n                }\r\n            ]\r\n}",
+							"raw": "{\r\n            \"displayName\": \"New Job\",\r\n            \"group\": \"{{deviceGroupId}}\",\r\n            \"data\": [\r\n                {\r\n                    \"type\": \"cloudProperty\",\r\n                    \"target\": {{deviceTemplateId}},\r\n                    \"path\": {{cloudPropertyName}},\r\n                    \"value\": \"1\"\r\n                }\r\n            ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2636,7 +3033,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}?api-version={{dataPlanePreview}}",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2651,7 +3048,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -2664,7 +3061,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}/stop?api-version={{dataPlanePreview}}",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}/stop?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2680,7 +3077,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -2693,7 +3090,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}/resume?api-version={{dataPlanePreview}}",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}/resume?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2709,7 +3106,7 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -2722,7 +3119,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}/rerun/rerun-01?api-version={{dataPlanePreview}}",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{jobId}}/rerun/rerun-01?api-version={{dataPlaneGA}}",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2739,7 +3136,164 @@
 							"query": [
 								{
 									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Schedule a Job",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"displayName\": \"New Scheduled Job\",\r\n    \"group\": {{deviceGroupId}},\r\n    \"data\": [\r\n        {\r\n            \"type\": \"cloudProperty\",\r\n            \"target\": {{deviceTemplateId}},\r\n            \"path\": \"Company\",\r\n            \"value\": \"Contoso\"\r\n        }\r\n    ],\r\n    \"schedule\": {\r\n        \"start\": \"2022-10-24T22:29:01Z\",\r\n        \"recurrence\": \"daily\",\r\n        \"end\": {\r\n            \"type\": \"date\",\r\n            \"date\": \"2022-12-30\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{scheduledJobId}}?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"jobs",
+								"{{scheduledJobId}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a scheduled job by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/scheduledJobs/{{scheduledJobId}}?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"scheduledJobs",
+								"{{scheduledJobId}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Scheduled jobs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/scheduledJobs?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"scheduledJobs"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a schedule Job",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"schedule\": {\r\n    \"start\": \"2022-10-24T22:29:01Z\",\r\n    \"recurrence\": \"weekly\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/jobs/{{scheduledJobId}}?api-version={{dataPlanePreview}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"jobs",
+								"{{scheduledJobId}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
 									"value": "{{dataPlanePreview}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a scheduled job by Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/scheduledJobs/{{scheduledJobId}}?api-version={{dataPlaneGA}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"scheduledJobs",
+								"{{scheduledJobId}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlaneGA}}"
 								}
 							]
 						}
@@ -3562,12 +4116,12 @@
 		},
 		{
 			"key": "dataPlaneGA",
-			"value": "2022-05-31",
+			"value": "2022-07-31",
 			"type": "string"
 		},
 		{
 			"key": "dataPlanePreview",
-			"value": "1.2-preview",
+			"value": "2022-06-30-preview",
 			"type": "string"
 		},
 		{
@@ -3598,6 +4152,41 @@
 		{
 			"key": "commandName",
 			"value": "getMaxMinReport",
+			"type": "string"
+		},
+		{
+			"key": "scheduledJobId",
+			"value": "scheduled-job-001",
+			"type": "string"
+		},
+		{
+			"key": "enrollmentGroupId",
+			"value": "enrollmentGroupId-001",
+			"type": "string"
+		},
+		{
+			"key": "entry",
+			"value": "primary",
+			"type": "string"
+		},
+		{
+			"key": "base64-certificate",
+			"value": "Add your base-64 encoded certificate",
+			"type": "string"
+		},
+		{
+			"key": "base64-verification-certificate",
+			"value": "Add your base64-verification-certificate",
+			"type": "string"
+		},
+		{
+			"key": "cloudPropertyName",
+			"value": "Add your cloud property name",
+			"type": "string"
+		},
+		{
+			"key": "componentId",
+			"value": "componentId-001",
 			"type": "string"
 		}
 	]
