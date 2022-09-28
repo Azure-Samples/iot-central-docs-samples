@@ -1,8 +1,24 @@
+if [[ ! -n $1 ]];
+then 
+    echo "No cluster name parameter passed."
+    exit
+else
+    echo "Cluster name: $1"
+fi
+
+if [[ ! -n $2 ]];
+then 
+    echo "No IoT Central URL prefix parameter passed."
+    exit
+else
+    echo "IoT Central URL prefix: $2"
+fi
+
 # The cluster name can contain only lowercase letters and numbers.
 # It must contain from 4 to 22 characters.
-CLUSTER_NAME="<A unique name for your cluster>"
+CLUSTER_NAME=$1
 
-CENTRAL_URL_PREFIX="<The URL prefix of your IoT Central application>"
+CENTRAL_URL_PREFIX=$2
 
 DATABASE_NAME="phonedata"
 LOCATION="eastus"
