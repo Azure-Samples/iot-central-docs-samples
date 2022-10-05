@@ -3963,87 +3963,13 @@
 			"name": "Manage dashboards",
 			"item": [
 				{
-					"name": "Add a dashboard - Line Chart",
+					"name": "Add a dashboard",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"displayName\": \"My Dashboard \",\r\n    \"tiles\": [\r\n        {\r\n            \"displayName\": \"lineChart\",\r\n            \"configuration\": {\r\n                \"type\": \"lineChart\",\r\n                \"capabilities\": [\r\n                    {\r\n                        \"capability\": {{capabilityName}},\r\n                        \"aggregateFunction\": \"avg\"\r\n                    }\r\n                ],\r\n                \"devices\": [\r\n                    \"{{deviceId}}\"\r\n                ],\r\n                \"group\": \"{{deviceGroupId}}\",\r\n                \"format\": {\r\n                    \"xAxisEnabled\": true,\r\n                    \"yAxisEnabled\": true,\r\n                    \"legendEnabled\": true\r\n                },\r\n                \"queryRange\": {\r\n                    \"type\": \"time\",\r\n                    \"duration\": \"PT30M\",\r\n                    \"resolution\": \"PT1M\"\r\n                }\r\n            },\r\n            \"x\": 5,\r\n            \"y\": 0,\r\n            \"width\": 6,\r\n            \"height\": 6\r\n        }\r\n    ],\r\n    \"favorite\": false\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/dashboards/{{dashboardId}}?api-version={{dataPlanePreview}}",
-							"protocol": "https",
-							"host": [
-								"{{yourAppSubdomain}}",
-								"azureiotcentral",
-								"com"
-							],
-							"path": [
-								"api",
-								"dashboards",
-								"{{dashboardId}}"
-							],
-							"query": [
-								{
-									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Add a dashboard - LKV",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"displayName\": \"My Dashboard LKV\",\r\n    \"tiles\": [\r\n        {\r\n            \"displayName\": \"LKV - root\",\r\n            \"configuration\": {\r\n                \"type\": \"lkv\",\r\n                \"capabilities\": [\r\n                    {\r\n                        \"capability\": \"{{capabilityName}}\",\r\n                        \"aggregateFunction\": \"avg\"\r\n                    }\r\n                ],\r\n                \"group\": \"{{deviceGroupId}}\",\r\n                \"devices\": [\r\n                    \"{{deviceId}}\"\r\n                ],\r\n                \"format\": {\r\n                    \"abbreviateValue\": false,\r\n                    \"wordWrap\": false,\r\n                    \"textSize\": 14\r\n                }\r\n            },\r\n            \"x\": 0,\r\n            \"y\": 0,\r\n            \"width\": 2,\r\n            \"height\": 2\r\n        }\r\n    ],\r\n    \"favorite\": false\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/dashboards/{{dashboardId}}?api-version={{dataPlanePreview}}",
-							"protocol": "https",
-							"host": [
-								"{{yourAppSubdomain}}",
-								"azureiotcentral",
-								"com"
-							],
-							"path": [
-								"api",
-								"dashboards",
-								"{{dashboardId}}"
-							],
-							"query": [
-								{
-									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Add a dashboard - MarkDown",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"displayName\": \"My Markdown\",\r\n    \"tiles\": [\r\n     {\r\n    \"displayName\": \"Documentation\",\r\n    \"configuration\": {\r\n        \"type\": \"markdown\",\r\n        \"description\": \"Comprehensive help articles and links to more support.\",\r\n        \"href\": \"https://aka.ms/iotcentral-pnp-docs\",\r\n        \"image\": \"4d6c6373-0220-4191-be2e-d58ca2a289e1\"\r\n    },\r\n    \"x\": 4,\r\n    \"y\": 0,\r\n    \"width\": 1,\r\n    \"height\": 1\r\n}\r\n    ],\r\n    \"favorite\": false\r\n}",
+							"raw": "{\r\n    \"displayName\": \"My Dashboard \",\r\n    \"tiles\": [\r\n        {\r\n            \"displayName\": \"Average Temperature\",\r\n            \"configuration\": {\r\n                \"type\": \"lineChart\",\r\n                \"capabilities\": [\r\n                    {\r\n                        \"capability\": {{capabilityName}},\r\n                        \"aggregateFunction\": \"avg\"\r\n                    }\r\n                ],\r\n                \"devices\": [\r\n                    \"{{deviceId}}\"\r\n                ],\r\n                \"group\": \"{{deviceGroupId}}\",\r\n                \"format\": {\r\n                    \"xAxisEnabled\": true,\r\n                    \"yAxisEnabled\": true,\r\n                    \"legendEnabled\": true\r\n                },\r\n                \"queryRange\": {\r\n                    \"type\": \"time\",\r\n                    \"duration\": \"PT30M\",\r\n                    \"resolution\": \"PT1M\"\r\n                }\r\n            },\r\n            \"x\": 5,\r\n            \"y\": 0,\r\n            \"width\": 6,\r\n            \"height\": 6\r\n        },\r\n        {\r\n            \"displayName\": \"LKV - temperature\",\r\n            \"configuration\": {\r\n                \"type\": \"lkv\",\r\n                \"capabilities\": [\r\n                    {\r\n                        \"capability\": \"{{capabilityName}}\",\r\n                        \"aggregateFunction\": \"avg\"\r\n                    }\r\n                ],\r\n                \"group\": \"{{deviceGroupId}}\",\r\n                \"devices\": [\r\n                    \"{{deviceId}}\"\r\n                ],\r\n                \"format\": {\r\n                    \"abbreviateValue\": false,\r\n                    \"wordWrap\": false,\r\n                    \"textSize\": 14\r\n                }\r\n            },\r\n            \"x\": 0,\r\n            \"y\": 0,\r\n            \"width\": 2,\r\n            \"height\": 2\r\n        },\r\n        {\r\n            \"displayName\": \"Documentation\",\r\n            \"configuration\": {\r\n                \"type\": \"markdown\",\r\n                \"description\": \"Comprehensive help articles and links to more support.\",\r\n                \"href\": \"https://aka.ms/iotcentral-pnp-docs\",\r\n                \"image\": \"4d6c6373-0220-4191-be2e-d58ca2a289e1\"\r\n            },\r\n            \"x\": 4,\r\n            \"y\": 0,\r\n            \"width\": 1,\r\n            \"height\": 1\r\n        }\r\n    ],\r\n    \"favorite\": false\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -4076,7 +4002,7 @@
 				{
 					"name": "Update a dashboard",
 					"request": {
-						"method": "PUT",
+						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -4427,7 +4353,7 @@
 		},
 		{
 			"key": "dashboardId",
-			"value": "Add your dashboard Id",
+			"value": "dtmi:kkfvwa2xi:p7pyt5x3o",
 			"type": "string"
 		},
 		{
