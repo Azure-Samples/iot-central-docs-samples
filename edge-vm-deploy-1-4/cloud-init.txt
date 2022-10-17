@@ -45,10 +45,10 @@ runcmd:
 
         if [ ! -z $sid ]; then
           mkdir /etc/aziot
-          wget https://github.com/Azure-Samples/iot-central-docs-samples/tree/main/edge-vm-deploy-1-4/config.toml -O /etc/aziot/config.toml
+          wget https://raw.githubusercontent.com/Azure-Samples/iot-central-docs-samples/main/edge-vm-deploy-1-4/config.toml -O /etc/aziot/config.toml
           sed -i "s#\(id_scope = \).*#\1\"$sid\"#g" /etc/aziot/config.toml
           sed -i "s#\(registration_id = \).*#\1\"$did\"#g" /etc/aziot/config.toml
-          sed -i "s#\(symmetric_key = \).*#\1\"$dky\"#g" /etc/aziot/config.toml
+          sed -i "s#\(symmetric_key = { value = \).*#\1\"$dky\" }#g" /etc/aziot/config.toml
           iotedge config apply -c /etc/aziot/config.toml
         fi
 
