@@ -17,6 +17,7 @@
     },
     "adminUsername": {
       "type": "string",
+      "defaultValue": "AzureUser",
       "metadata": {
         "description": "User name for the Virtual Machine."
       }
@@ -49,6 +50,7 @@
     },
     "deviceId": {
         "type": "string",
+        "defaultValue": "env-sens-001",
         "metadata": {
             "description": "IoT Edge Device Id"
         }
