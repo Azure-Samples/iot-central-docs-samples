@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "efbadbef-be6d-4fa0-9cd0-8e422dce8728",
+		"_postman_id": "0e9d957b-0ddc-477c-a7ac-1c500834991c",
 		"name": "IoT Central",
 		"description": "This collection helps you try out the IoT Central REST API calls described in [How to use the Azure IoT Central REST API](https://docs.microsoft.com/azure/iot-central/core/howto-authorize-rest-api).\n\nMany of the variables used in this collection are set for you. Some, such as as your app ID and admin token, you need to set using your own values.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -1534,6 +1534,276 @@
 				}
 			],
 			"description": "To learn more, see [How to use the IoT Central REST API to manage device templates](https://docs.microsoft.com/azure/iot-central/core/howto-manage-device-templates-with-rest-api)"
+		},
+		{
+			"name": "Deployment manifests",
+			"item": [
+				{
+					"name": "Add a deployment manifest",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{deploymentManifestId}}\",\r\n    \"displayName\": \"Environmental sensor deployment manifest\",\r\n    \"data\": {\r\n        \"modulesContent\": {\r\n            \"$edgeAgent\": {\r\n                \"properties.desired\": {\r\n                    \"schemaVersion\": \"1.0\",\r\n                    \"runtime\": {\r\n                        \"type\": \"docker\",\r\n                        \"settings\": {\r\n                            \"minDockerVersion\": \"v1.25\",\r\n                            \"loggingOptions\": \"\",\r\n                            \"registryCredentials\": {}\r\n                        }\r\n                    },\r\n                    \"systemModules\": {\r\n                        \"edgeAgent\": {\r\n                            \"type\": \"docker\",\r\n                            \"settings\": {\r\n                                \"image\": \"mcr.microsoft.com/azureiotedge-agent:1.4\",\r\n                                \"createOptions\": \"{}\"\r\n                            }\r\n                        },\r\n                        \"edgeHub\": {\r\n                            \"type\": \"docker\",\r\n                            \"status\": \"running\",\r\n                            \"restartPolicy\": \"always\",\r\n                            \"settings\": {\r\n                                \"image\": \"mcr.microsoft.com/azureiotedge-hub:1.4\",\r\n                                \"createOptions\": \"{}\"\r\n                            }\r\n                        }\r\n                    },\r\n                    \"modules\": {\r\n                        \"SimulatedTemperatureSensor\": {\r\n                            \"version\": \"1.0\",\r\n                            \"type\": \"docker\",\r\n                            \"status\": \"running\",\r\n                            \"restartPolicy\": \"always\",\r\n                            \"settings\": {\r\n                                \"image\": \"mcr.microsoft.com/azureiotedge-simulated-temperature-sensor:1.0\",\r\n                                \"createOptions\": \"{}\"\r\n                            }\r\n                        }\r\n                    }\r\n                }\r\n            },\r\n            \"$edgeHub\": {\r\n                \"properties.desired\": {\r\n                    \"schemaVersion\": \"1.0\",\r\n                    \"routes\": {\r\n                        \"route\": \"FROM /* INTO $upstream\"\r\n                    },\r\n                    \"storeAndForwardConfiguration\": {\r\n                        \"timeToLiveSecs\": 7200\r\n                    }\r\n                }\r\n            },\r\n            \"SimulatedTemperatureSensor\": {\r\n                \"properties.desired\": {\r\n                    \"SendData\": true,\r\n                    \"SendInterval\": 10\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deploymentManifests/{{deploymentManifestId}}?api-version={{dataPlanePreview}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"deploymentManifests",
+								"{{deploymentManifestId}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlanePreview}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a deployment manifest",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deploymentManifests/{{deploymentManifestId}}?api-version={{dataPlanePreview}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"deploymentManifests",
+								"{{deploymentManifestId}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlanePreview}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a deployment manifest",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"data\": {\r\n    \"modulesContent\": {\r\n      \"$edgeAgent\": {\r\n        \"properties.desired\": {\r\n          \"schemaVersion\": \"1.0\",\r\n          \"runtime\": {\r\n            \"type\": \"docker\",\r\n            \"settings\": {\r\n              \"minDockerVersion\": \"v1.25\",\r\n              \"loggingOptions\": \"\",\r\n              \"registryCredentials\": {}\r\n            }\r\n          },\r\n          \"systemModules\": {\r\n            \"edgeAgent\": {\r\n              \"type\": \"docker\",\r\n              \"settings\": {\r\n                \"image\": \"mcr.microsoft.com/azureiotedge-agent:1.4\",\r\n                \"createOptions\": \"{}\"\r\n              }\r\n            },\r\n            \"edgeHub\": {\r\n              \"type\": \"docker\",\r\n              \"status\": \"running\",\r\n              \"restartPolicy\": \"always\",\r\n              \"settings\": {\r\n                \"image\": \"mcr.microsoft.com/azureiotedge-hub:1.4\",\r\n                \"createOptions\": \"{}\"\r\n              }\r\n            }\r\n          },\r\n          \"modules\": {\r\n            \"SimulatedTemperatureSensor\": {\r\n              \"version\": \"1.0\",\r\n              \"type\": \"docker\",\r\n              \"status\": \"running\",\r\n              \"restartPolicy\": \"always\",\r\n              \"settings\": {\r\n                \"image\": \"mcr.microsoft.com/azureiotedge-simulated-temperature-sensor:1.2\",\r\n                \"createOptions\": \"{}\"\r\n              }\r\n            }\r\n          }\r\n        }\r\n      },\r\n      \"$edgeHub\": {\r\n        \"properties.desired\": {\r\n          \"schemaVersion\": \"1.0\",\r\n          \"routes\": {\r\n            \"route\": \"FROM /* INTO $upstream\"\r\n          },\r\n          \"storeAndForwardConfiguration\": {\r\n            \"timeToLiveSecs\": 7200\r\n          }\r\n        }\r\n      },\r\n      \"SimulatedTemperatureSensor\": {\r\n        \"properties.desired\": {\r\n          \"SendData\": true,\r\n          \"SendInterval\": 10\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deploymentManifests/{{deploymentManifestId}}?api-version={{dataPlanePreview}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"deploymentManifests",
+								"{{deploymentManifestId}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlanePreview}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List deployment manifests",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deploymentManifests?api-version={{dataPlanePreview}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"deploymentManifests"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlanePreview}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a deployment manifest",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deploymentManifests/{{deploymentManifestId}}?api-version={{dataPlanePreview}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"deploymentManifests",
+								"{{deploymentManifestId}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlanePreview}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add an IoT Edge device without a deployment manifest Copy",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"displayName\": \"Edge device without an initial deployment manifest\",\r\n  \"simulated\": false,\r\n  \"enabled\": true,\r\n  \"type\": [\"iotEdge\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{edgeDevice1}}?api-version={{dataPlanePreview}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"devices",
+								"{{edgeDevice1}}"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlanePreview}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Assign a deployment manifest to a device",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"data\": {\r\n    \"modulesContent\": {\r\n      \"$edgeAgent\": {\r\n        \"properties.desired\": {\r\n          \"schemaVersion\": \"1.0\",\r\n          \"runtime\": {\r\n            \"type\": \"docker\",\r\n            \"settings\": {\r\n              \"minDockerVersion\": \"v1.25\",\r\n              \"loggingOptions\": \"\",\r\n              \"registryCredentials\": {}\r\n            }\r\n          },\r\n          \"systemModules\": {\r\n            \"edgeAgent\": {\r\n              \"type\": \"docker\",\r\n              \"settings\": {\r\n                \"image\": \"mcr.microsoft.com/azureiotedge-agent:1.4\",\r\n                \"createOptions\": \"{}\"\r\n              }\r\n            },\r\n            \"edgeHub\": {\r\n              \"type\": \"docker\",\r\n              \"status\": \"running\",\r\n              \"restartPolicy\": \"always\",\r\n              \"settings\": {\r\n                \"image\": \"mcr.microsoft.com/azureiotedge-hub:1.4\",\r\n                \"createOptions\": \"{}\"\r\n              }\r\n            }\r\n          },\r\n          \"modules\": {\r\n            \"SimulatedTemperatureSensor\": {\r\n              \"version\": \"1.0\",\r\n              \"type\": \"docker\",\r\n              \"status\": \"running\",\r\n              \"restartPolicy\": \"always\",\r\n              \"settings\": {\r\n                \"image\": \"mcr.microsoft.com/azureiotedge-simulated-temperature-sensor:1.0\",\r\n                \"createOptions\": \"{}\"\r\n              }\r\n            }\r\n          }\r\n        }\r\n      },\r\n      \"$edgeHub\": {\r\n        \"properties.desired\": {\r\n          \"schemaVersion\": \"1.0\",\r\n          \"routes\": {\r\n            \"route\": \"FROM /* INTO $upstream\"\r\n          },\r\n          \"storeAndForwardConfiguration\": {\r\n            \"timeToLiveSecs\": 7200\r\n          }\r\n        }\r\n      },\r\n      \"SimulatedTemperatureSensor\": {\r\n        \"properties.desired\": {\r\n          \"SendData\": true,\r\n          \"SendInterval\": 10\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices/{{edgeDevice1}}/applyDeploymentManifest?api-version={{dataPlanePreview}}",
+							"protocol": "https",
+							"host": [
+								"{{yourAppSubdomain}}",
+								"azureiotcentral",
+								"com"
+							],
+							"path": [
+								"api",
+								"devices",
+								"{{edgeDevice1}}",
+								"applyDeploymentManifest"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{dataPlanePreview}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Manage devices",
@@ -4174,6 +4444,41 @@
 			"type": "default"
 		},
 		{
+			"key": "destBlobConnectionString",
+			"value": "Add your blob connection string for data export",
+			"type": "string"
+		},
+		{
+			"key": "BearerToken",
+			"value": "Add your bearer token ",
+			"type": "default"
+		},
+		{
+			"key": "applicationName",
+			"value": "Add your new IoT Central app name",
+			"type": "default"
+		},
+		{
+			"key": "accountName",
+			"value": "Add the name of your storage account for file uploads",
+			"type": "string"
+		},
+		{
+			"key": "accountKey",
+			"value": "Run \"Storage accounts - list keys\" to set this variable",
+			"type": "string"
+		},
+		{
+			"key": "base64-certificate",
+			"value": "Add your base-64 encoded certificate",
+			"type": "string"
+		},
+		{
+			"key": "base64-verification-certificate",
+			"value": "Add your base64-verification-certificate",
+			"type": "string"
+		},
+		{
 			"key": "newUserId",
 			"value": "user-001",
 			"type": "string"
@@ -4204,11 +4509,6 @@
 			"type": "default"
 		},
 		{
-			"key": "destBlobConnectionString",
-			"value": "Add your blob connection string for data export",
-			"type": "string"
-		},
-		{
 			"key": "containerName",
 			"value": "exportdestination",
 			"type": "string"
@@ -4222,6 +4522,11 @@
 			"key": "deviceTemplateId",
 			"value": "dtmi:contoso:mythermostattemplate;1",
 			"type": "default"
+		},
+		{
+			"key": "deploymentManifestId",
+			"value": "envsensorv1",
+			"type": "string"
 		},
 		{
 			"key": "deviceId",
@@ -4244,28 +4549,8 @@
 			"type": "default"
 		},
 		{
-			"key": "BearerToken",
-			"value": "Add your bearer token ",
-			"type": "default"
-		},
-		{
-			"key": "applicationName",
-			"value": "Add your new IoT Central app name",
-			"type": "default"
-		},
-		{
 			"key": "deviceGroupId",
 			"value": "device-group-01"
-		},
-		{
-			"key": "accountName",
-			"value": "Add the name of your storage account for file uploads",
-			"type": "string"
-		},
-		{
-			"key": "accountKey",
-			"value": "Run \"Storage accounts - list keys\" to set this variable",
-			"type": "string"
 		},
 		{
 			"key": "resourceGroupName",
@@ -4332,16 +4617,6 @@
 			"type": "string"
 		},
 		{
-			"key": "base64-certificate",
-			"value": "Add your base-64 encoded certificate",
-			"type": "string"
-		},
-		{
-			"key": "base64-verification-certificate",
-			"value": "Add your base64-verification-certificate",
-			"type": "string"
-		},
-		{
 			"key": "componentId",
 			"value": "componentId-001",
 			"type": "string"
@@ -4349,6 +4624,11 @@
 		{
 			"key": "dashboardId",
 			"value": "dtmi:kkfvwa2xi:p7pyt5x3o",
+			"type": "string"
+		},
+		{
+			"key": "edgeDevice1",
+			"value": "edge-device-01",
 			"type": "string"
 		}
 	]

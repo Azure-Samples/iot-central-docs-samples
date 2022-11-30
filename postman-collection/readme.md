@@ -6,6 +6,7 @@ The [Postman collection](https://raw.githubusercontent.com/Azure-Samples/iot-cen
 - [Manage organizations](https://docs.microsoft.com/azure/iot-central/core/howto-manage-organizations-with-rest-api)
 - [Data export](https://docs.microsoft.com/azure/iot-central/core/howto-manage-data-export-with-rest-api)
 - [Manage device templates](https://docs.microsoft.com/azure/iot-central/core/howto-manage-device-templates-with-rest-api)
+- [Manage deployment manifests](https://docs.microsoft.com/azure/iot-central/core/howto-manage-deployment-manifests-with-rest-api)
 - [Manage devices](https://docs.microsoft.com/azure/iot-central/core/howto-manage-devices-with-rest-api)
 - [Control devices](https://docs.microsoft.com/azure/iot-central/core/howto-control-devices-with-rest-api)
 - [Manage jobs](https://docs.microsoft.com/azure/iot-central/core/howto-manage-jobs-with-rest-api)
