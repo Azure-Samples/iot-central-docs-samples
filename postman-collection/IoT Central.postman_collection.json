@@ -3870,178 +3870,208 @@
 			"name": "File upload storage configuration",
 			"item": [
 				{
-					"name": "Create a storage account",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{BearerToken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n \"kind\": \"BlockBlobStorage\",\r\n \"location\": \"West US\",\r\n \"sku\": {\r\n    \"name\": \"Premium_LRS\"\r\n  }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroupName}}/providers/Microsoft.Storage/storageAccounts/{{accountName}}?api-version={{storageControlPlaneGA}}",
-							"protocol": "https",
-							"host": [
-								"management",
-								"azure",
-								"com"
-							],
-							"path": [
-								"subscriptions",
-								"{{subscriptionId}}",
-								"resourceGroups",
-								"{{resourceGroupName}}",
-								"providers",
-								"Microsoft.Storage",
-								"storageAccounts",
-								"{{accountName}}"
-							],
-							"query": [
-								{
-									"key": "api-version",
-									"value": "{{storageControlPlaneGA}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Storage accounts - list keys",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"console.log(\"Setting accountKey collection variable...\");\r",
-									"var jsonData = pm.response.json();\r",
-									"pm.collectionVariables.set(\"accountKey\", jsonData.keys[0].value);\r",
-									"console.log(\"Done!\");"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{BearerToken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroupName}}/providers/Microsoft.Storage/storageAccounts/{{accountName}}/listKeys?api-version={{storageControlPlaneGA}}",
-							"protocol": "https",
-							"host": [
-								"management",
-								"azure",
-								"com"
-							],
-							"path": [
-								"subscriptions",
-								"{{subscriptionId}}",
-								"resourceGroups",
-								"{{resourceGroupName}}",
-								"providers",
-								"Microsoft.Storage",
-								"storageAccounts",
-								"{{accountName}}",
-								"listKeys"
-							],
-							"query": [
-								{
-									"key": "api-version",
-									"value": "{{storageControlPlaneGA}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create a container",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{BearerToken}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroupName}}/providers/Microsoft.Storage/storageAccounts/{{accountName}}/blobServices/default/containers/{{storageAccountcontainerName}}?api-version={{storageControlPlaneGA}}",
-							"protocol": "https",
-							"host": [
-								"management",
-								"azure",
-								"com"
-							],
-							"path": [
-								"subscriptions",
-								"{{subscriptionId}}",
-								"resourceGroups",
-								"{{resourceGroupName}}",
-								"providers",
-								"Microsoft.Storage",
-								"storageAccounts",
-								"{{accountName}}",
-								"blobServices",
-								"default",
-								"containers",
-								"{{storageAccountcontainerName}}"
-							],
-							"query": [
-								{
-									"key": "api-version",
-									"value": "{{storageControlPlaneGA}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Add a storage configuration",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let subscriptionId = pm.collectionVariables.get(\"subscriptionId\");\r",
+									"let resourceGroupName = pm.collectionVariables.get(\"resourceGroupNameFileUploads\");\r",
+									"let accountName = pm.collectionVariables.get(\"accountName\");\r",
+									"let storageControlPlaneGA = pm.collectionVariables.get(\"storageControlPlaneGA\");\r",
+									"let storageAccountcontainerName = pm.collectionVariables.get(\"storageAccountcontainerName\");\r",
+									"let bearerToken = \"Bearer \" + pm.collectionVariables.get(\"BearerToken\");\r",
+									"\r",
+									"// Create a resource group\r",
+									"const resourceGroupURL = pm.collectionVariables.replaceIn(\"https://management.azure.com/subscriptions/{{subscriptionId}}/resourcegroups/{{resourceGroupName}}?api-version=2021-04-01\");\r",
+									"const putResourceGroup = {\r",
+									"  url: resourceGroupURL,\r",
+									"  method: 'PUT',\r",
+									"  header: {\r",
+									"    'Content-Type': 'application/json',\r",
+									"    'Authorization': bearerToken\r",
+									"  },\r",
+									"  body: {\r",
+									"    mode: 'raw',\r",
+									"    raw: JSON.stringify({\r",
+									"      \"location\": \"eastus\"\r",
+									"      })\r",
+									"  }\r",
+									"};\r",
+									"const getResourceGroup = {\r",
+									"  url: resourceGroupURL,\r",
+									"  method: 'GET',\r",
+									"  header: {\r",
+									"    'Content-Type': 'application/json',\r",
+									"    'Authorization': bearerToken\r",
+									"  }\r",
+									"};\r",
+									"\r",
+									"// Create a storage account\r",
+									"const createStorageRequestURL = pm.collectionVariables.replaceIn(\"https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroupName}}/providers/Microsoft.Storage/storageAccounts/{{accountName}}?api-version={{storageControlPlaneGA}}\");\r",
+									"const putCreateStorageRequest = {\r",
+									"  url: createStorageRequestURL,\r",
+									"  method: 'PUT',\r",
+									"  header: {\r",
+									"    'Content-Type': 'application/json',\r",
+									"    'Authorization': bearerToken\r",
+									"  },\r",
+									"  body: {\r",
+									"    mode: 'raw',\r",
+									"    raw: JSON.stringify({\r",
+									"      \"kind\": \"BlockBlobStorage\",\r",
+									"      \"location\": \"eastus\",\r",
+									"      \"sku\": {\r",
+									"          \"name\": \"Premium_LRS\"\r",
+									"        }\r",
+									"      })\r",
+									"  }\r",
+									"};\r",
+									"\r",
+									"// Get storage account key and set variable\r",
+									"const getStorageKeyURL = pm.collectionVariables.replaceIn(\"https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroupName}}/providers/Microsoft.Storage/storageAccounts/{{accountName}}/listKeys?api-version={{storageControlPlaneGA}}\");\r",
+									"const postGetStorageKeys = {\r",
+									"  url: getStorageKeyURL,\r",
+									"  method: 'POST',\r",
+									"  header: {\r",
+									"    'Content-Type': 'application/json',\r",
+									"    'Authorization': bearerToken\r",
+									"  },\r",
+									"  body: {\r",
+									"    mode: 'raw',\r",
+									"    raw: JSON.stringify({\r",
+									"      \"kind\": \"BlockBlobStorage\",\r",
+									"      \"location\": \"eastus\",\r",
+									"      \"sku\": {\r",
+									"          \"name\": \"Premium_LRS\"\r",
+									"        }\r",
+									"      })\r",
+									"  }\r",
+									"};\r",
+									"\r",
+									"// Create a storage container\r",
+									"const createStorageContainerRequestURL = pm.collectionVariables.replaceIn(\"https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroupName}}/providers/Microsoft.Storage/storageAccounts/{{accountName}}/blobServices/default/containers/{{storageAccountcontainerName}}?api-version={{storageControlPlaneGA}}\");\r",
+									"const putCreateStorageContainerRequest = {\r",
+									"  url: createStorageContainerRequestURL,\r",
+									"  method: 'PUT',\r",
+									"  header: {\r",
+									"    'Content-Type': 'application/json',\r",
+									"    'Authorization': bearerToken\r",
+									"  },\r",
+									"  body: {\r",
+									"    mode: 'raw',\r",
+									"    raw: JSON.stringify({\r",
+									"      \"kind\": \"BlockBlobStorage\",\r",
+									"      \"location\": \"eastus\",\r",
+									"      \"sku\": {\r",
+									"          \"name\": \"Premium_LRS\"\r",
+									"        }\r",
+									"      })\r",
+									"  }\r",
+									"};\r",
+									"\r",
+									"\r",
+									"// Create the resource group\r",
+									"console.log(\"Creating resource group...\");\r",
+									"pm.sendRequest(putResourceGroup, (error, response) => {\r",
+									"  if (error) {\r",
+									"    console.log(error);\r",
+									"  } else {\r",
+									"    createStorageAccount();\r",
+									"  }\r",
+									"});\r",
+									"\r",
+									"function createStorageAccount()\r",
+									"{\r",
+									"  console.log(\"Waiting for resource group creation...\");\r",
+									"  var retryDelay = 10000;\r",
+									"  var retryLimit = 10;\r",
+									"\r",
+									"  function isProcessingComplete(retryCount) {\r",
+									"      pm.sendRequest(getResourceGroup, (error, response) =>  {\r",
+									"          if (error) {\r",
+									"              console.log(error);\r",
+									"          } else {\r",
+									"              var jsonData = response.json();\r",
+									"              if (jsonData.properties.provisioningState == 'Succeeded') {\r",
+									"                  // Get the storage account key we need\r",
+									"                  console.log(\"Resource group ready. Creating storage account...\");\r",
+									"                  pm.sendRequest(putCreateStorageRequest, (error, response) => {\r",
+									"                    if (error) {\r",
+									"                      console.log(error);\r",
+									"                    } else {\r",
+									"                      console.log(\"Created storage account\")\r",
+									"                      getAccountKey();\r",
+									"                    }\r",
+									"                  });\r",
+									"              } else {\r",
+									"                  if (retryCount < retryLimit) {\r",
+									"                      console.log('Resource group not ready yet. Retrying in ' + retryDelay + 'ms');\r",
+									"                      setTimeout(function() {\r",
+									"                          isProcessingComplete(++retryCount);\r",
+									"                      }, retryDelay);\r",
+									"                  } else {\r",
+									"                      console.log('Retry limit reached, giving up.');\r",
+									"                  }\r",
+									"              }\r",
+									"          }\r",
+									"      });\r",
+									"  }\r",
+									"  isProcessingComplete(1);\r",
+									"}\r",
+									"\r",
+									"function getAccountKey()\r",
+									"{\r",
+									"  console.log('Waiting for storage account to be ready...');\r",
+									"  var retryDelay = 5000;\r",
+									"  var retryLimit = 10;\r",
+									"\r",
+									"  function isProcessingComplete(retryCount) {\r",
+									"      pm.sendRequest(postGetStorageKeys, (error, response) =>  {\r",
+									"          if (error) {\r",
+									"              console.log(error);\r",
+									"          } else {\r",
+									"              var jsonData = response.json();\r",
+									"              if (jsonData.error) {\r",
+									"                  if (retryCount < retryLimit) {\r",
+									"                      console.log('Storage account not ready yet. Retrying in ' + retryDelay + 'ms');\r",
+									"                      setTimeout(function() {\r",
+									"                          isProcessingComplete(++retryCount);\r",
+									"                      }, retryDelay);\r",
+									"                  } else {\r",
+									"                      console.log('Retry limit reached, giving up.');\r",
+									"                  }\r",
+									"              } else {\r",
+									"                  // Get the storage account key we need\r",
+									"                  console.log(\"Storage account is ready. Setting accountKey collection variable...\");\r",
+									"                  var jsonData = response.json();\r",
+									"                  pm.collectionVariables.set(\"accountKey\", jsonData.keys[0].value);\r",
+									"                  console.log(\"accountKey collection variable set!\");\r",
+									"\r",
+									"                  // Create the container\r",
+									"                  pm.sendRequest(putCreateStorageContainerRequest, (error, response) => {\r",
+									"                      if (error){\r",
+									"                          console.log(error);\r",
+									"                      } else {\r",
+									"                          console.log(\"Created storage container\");\r",
+									"                      }\r",
+									"                  });\r",
+									"              }\r",
+									"          }\r",
+									"      });\r",
+									"  }\r",
+									"  isProcessingComplete(1);\r",
+									"}\r",
 									""
 								],
 								"type": "text/javascript"
@@ -4078,7 +4108,8 @@
 									"value": "{{dataPlaneGA}}"
 								}
 							]
-						}
+						},
+						"description": "This example uses a pre-request script that sets up the prerequisites for the call. The script:\n\n- Creates a resource group\n- Creates a storage account\n- Adds the storage account key to a collection variable\n- Creates a blob container"
 					},
 					"response": []
 				},
@@ -4554,6 +4585,11 @@
 		},
 		{
 			"key": "resourceGroupName",
+			"value": "centralrg",
+			"type": "string"
+		},
+		{
+			"key": "resourceGroupNameFileUploads",
 			"value": "fileuploadsrg",
 			"type": "string"
 		},
