@@ -43,7 +43,7 @@ runcmd:
 
         apt install -y aziot-edge
 
-        if [ ! -z "$sid" ] && [ ! -z "$did" ] && [ ! -z "$sky" ]; then
+        if [ ! -z "$sid" ] && [ ! -z "$did" ] && [ ! -z "$dky" ]; then
           mkdir /etc/aziot
           wget https://raw.githubusercontent.com/Azure-Samples/iot-central-docs-samples/main/transparent-gateway-1-4/config.toml -O /etc/aziot/config.toml
           sed -i "s#\(id_scope = \).*#\1\"$sid\"#g" /etc/aziot/config.toml
