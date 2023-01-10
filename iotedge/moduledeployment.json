@@ -1,0 +1,68 @@
+{
+    "modulesContent": {
+      "$edgeAgent": {
+        "properties.desired": {
+          "schemaVersion": "1.1",
+          "runtime": {
+            "type": "docker",
+            "settings": {
+              "minDockerVersion": "v1.25",
+              "loggingOptions": "",
+              "registryCredentials": {
+                "acr": {
+                    "address": "{your username}.azurecr.io",
+                    "password": "{your password}",
+                    "username": "{your username}"
+                }
+              }
+            }
+          },
+          "systemModules": {
+            "edgeAgent": {
+              "type": "docker",
+              "settings": {
+                "image": "mcr.microsoft.com/azureiotedge-agent:1.4",
+                "createOptions": "{}"
+              }
+            },
+            "edgeHub": {
+              "type": "docker",
+              "status": "running",
+              "restartPolicy": "always",
+              "settings": {
+                "image": "mcr.microsoft.com/azureiotedge-hub:1.4",
+                "createOptions": "{\"HostConfig\":{\"PortBindings\":{\"443/tcp\":[{\"HostPort\":\"443\"}],\"5671/tcp\":[{\"HostPort\":\"5671\"}],\"8883/tcp\":[{\"HostPort\":\"8883\"}]}}}"
+              }
+            }
+          },
+          "modules": {
+            "transformmodule": {
+                "settings": {
+                    "image": "{your username}.azurecr.io/transformmodule:0.0.1-amd64",
+                    "createOptions": ""
+                },
+                "type": "docker",
+                "status": "running",
+                "restartPolicy": "always",
+                "version": "1.0"
+            }
+          }
+        }
+      },
+      "$edgeHub": {
+        "properties.desired": {
+          "schemaVersion": "1.1",
+          "routes": {
+            "toTransformFromDevices": "FROM /messages/* WHERE NOT IS_DEFINED($connectionModuleId) INTO BrokeredEndpoint(\"/modules/transformmodule/inputs/input1\")",
+            "toIoTHub": "FROM /messages/modules/transformmodule/outputs/output1 INTO $upstream"
+          },
+          "storeAndForwardConfiguration": {
+            "timeToLiveSecs": 7200
+          }
+        }
+      },
+      "transformmodule": {
+          "properties.desired": {}
+      }
+    }
+  }
