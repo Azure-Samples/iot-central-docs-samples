@@ -14,7 +14,7 @@ ARM template to deploy a VM with IoT Edge pre-installed and configured for an Io
 
 The ARM template visualized for exploration
 
-<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fiot-central-docs-samples%2Fmain%2Ftransparent-gateway-1-2%2FDeployGatewayVMs.json" target="_blank">
+<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fiot-central-docs-samples%2Fmain%2Ftransparent-gateway-1-4%2FDeployGatewayVMs.json" target="_blank">
     <img src="https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/visualizebutton.png" /></a>
 
 ## Azure CLI command to deploy IoT Edge 1.4 enabled VM
