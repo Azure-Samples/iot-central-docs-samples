@@ -8,7 +8,13 @@
           "settings": {
             "minDockerVersion": "v1.25",
             "loggingOptions": "",
-            "registryCredentials": {}
+            "registryCredentials": {
+              "rvacr": {
+                  "address": "<YOUR CONTAINER REGISTRY NAME>.azurecr.io",
+                  "password": "<YOUR CONTAINER REGISTRY PASSWORD>",
+                  "username": "<YOUR CONTAINER REGISTRY NAME>"
+              }
+            }
           }
         },
         "systemModules": {
@@ -39,6 +45,16 @@
               "image": "mcr.microsoft.com/azureiotedge-simulated-temperature-sensor:1.4.6",
               "createOptions": "{}"
             }
+          },
+          "filterfunction": {
+              "settings": {
+                  "image": "<YOUR CONTAINER REGISTRY NAME>.azurecr.io/filterfunction:v1",
+                  "createOptions": ""
+              },
+              "type": "docker",
+              "status": "running",
+              "restartPolicy": "always",
+              "version": "1.0"
           }
         }
       }
@@ -47,8 +63,9 @@
       "properties.desired": {
         "schemaVersion": "1.0",
         "routes": {
-            "route": "FROM /* INTO $upstream"
-        },
+            "FilterFunctionToIoTCentral": "FROM /messages/modules/filterfunction/outputs/* INTO $upstream",
+            "sensorToFilterFunction": "FROM /messages/modules/SimulatedTemperatureSensor/outputs/temperatureOutput INTO BrokeredEndpoint(\"/modules/filterfunction/inputs/input1\")"
+          },
         "storeAndForwardConfiguration": {
           "timeToLiveSecs": 7200
         }
@@ -59,6 +76,9 @@
            "SendData": true,
            "SendInterval": 10
       }
+    },
+    "filterfunction": {
+        "properties.desired": {}
     }
   }
 }
