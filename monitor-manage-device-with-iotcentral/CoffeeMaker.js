@@ -11,7 +11,7 @@ var modelIdObject = { modelId: 'dtmi:com:example:ConnectedCoffeeMaker;1' };
 var provisioningHost = 'global.azure-devices-provisioning.net';
 var idScope = '{ID scope}';
 var registrationId = '{Device ID}';
-var symmetricKey = '{Primary key}';
+var symmetricKey = '{Device Primary key}';
 var provisioningSecurityClient = new SymmetricKeySecurityClient(registrationId, symmetricKey);
 var provisioningClient = ProvisioningDeviceClient.create(provisioningHost, idScope, new ProvisioningTransport(), provisioningSecurityClient);
 var centralClient;
