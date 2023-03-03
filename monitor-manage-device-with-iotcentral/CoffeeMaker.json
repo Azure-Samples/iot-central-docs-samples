@@ -115,7 +115,7 @@
             "minValue": 88
         },
         {
-            "@type": ["Property","Cloud", "NumberValue", "Temperature"],
+            "@type": ["Property", "Cloud", "NumberValue", "Temperature"],
             "displayName": {
                 "en": "Coffee Maker Max Temperature"
             },
