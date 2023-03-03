@@ -103,6 +103,30 @@
             "writable": false
         },
         {
+            "@type": ["Property", "Cloud", "NumberValue", "Temperature"],
+            "displayName": {
+                "en": "Coffee Maker Min Temperature"
+            },
+            "name": "CoffeeMakerMinTemperature",
+            "schema": "double",
+            "unit": "degreeCelsius",
+            "decimalPlaces": 1,
+            "maxValue": 92,
+            "minValue": 88
+        },
+        {
+            "@type": ["Property","Cloud", "NumberValue", "Temperature"],
+            "displayName": {
+                "en": "Coffee Maker Max Temperature"
+            },
+            "name": "CoffeeMakerMaxTemperature",
+            "schema": "double",
+            "unit": "degreeCelsius",
+            "decimalPlaces": 1,
+            "maxValue": 99,
+            "minValue": 96
+        },
+        {
             "@type": "Command",
             "commandType": "synchronous",
             "displayName": {
