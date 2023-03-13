@@ -13,24 +13,24 @@ namespace Learn.CoffeeMaker
     {
         [Option(
             'i',
-            "DpsIdScope",
-            HelpText = "(Required if DeviceSecurityType is 'dps'). \nThe DPS ID Scope to use during device provisioning." +
-            "\nDefaults to environment variable 'IOTHUB_DEVICE_DPS_ID_SCOPE'.")]
-        public string DpsIdScope { get; set; } = Environment.GetEnvironmentVariable("IOTHUB_DEVICE_DPS_ID_SCOPE");
+            "IdScope",
+            HelpText = "The ID Scope to use during device provisioning." +
+            "\nDefaults to environment variable 'ID_SCOPE'.")]
+        public string IdScope { get; set; } = Environment.GetEnvironmentVariable("ID_SCOPE");
 
         [Option(
             'd',
             "DeviceId",
-            HelpText = "(Required if DeviceSecurityType is 'dps'). \nThe device registration Id to use during device provisioning." +
-            "\nDefaults to environment variable 'IOTHUB_DEVICE_DPS_DEVICE_ID'.")]
-        public string DeviceId { get; set; } = Environment.GetEnvironmentVariable("IOTHUB_DEVICE_DPS_DEVICE_ID");
+            HelpText = "The device Id to use during device provisioning." +
+            "\nDefaults to environment variable 'DEVICE_ID'.")]
+        public string DeviceId { get; set; } = Environment.GetEnvironmentVariable("DEVICE_ID");
 
         [Option(
             'k',
-            "DeviceSymmetricKey",
-            HelpText = "(Required if DeviceSecurityType is 'dps'). \nThe device symmetric key to use during device provisioning." +
-            "\nDefaults to environment variable 'IOTHUB_DEVICE_DPS_DEVICE_KEY'.")]
-        public string DeviceSymmetricKey { get; set; } = Environment.GetEnvironmentVariable("IOTHUB_DEVICE_DPS_DEVICE_KEY");
+            "DevicePrimaryKey",
+            HelpText = "The device Primary key to use during device provisioning." +
+            "\nDefaults to environment variable 'DEVICE_KEY'.")]
+        public string DevicePrimaryKey { get; set; } = Environment.GetEnvironmentVariable("DEVICE_KEY");
 
         [Option(
             'n',
@@ -41,9 +41,9 @@ namespace Learn.CoffeeMaker
 
         public bool Validate()
         {
-            return !string.IsNullOrWhiteSpace(DpsIdScope)
+            return !string.IsNullOrWhiteSpace(IdScope)
                     && !string.IsNullOrWhiteSpace(DeviceId)
-                    && !string.IsNullOrWhiteSpace(DeviceSymmetricKey);
+                    && !string.IsNullOrWhiteSpace(DevicePrimaryKey);
         }
     }
 }

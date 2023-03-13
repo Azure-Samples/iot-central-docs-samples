@@ -66,9 +66,9 @@ namespace Learn.CoffeeMaker
         private static async Task<DeviceClient> SetupDeviceClientAsync(Parameters parameters, CancellationToken cancellationToken)
         {
             // Provision a device via DPS, by sending the PnP model Id as DPS payload.
-            using SecurityProvider symmetricKeyProvider = new SecurityProviderSymmetricKey(parameters.DeviceId, parameters.DeviceSymmetricKey, null);
+            using SecurityProvider symmetricKeyProvider = new SecurityProviderSymmetricKey(parameters.DeviceId, parameters.DevicePrimaryKey, null);
             using ProvisioningTransportHandler mqttTransportHandler = new ProvisioningTransportHandlerMqtt();
-            ProvisioningDeviceClient pdc = ProvisioningDeviceClient.Create(DpsEndpoint, parameters.DpsIdScope,
+            ProvisioningDeviceClient pdc = ProvisioningDeviceClient.Create(DpsEndpoint, parameters.IdScope,
                 symmetricKeyProvider, mqttTransportHandler);
 
             var pnpPayload = new ProvisioningRegistrationAdditionalData
@@ -81,7 +81,7 @@ namespace Learn.CoffeeMaker
             // Initialize the device client instance using symmetric key based authentication, over Mqtt protocol (TCP, with fallback over Websocket) and setting the ModelId into ClientOptions.
             DeviceClient deviceClient;
 
-            var authMethod = new DeviceAuthenticationWithRegistrySymmetricKey(dpsRegistrationResult.DeviceId, parameters.DeviceSymmetricKey);
+            var authMethod = new DeviceAuthenticationWithRegistrySymmetricKey(dpsRegistrationResult.DeviceId, parameters.DevicePrimaryKey);
 
             var options = new ClientOptions
             {
