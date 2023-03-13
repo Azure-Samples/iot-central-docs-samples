@@ -102,3 +102,7 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# Csharp build files
+monitor-manage-device-with-iotcentral/obj/
+monitor-manage-device-with-iotcentral/bin/
