@@ -63,6 +63,7 @@ namespace Learn.CoffeeMaker
 
         }
         
+        //<Provisioning>
         private static async Task<DeviceClient> SetupDeviceClientAsync(Parameters parameters, CancellationToken cancellationToken)
         {
             // Provision a device via DPS, by sending the PnP model Id as DPS payload.
@@ -91,5 +92,6 @@ namespace Learn.CoffeeMaker
             deviceClient = DeviceClient.Create(dpsRegistrationResult.AssignedHub, authMethod, TransportType.Mqtt, options);
             return deviceClient;
         }
+        //</Provisioning>
     }
 }
