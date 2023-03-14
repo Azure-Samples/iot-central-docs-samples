@@ -45,16 +45,16 @@ namespace Learn.CoffeeMaker
         {
             Console.WriteLine($"Device successfully connected to Azure IoT Central");
             
-            Console.WriteLine($"Set handler for \"SetMaintenanceMode\" command.");
+            Console.WriteLine($"- Set handler for \"SetMaintenanceMode\" command.");
             await _deviceClient.SetMethodHandlerAsync("SetMaintenanceMode", HandleMaintenanceModeCommand, _deviceClient, cancellationToken);
 
-            Console.WriteLine($"Set handler for \"StartBrewing\" command.");
+            Console.WriteLine($"- Set handler for \"StartBrewing\" command.");
             await _deviceClient.SetMethodHandlerAsync("StartBrewing", HandleStartBrewingCommand, _deviceClient, cancellationToken);
 
-            Console.WriteLine($"Set handler to receive \"OptimalTemperature\" updates.");
+            Console.WriteLine($"- Set handler to receive \"OptimalTemperature\" updates.");
             await _deviceClient.SetDesiredPropertyUpdateCallbackAsync(OptimalTemperatureUpdateCallbackAsync, _deviceClient, cancellationToken);
 
-            Console.WriteLine("Update \"DeviceWarrantyExpired\" reported property on the initial startup.");
+            Console.WriteLine("- Update \"DeviceWarrantyExpired\" reported property on the initial startup.");
             await UpdateDeviceWarranty(cancellationToken);
 
             while (!cancellationToken.IsCancellationRequested)
@@ -206,14 +206,14 @@ namespace Learn.CoffeeMaker
             (bool optimalTempUpdateReceived, double optimalTemp) = GetPropertyFromTwin<double>(desiredProperties, propertyName);
             if (optimalTempUpdateReceived)
             {
-                Console.WriteLine($"Property: Received - {{ \"{propertyName}\": {optimalTemp}°C }}.");
+                Console.WriteLine($" * Property: Received - {{ \"{propertyName}\": {optimalTemp}°C }}.");
 
                 //Update reported property to In Progress
                 string jsonPropertyPending = $"{{ \"{propertyName}\": {{ \"value\": {optimalTemp}, \"ac\": {(int)StatusCode.InProgress}, " +
                     $"\"av\": {desiredProperties.Version}, \"ad\": \"In progress - reporting optimal temperature\" }} }}";
                 var reportedPropertyPending = new TwinCollection(jsonPropertyPending);
                 await _deviceClient.UpdateReportedPropertiesAsync(reportedPropertyPending);
-                Console.WriteLine($"Property: Update - {{\"{propertyName} \": {optimalTemp}°C }} is {StatusCode.InProgress}.");
+                Console.WriteLine($" * Property: Update - {{\"{propertyName} \": {optimalTemp}°C }} is {StatusCode.InProgress}.");
 
                 //Update the optimal temperature
                 _optimalTemperature = optimalTemp;
@@ -223,11 +223,11 @@ namespace Learn.CoffeeMaker
                     $"\"av\": {desiredProperties.Version}, \"ad\": \"Successfully updated optimal temperature\" }} }}";
                 var reportedProperty = new TwinCollection(jsonProperty);
                 await _deviceClient.UpdateReportedPropertiesAsync(reportedProperty);
-                Console.WriteLine($"Property: Update - {{\"{propertyName} \": {optimalTemp}°C }} is {StatusCode.Completed}.");
+                Console.WriteLine($" * Property: Update - {{\"{propertyName} \": {optimalTemp}°C }} is {StatusCode.Completed}.");
             }
             else
             {
-                Console.WriteLine($"Property: Received an unrecognized property update from service:\n{desiredProperties.ToJson()}");
+                Console.WriteLine($" * Property: Received an unrecognized property update from service:\n{desiredProperties.ToJson()}");
             }
         }
 
@@ -239,7 +239,7 @@ namespace Learn.CoffeeMaker
             reportedProperties[propertyName] = _warrantyState;
 
             await _deviceClient.UpdateReportedPropertiesAsync(reportedProperties, cancellationToken);
-            Console.WriteLine($"Property: Update - {{ \"{propertyName}\": {_warrantyState} }} is {StatusCode.Completed}.");
+            Console.WriteLine($" * Property: Update - {{ \"{propertyName}\": {_warrantyState} }} is {StatusCode.Completed}.");
         }
         //</Properties>
 
