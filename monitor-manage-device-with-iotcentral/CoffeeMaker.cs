@@ -40,14 +40,9 @@ namespace Learn.CoffeeMaker
             _warrantyState = _random.NextDouble() > 0.5 ? true : false;
         }
 
+        //<Workflow>
         public async Task PerformOperationsAsync(CancellationToken cancellationToken)
         {
-            // This sample follows the following workflow:
-            // -> Set handlers to receive "SetMaintenanceMode" and "StartBrewing" command callbacks.
-            // -> Set handler to handle "OptimalTemperature" desired property changes on device twin.
-            // -> Update "DeviceWarrantyExpired" device twin reported property on the initial startup.
-            // -> Starts a loop to send temperature and humidity telemetry, whether it's currently brewing and when a cup is detected every 1 second.
-
             Console.WriteLine($"Set handler for \"SetMaintenanceMode\" command.");
             await _deviceClient.SetMethodHandlerAsync("SetMaintenanceMode", HandleMaintenanceModeCommand, _deviceClient, cancellationToken);
 
@@ -66,7 +61,9 @@ namespace Learn.CoffeeMaker
                 await Task.Delay(1000, cancellationToken);
             }
         }
+        //</Workflow>
 
+        //<Telemetry>
         //Send temperature and humidity telemetry, whether it's currently brewing and when a cup is detected.
         private async Task SendTelemetryAsync(CancellationToken cancellationToken)
         {
@@ -126,7 +123,9 @@ namespace Learn.CoffeeMaker
             //Send the message
             await _deviceClient.SendEventAsync(message, cancellationToken);
         }
+        //</Telemetry>
 
+        //<Commands>
         // The callback to handle "SetMaintenanceMode" command.
         private Task<MethodResponse> HandleMaintenanceModeCommand(MethodRequest request, object userContext)
         {
@@ -193,9 +192,11 @@ namespace Learn.CoffeeMaker
                 return Task.FromResult(new MethodResponse((int)StatusCode.BadRequest));
             }
         }
+        //</Commands>
 
         // The desired property update callback, which receives the OptimalTemperature as a desired property update,
         // and updates the current _optimalTemperature value over telemetry and reported property update.
+        //<Properties>
         private async Task OptimalTemperatureUpdateCallbackAsync(TwinCollection desiredProperties, object userContext)
         {
             const string propertyName = "OptimalTemperature";
@@ -228,11 +229,6 @@ namespace Learn.CoffeeMaker
             }
         }
 
-        private static (bool, T) GetPropertyFromTwin<T>(TwinCollection collection, string propertyName)
-        {
-            return collection.Contains(propertyName) ? (true, (T)collection[propertyName]) : (false, default);
-        }
-
         private async Task UpdateDeviceWarranty(CancellationToken cancellationToken)
         {
             const string propertyName = "DeviceWarrantyExpired";
@@ -242,6 +238,12 @@ namespace Learn.CoffeeMaker
 
             await _deviceClient.UpdateReportedPropertiesAsync(reportedProperties, cancellationToken);
             Console.WriteLine($"Property: Update - {{ \"{propertyName}\": {_warrantyState} }} is {StatusCode.Completed}.");
+        }
+        //</Properties>
+
+        private static (bool, T) GetPropertyFromTwin<T>(TwinCollection collection, string propertyName)
+        {
+            return collection.Contains(propertyName) ? (true, (T)collection[propertyName]) : (false, default);
         }
     }
 }
