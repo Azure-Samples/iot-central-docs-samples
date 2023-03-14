@@ -43,6 +43,8 @@ namespace Learn.CoffeeMaker
         //<Workflow>
         public async Task PerformOperationsAsync(CancellationToken cancellationToken)
         {
+            Console.WriteLine($"Device successfully connected to Azure IoT Central");
+            
             Console.WriteLine($"Set handler for \"SetMaintenanceMode\" command.");
             await _deviceClient.SetMethodHandlerAsync("SetMaintenanceMode", HandleMaintenanceModeCommand, _deviceClient, cancellationToken);
 
