@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0e9d957b-0ddc-477c-a7ac-1c500834991c",
+		"_postman_id": "3262a1bd-3ab3-433e-841d-a8d6ad92e030",
 		"name": "IoT Central",
 		"description": "This collection helps you try out the IoT Central REST API calls described in [How to use the Azure IoT Central REST API](https://docs.microsoft.com/azure/iot-central/core/howto-authorize-rest-api).\n\nMany of the variables used in this collection are set for you. Some, such as as your app ID and admin token, you need to set using your own values.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -1405,12 +1405,12 @@
 					"response": []
 				},
 				{
-					"name": "Get a device template $top",
+					"name": "List device templates maxpagesize",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version={{dataPlaneGA}}&$top=10",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version={{dataPlanePreview}}&maxpagesize=10",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1424,10 +1424,10 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlaneGA}}"
+									"value": "{{dataPlanePreview}}"
 								},
 								{
-									"key": "$top",
+									"key": "maxpagesize",
 									"value": "10"
 								}
 							]
@@ -1436,12 +1436,12 @@
 					"response": []
 				},
 				{
-					"name": "Get a device template $filter",
+					"name": "List device templates filter",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version={{dataPlaneGA}}&$filter=contains(displayName, 'thermostat')",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version={{dataPlanePreview}}&filter=contains(displayName, 'thermostat') eq false",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1455,11 +1455,11 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlaneGA}}"
+									"value": "{{dataPlanePreview}}"
 								},
 								{
-									"key": "$filter",
-									"value": "contains(displayName, 'thermostat')"
+									"key": "filter",
+									"value": "contains(displayName, 'thermostat') eq false"
 								}
 							]
 						}
@@ -1467,12 +1467,12 @@
 					"response": []
 				},
 				{
-					"name": "Get a device template $orderby",
+					"name": "List device templates orderby",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version={{dataPlaneGA}}&$orderby=displayName",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version={{dataPlanePreview}}&orderby=displayName",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1486,10 +1486,10 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlaneGA}}"
+									"value": "{{dataPlanePreview}}"
 								},
 								{
-									"key": "$orderby",
+									"key": "orderby",
 									"value": "displayName"
 								}
 							]
@@ -1498,12 +1498,12 @@
 					"response": []
 				},
 				{
-					"name": "Get a device template $filter & $top",
+					"name": "List device templates filter & maxpagesize",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version={{dataPlaneGA}}&$filter=contains(displayName, 'thermostat')&$top=2",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/deviceTemplates?api-version={{dataPlanePreview}}&filter=contains(displayName, 'thermostat')&maxpagesize=2",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -1517,14 +1517,14 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlaneGA}}"
+									"value": "{{dataPlanePreview}}"
 								},
 								{
-									"key": "$filter",
+									"key": "filter",
 									"value": "contains(displayName, 'thermostat')"
 								},
 								{
-									"key": "$top",
+									"key": "maxpagesize",
 									"value": "2"
 								}
 							]
@@ -1995,12 +1995,12 @@
 					"response": []
 				},
 				{
-					"name": "Get a device $top",
+					"name": "List devices maxpagesize",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version={{dataPlaneGA}}&$top=10",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version={{dataPlanePreview}}&maxpagesize=10",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2014,10 +2014,10 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlaneGA}}"
+									"value": "{{dataPlanePreview}}"
 								},
 								{
-									"key": "$top",
+									"key": "maxpagesize",
 									"value": "10"
 								}
 							]
@@ -2026,12 +2026,12 @@
 					"response": []
 				},
 				{
-					"name": "Get a device $filter",
+					"name": "List devices filter",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version={{dataPlaneGA}}&$filter=displayName eq 'Contoso thermostat 001'",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version={{dataPlanePreview}}&filter=provisioned eq true",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2045,11 +2045,11 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlaneGA}}"
+									"value": "{{dataPlanePreview}}"
 								},
 								{
-									"key": "$filter",
-									"value": "displayName eq 'Contoso thermostat 001'"
+									"key": "filter",
+									"value": "provisioned eq true"
 								}
 							]
 						}
@@ -2057,12 +2057,12 @@
 					"response": []
 				},
 				{
-					"name": "Get a device $orderby",
+					"name": "List devices orderby",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version={{dataPlaneGA}}&$orderby=displayName",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version={{dataPlanePreview}}&orderby=displayName",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2076,10 +2076,10 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlaneGA}}"
+									"value": "{{dataPlanePreview}}"
 								},
 								{
-									"key": "$orderby",
+									"key": "orderby",
 									"value": "displayName"
 								}
 							]
@@ -2088,12 +2088,12 @@
 					"response": []
 				},
 				{
-					"name": "Get a device $filter & $top",
+					"name": "List devices filter & maxpagesize",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version={{dataPlaneGA}}&$filter=contains(displayName, 'thermostat') ge 0&$top=2",
+							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/devices?api-version={{dataPlanePreview}}&filter=contains(displayName, 'Thermostat')&maxpagesize=3",
 							"protocol": "https",
 							"host": [
 								"{{yourAppSubdomain}}",
@@ -2107,15 +2107,15 @@
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{dataPlaneGA}}"
+									"value": "{{dataPlanePreview}}"
 								},
 								{
-									"key": "$filter",
-									"value": "contains(displayName, 'thermostat') ge 0"
+									"key": "filter",
+									"value": "contains(displayName, 'Thermostat')"
 								},
 								{
-									"key": "$top",
-									"value": "2"
+									"key": "maxpagesize",
+									"value": "3"
 								}
 							]
 						}
