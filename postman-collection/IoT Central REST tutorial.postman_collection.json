@@ -1,0 +1,821 @@
+{
+	"info": {
+		"_postman_id": "ba2fe6a5-8680-4e5c-a0eb-476149f39611",
+		"name": "IoT Central REST tutorial",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2530234"
+	},
+	"item": [
+		{
+			"name": "Create an IoT Central application",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Generate a unique IoT Central app name to use in this tutorial\r",
+							"\r",
+							"const appName = pm.collectionVariables.replaceIn(\"tutorial-app-{{$randomInt}}\");\r",
+							"pm.collectionVariables.set(\"applicationName\", appName);\r",
+							"\r",
+							"const appURL = pm.collectionVariables.replaceIn(\"https://{{applicationName}}.azureiotcentral.com\");\r",
+							"pm.collectionVariables.set(\"appURL\", appURL);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = `<p><b>App URL: </b>https://{{res.properties.subdomain}}.azureiotcentral.com</p>`;\r",
+							"pm.visualizer.set(template, {\r",
+							"    res: pm.response.json()\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearerToken}}",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "{{BEARER_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"location\": \"eastus\",\r\n  \"sku\": {\r\n    \"name\": \"ST2\"\r\n  },\r\n  \"properties\": {\r\n    \"displayName\": \"Contoso REST API tutorial app\",\r\n    \"subdomain\": \"{{applicationName}}\",\r\n    \"template\": \"iotc-pnp-preview@1.0.0\"\r\n  },\r\n  \"identity\": {\r\n    \"type\": \"SystemAssigned\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroupName}}/providers/Microsoft.IoTCentral/iotApps/{{applicationName}}?api-version={{controlPlaneGA}}&=",
+					"protocol": "https",
+					"host": [
+						"management",
+						"azure",
+						"com"
+					],
+					"path": [
+						"subscriptions",
+						"{{subscriptionId}}",
+						"resourceGroups",
+						"{{resourceGroupName}}",
+						"providers",
+						"Microsoft.IoTCentral",
+						"iotApps",
+						"{{applicationName}}"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{controlPlaneGA}}"
+						},
+						{
+							"key": "",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create an operator token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"responseData = pm.response.json();\r",
+							"\r",
+							"pm.collectionVariables.set(\"operatorToken\", responseData.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearerTokenApp}}",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "{{BEARER_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"roles\": [\r\n    {\r\n      \"role\": \"ae2c9854-393b-4f97-8c42-479d70ce626e\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{applicationName}}.azureiotcentral.com/api/apiTokens/operator-token?api-version={{dataPlaneGA}}",
+					"protocol": "https",
+					"host": [
+						"{{applicationName}}",
+						"azureiotcentral",
+						"com"
+					],
+					"path": [
+						"api",
+						"apiTokens",
+						"operator-token"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{dataPlaneGA}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create an admin token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"responseData = pm.response.json();\r",
+							"\r",
+							"pm.collectionVariables.set(\"adminToken\", responseData.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearerTokenApp}}",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "{{BEARER_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"roles\": [\r\n    {\r\n      \"role\": \"ca310b8d-2f4a-44e0-a36e-957c202cd8d4\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{applicationName}}.azureiotcentral.com/api/apiTokens/admin-token?api-version={{dataPlaneGA}}",
+					"protocol": "https",
+					"host": [
+						"{{applicationName}}",
+						"azureiotcentral",
+						"com"
+					],
+					"path": [
+						"api",
+						"apiTokens",
+						"admin-token"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{dataPlaneGA}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a device",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = pm.collectionVariables.replaceIn(\"<p><b>App URL: </b>{{appURL}}/devices/details/{{deviceId}}</p>\");\r",
+							"pm.visualizer.set(template);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"displayName\": \"My phone app\",\r\n  \"simulated\": false,\r\n  \"enabled\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{applicationName}}.azureiotcentral.com/api/devices/{{deviceId}}?api-version={{dataPlaneGA}}",
+					"protocol": "https",
+					"host": [
+						"{{applicationName}}",
+						"azureiotcentral",
+						"com"
+					],
+					"path": [
+						"api",
+						"devices",
+						"{{deviceId}}"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{dataPlaneGA}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get device credentials",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = `<p><b>ID Scope:</b> {{res.idScope}}</p><p><b>Primary key:</b> {{res.symmetricKey.primaryKey}}</p>`;\r",
+							"pm.visualizer.set(template, {\r",
+							"    res: pm.response.json()\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{applicationName}}.azureiotcentral.com/api/devices/{{deviceId}}/credentials?api-version={{dataPlaneGA}}",
+					"protocol": "https",
+					"host": [
+						"{{applicationName}}",
+						"azureiotcentral",
+						"com"
+					],
+					"path": [
+						"api",
+						"devices",
+						"{{deviceId}}",
+						"credentials"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{dataPlaneGA}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a device",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"responseData = pm.response.json();\r",
+							"\r",
+							"pm.collectionVariables.set(\"deviceTemplateId\", responseData.template);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{applicationName}}.azureiotcentral.com/api/devices/{{deviceId}}?api-version={{dataPlaneGA}}",
+					"protocol": "https",
+					"host": [
+						"{{applicationName}}",
+						"azureiotcentral",
+						"com"
+					],
+					"path": [
+						"api",
+						"devices",
+						"{{deviceId}}"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{dataPlaneGA}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List device templates",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{applicationName}}.azureiotcentral.com/api/deviceTemplates?api-version={{dataPlaneGA}}",
+					"protocol": "https",
+					"host": [
+						"{{applicationName}}",
+						"azureiotcentral",
+						"com"
+					],
+					"path": [
+						"api",
+						"deviceTemplates"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{dataPlaneGA}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Run a query",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"query\": \"SELECT $id as ID, $ts as timestamp, sensors.accelerometer FROM {{deviceTemplateId}} WHERE WITHIN_WINDOW(P1D) AND sensors.accelerometer <> NULL\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{applicationName}}.azureiotcentral.com/api/query?api-version={{dataPlanePreview}}",
+					"protocol": "https",
+					"host": [
+						"{{applicationName}}",
+						"azureiotcentral",
+						"com"
+					],
+					"path": [
+						"api",
+						"query"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{dataPlanePreview}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get properties from component",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{applicationName}}.azureiotcentral.com/api/devices/{{deviceId}}/components/{{componentName}}/properties?api-version={{dataPlaneGA}}",
+					"protocol": "https",
+					"host": [
+						"{{applicationName}}",
+						"azureiotcentral",
+						"com"
+					],
+					"path": [
+						"api",
+						"devices",
+						"{{deviceId}}",
+						"components",
+						"{{componentName}}",
+						"properties"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{dataPlaneGA}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Call command",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"duration\": 3,\r\n    \"delay\": 1,\r\n    \"pulses\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{applicationName}}.azureiotcentral.com/api/devices/{{deviceId}}/commands/{{commandName}}?api-version={{dataPlaneGA}}",
+					"protocol": "https",
+					"host": [
+						"{{applicationName}}",
+						"azureiotcentral",
+						"com"
+					],
+					"path": [
+						"api",
+						"devices",
+						"{{deviceId}}",
+						"commands",
+						"{{commandName}}"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{dataPlaneGA}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a webhook export destination",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{adminToken}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"{{destinationId}}\",\r\n    \"displayName\": \"WebHook destination\",\r\n    \"type\": \"webhook@v1\",\r\n    \"url\": \"{{webHookURL}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{applicationName}}.azureiotcentral.com/api/dataExport/destinations/{{destinationId}}?api-version={{dataPlanePreview}}",
+					"protocol": "https",
+					"host": [
+						"{{applicationName}}",
+						"azureiotcentral",
+						"com"
+					],
+					"path": [
+						"api",
+						"dataExport",
+						"destinations",
+						"{{destinationId}}"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{dataPlanePreview}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a telemetry export definition",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{adminToken}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"{{exportId}}\",\r\n  \"displayName\": \"Telemetry export\",\r\n  \"enabled\": true,\r\n  \"source\": \"telemetry\",\r\n  \"filter\": \"SELECT * FROM devices WHERE $id = \\\"{{deviceId}}\\\"\",\r\n  \"destinations\": [\r\n      {\r\n          \"id\": \"{{destinationId}}\"\r\n      }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{applicationName}}.azureiotcentral.com/api/dataExport/exports/{{exportId}}?api-version={{dataPlanePreview}}",
+					"protocol": "https",
+					"host": [
+						"{{applicationName}}",
+						"azureiotcentral",
+						"com"
+					],
+					"path": [
+						"api",
+						"dataExport",
+						"exports",
+						"{{exportId}}"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{dataPlanePreview}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get an export by ID",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{adminToken}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{applicationName}}.azureiotcentral.com/api/dataExport/exports/{{exportId}}?api-version={{dataPlanePreview}}",
+					"protocol": "https",
+					"host": [
+						"{{applicationName}}",
+						"azureiotcentral",
+						"com"
+					],
+					"path": [
+						"api",
+						"dataExport",
+						"exports",
+						"{{exportId}}"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{dataPlanePreview}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an IoT Central application",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearerToken}}",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "{{BEARER_TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroupName}}/providers/Microsoft.IoTCentral/iotApps/{{applicationName}}?api-version={{controlPlaneGA}}",
+					"protocol": "https",
+					"host": [
+						"management",
+						"azure",
+						"com"
+					],
+					"path": [
+						"subscriptions",
+						"{{subscriptionId}}",
+						"resourceGroups",
+						"{{resourceGroupName}}",
+						"providers",
+						"Microsoft.IoTCentral",
+						"iotApps",
+						"{{applicationName}}"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{controlPlaneGA}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "{{operatorToken}}",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "Authorization",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "subscriptionId",
+			"value": "Enter your Azure subscription Id",
+			"type": "string"
+		},
+		{
+			"key": "bearerToken",
+			"value": "See the tutorial to generate this value",
+			"type": "string"
+		},
+		{
+			"key": "bearerTokenApp",
+			"value": "See the tutorial to generate this value",
+			"type": "string"
+		},
+		{
+			"key": "webHookURL",
+			"value": "See the tutorial instructions",
+			"type": "string"
+		},
+		{
+			"key": "appURL",
+			"value": "Set by script",
+			"type": "string"
+		},
+		{
+			"key": "adminToken",
+			"value": "Set by script",
+			"type": "string"
+		},
+		{
+			"key": "applicationName",
+			"value": "Set by script",
+			"type": "string"
+		},
+		{
+			"key": "operatorToken",
+			"value": "Set by script",
+			"type": "string"
+		},
+		{
+			"key": "resourceGroupName",
+			"value": "IOTC",
+			"type": "string"
+		},
+		{
+			"key": "controlPlaneGA",
+			"value": "2021-06-01",
+			"type": "string"
+		},
+		{
+			"key": "dataPlaneGA",
+			"value": "2022-07-31",
+			"type": "string"
+		},
+		{
+			"key": "dataPlanePreview",
+			"value": "2022-10-31-preview",
+			"type": "string"
+		},
+		{
+			"key": "deviceId",
+			"value": "phone-001",
+			"type": "string"
+		},
+		{
+			"key": "deviceTemplateId",
+			"value": "Set by script",
+			"type": "string"
+		},
+		{
+			"key": "componentName",
+			"value": "device_info",
+			"type": "string"
+		},
+		{
+			"key": "commandName",
+			"value": "lightOn",
+			"type": "string"
+		},
+		{
+			"key": "destinationId",
+			"value": "webhookdest",
+			"type": "string"
+		},
+		{
+			"key": "exportId",
+			"value": "telemetryexport",
+			"type": "string"
+		}
+	]
+}
