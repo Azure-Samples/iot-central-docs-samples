@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3262a1bd-3ab3-433e-841d-a8d6ad92e030",
+		"_postman_id": "ab4f9206-f793-494d-8cda-aca0a19cc3bc",
 		"name": "IoT Central",
 		"description": "This collection helps you try out the IoT Central REST API calls described in [How to use the Azure IoT Central REST API](https://docs.microsoft.com/azure/iot-central/core/howto-authorize-rest-api).\n\nMany of the variables used in this collection are set for you. Some, such as as your app ID and admin token, you need to set using your own values.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -130,42 +130,6 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n  \"query\": \"SELECT $id, $ts, temperature, humidity FROM {{deviceTemplateId}} WHERE WITHIN_WINDOW(P1D)\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://{{yourAppSubdomain}}.azureiotcentral.com/api/query?api-version={{dataPlanePreview}}",
-							"protocol": "https",
-							"host": [
-								"{{yourAppSubdomain}}",
-								"azureiotcentral",
-								"com"
-							],
-							"path": [
-								"api",
-								"query"
-							],
-							"query": [
-								{
-									"key": "api-version",
-									"value": "{{dataPlanePreview}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Select",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"query\": \"SELECT deviceInformation.model, deviceInformation.swVersion FROM {{deviceTemplateId}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
