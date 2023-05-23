@@ -47,14 +47,14 @@
             }
           },
           "filterfunction": {
-              "settings": {
-                  "image": "<YOUR CONTAINER REGISTRY NAME>.azurecr.io/filterfunction:v1",
-                  "createOptions": ""
-              },
-              "type": "docker",
-              "status": "running",
-              "restartPolicy": "always",
-              "version": "1.0"
+            "version": "1.0"
+            "type": "docker",
+            "status": "running",
+            "restartPolicy": "always",
+            "settings": {
+              "image": "<YOUR CONTAINER REGISTRY NAME>.azurecr.io/filterfunction:v1",
+              "createOptions": ""
+            }
           }
         }
       }
